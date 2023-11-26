@@ -90,4 +90,4 @@ class Player(Alive_Being):
         pass
 
 
-player = Player(100, 100)
+player = Player(100, 100, (5,5))

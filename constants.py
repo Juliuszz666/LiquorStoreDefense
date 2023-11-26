@@ -27,7 +27,28 @@ ARROW_DIR = 1
 ARROW_DAMAGE = 50
 
 """
+Enemy consts
+"""
+
+ENEMY_DIRECTION = -1
+ENEMY_SPEED = 1
+
+"""
 Melee consts
 """
 
 AURA_RANGE = 50
+MELEE_HEALTH = 200
+
+"""
+Ranged consts
+"""
+
+RANGED_HEALTH = 100
+
+"""
+Player consts
+"""
+
+PLAYER_HEALTH = 250
+PLAYER_SPEED = 1.5

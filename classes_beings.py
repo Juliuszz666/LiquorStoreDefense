@@ -1,10 +1,13 @@
 import pygame
+from constants import *
 
 class Alive_Being:
-    """_summary_
     """
-    def __init__(self, health, speed):
-        """Constructor
+    Mother class for player and enemies
+    """
+    def __init__(self, health, speed, position):
+        """
+        Constructor
 
         Args:
             health (int): health points
@@ -12,26 +15,35 @@ class Alive_Being:
         """
         self.health_points = health
         self.speed = speed
+        self.position = position
     def __del__(self):
         pass
 
 class Enemy(Alive_Being):
-    """_summary_
+    """
+    Abstract class for enemies (zule i menele)
 
     Args:
-        Alive_Being (_type_): _description_
+        Alive_Being (object): heritance mechanism
     """
-    def __init__(self, weapon_type):
+    def __init__(self, weapon_type, health, speed, position):
+        Alive_Being.__init__(health, speed, position)
         self.weapon = weapon_type
-    def attack():
-        pass
+    
 
 class MeleeEnemy(Enemy):
-    """_summary_
+    """
+    Class for melee enemies
 
     Args:
-        Enemy (_type_): _description_
+        Enemy (object): _description_
     """
+    def attack(self, player):
+        self.damage_aura = pygame.rect.Rect(self.position, (AURA_RANGE, AURA_RANGE))
+        if self.damage_aura.colliderect(player):
+            pass
+        del self.damage_aura
+        pass
 
 class RangedEnemy(Enemy):
     """_summary_

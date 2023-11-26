@@ -25,3 +25,9 @@ ARROW_HEIGHT = 10
 ARROW_SPEED = 4
 ARROW_DIR = 1 
 ARROW_DAMAGE = 50
+
+"""
+Melee consts
+"""
+
+AURA_RANGE = 50

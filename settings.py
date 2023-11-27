@@ -3,4 +3,5 @@ import json
 with open('constants.json') as constants:
     const = json.load(constants)
 
-print(2*const['ARROW_HEIGHT'])
+with open('settings.json') as settings:
+    settings = json.load(settings)

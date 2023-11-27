@@ -1,5 +1,5 @@
 import pygame
-from constants import *
+from settings import *
 
 class Alive_Being:
     """

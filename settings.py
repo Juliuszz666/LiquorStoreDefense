@@ -1,4 +1,5 @@
 import json
+import pygame
 
 with open('constants.json') as constants:
     const = json.load(constants)

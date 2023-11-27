@@ -1,5 +1,5 @@
 {
-    "FULLSCREEN": 1,
-    "SCREEN_WIDTH": 100,
-    "SCREEN_HEIGHT": 100
+    "FULLSCREEN": 0,
+    "SCREEN_WIDTH": 250,
+    "SCREEN_HEIGHT": 250
 }

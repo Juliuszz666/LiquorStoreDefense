@@ -1,6 +1,6 @@
 import classes_beings as entities
 import classes_bullets as bullet
-from screen import display
+from screen import *
 import pygame
 
 
@@ -11,7 +11,7 @@ pygame.init()
 clock = pygame.time.Clock()
 running = True
 freeze = False
-chuj = entities.Player(100, 100)
+chuj = entities.Player(100, 100, (50,50))
 
 
 
@@ -34,11 +34,10 @@ while running:
 
 
     if not freeze:
-        display(entities.player)
+        display()
         chuj.handling_equipment()
 
-    pygame.display.flip()
-
+    
     clock.tick(60)  # limits FPS to 60
 
 pygame.quit()

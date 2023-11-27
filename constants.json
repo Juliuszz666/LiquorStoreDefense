@@ -1,59 +1,32 @@
-{
-    "bullet_pistol":
-    [
-        {
-            "P_BULLET_WIDTH": 15, 
-            "P_BULLET_HEIGHT": 15,
-            "P_BULLET_SPEED": 5,
-            "P_BULLET_DIR": 1,             
-            "P_BULLET_DAMAGE": 69
-        }        
-    ],
-    "bullet_shotgun":
-    [
-        {
-            "S_BULLET_WIDTH": 15, 
-            "S_BULLET_HEIGHT": 15,
-            "S_BULLET_SPEED": 5,
-            "S_BULLET_DIR": 1,             
-            "S_BULLET_DAMAGE": 100
-        }
-    ],
-    "arrow":
-    [
-        {
-            "ARROW_WIDTH": 40,
-            "ARROW_HEIGHT": 10,
-            "ARROW_SPEED": 4,
-            "ARROW_DIR": 1,
-            "ARROW_DAMAGE": 50
-        }
-    ],
-    "enemy":
-    [
-        {
-            "ENEMY_DIRECTION": -1,
-            "ENEMY_SPEED": 1
-        }
-    ],
-    "melee":
-    [
-        {
-            "AURA_RANGE": 50,
-            "MELEE_HEALTH": 200
-        }
-    ],
-    "ranged":
-    [
-        {
-            "RANGED_HEALTH": 100
-        }
-    ],
-    "player":
-    [
-        {
-            "PLAYER_HEALTH": 250,
-            "PLAYER_SPEED": 1.5
-        }
-    ]
-}
+
+    {
+        "P_BULLET_WIDTH": 15, 
+        "P_BULLET_HEIGHT": 15,
+        "P_BULLET_SPEED": 5,
+        "P_BULLET_DIR": 1,             
+        "P_BULLET_DAMAGE": 69,
+
+        "S_BULLET_WIDTH": 15, 
+        "S_BULLET_HEIGHT": 15,
+        "S_BULLET_SPEED": 5,
+        "S_BULLET_DIR": 1,             
+        "S_BULLET_DAMAGE": 100,
+
+        "ARROW_WIDTH": 40,
+        "ARROW_HEIGHT": 10,
+        "ARROW_SPEED": 4,
+        "ARROW_DIR": 1,
+        "ARROW_DAMAGE": 50,
+ 
+        "ENEMY_DIRECTION": -1,
+        "ENEMY_SPEED": 1,
+
+        "AURA_RANGE": 50,
+        "MELEE_HEALTH": 200,
+
+        "RANGED_HEALTH": 100,
+  
+        "PLAYER_HEALTH": 250,
+        "PLAYER_SPEED": 1.5
+    
+    }

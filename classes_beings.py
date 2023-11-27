@@ -39,7 +39,7 @@ class MeleeEnemy(Enemy):
         Enemy (object): _description_
     """
     def attack(self, player):
-        self.damage_aura = pygame.rect.Rect(self.position, (AURA_RANGE, AURA_RANGE))
+        self.damage_aura = pygame.rect.Rect(self.position, (const['AURA_RANGE'], const['AURA_RANGE']))
         if self.damage_aura.colliderect(player):
             pass
         del self.damage_aura

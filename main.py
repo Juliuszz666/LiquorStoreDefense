@@ -11,7 +11,7 @@ pygame.init()
 clock = pygame.time.Clock()
 running = True
 freeze = False
-chuj = entities.Player(100, 100, (50,50))
+
 
 
 
@@ -35,7 +35,7 @@ while running:
 
     if not freeze:
         display()
-        chuj.handling_equipment()
+        entities.player.handling_equipment()
 
     
     clock.tick(60)  # limits FPS to 60

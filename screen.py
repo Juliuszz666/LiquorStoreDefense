@@ -23,12 +23,13 @@ def display():
     eq_item_space = int(player_details.get_height()*0.9)
     eq_item_base = int(screen.get_height()/100)
     
-    equipment_item = []
+    #eq_item = []
     
-    for i in range(0,9):
-        equipment_item.append(pygame.Surface((eq_item_height, eq_item_height)))
-        equipment_item[i].fill("white")
-        player_details.blit(equipment_item[i], (eq_item_base+(i*eq_item_space), eq_item_base))
+    #for i in range(0,9):
+    equipment_item = pygame.Surface((eq_item_height, eq_item_height))
+    equipment_item.fill("white")
+    #    eq_item.append(equipment_item)
+    player_details.blit(equipment_item, (eq_item_base, eq_item_base))
     
     pygame.display.flip()
 

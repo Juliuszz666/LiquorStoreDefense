@@ -25,7 +25,7 @@
         "MELEE_HEALTH": 200,
 
         "RANGED_HEALTH": 100,
-  
+            
         "PLAYER_HEALTH": 250,
         "PLAYER_SPEED": 1.5,
         "PLAYER_HEIGHT": 100,

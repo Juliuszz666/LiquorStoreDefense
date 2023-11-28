@@ -17,7 +17,7 @@ class Alive_Being:
         self.health_points = health
         self.speed = speed
         self.position = position
-        self.hitbox = pygame.rect.Rect(width, height)
+        self.hitbox = pygame.rect.Rect(300, 300, width, height)
 
 class Enemy(Alive_Being):
     """
@@ -81,8 +81,9 @@ class Player(Alive_Being):
     def movement(self):
         """Function responsible for movement of player
         """
-        self.hitbox.move_ip(self.speed)
         pygame.draw.rect(screen.screen, ("white"), self.hitbox)
+        self.hitbox.move_ip(self.speed, self.speed)
+        
 
 
-player = Player(100, 100, (500,500), const['PLAYER_WIDTH'], const['PLAYER_HEIGHT'])
+player = Player(const['PLAYER_HEALTH'], const['PLAYER_SPEED'], (500,500), const['PLAYER_WIDTH'], const['PLAYER_HEIGHT'])

@@ -37,6 +37,7 @@ while running:
     if not freeze:
         display()
         entities.player.handling_equipment()
+        entities.player.movement()
 
     
     clock.tick(settings['FPS'])  # limits FPS to 60

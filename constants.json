@@ -28,6 +28,8 @@
   
         "PLAYER_HEALTH": 250,
         "PLAYER_SPEED": 1.5,
+        "PLAYER_HEIGHT": 100,
+        "PLAYER_WIDTH": 40,
         
         "ITEM_BORDER": 3
     

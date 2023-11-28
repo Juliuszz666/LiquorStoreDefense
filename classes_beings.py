@@ -6,7 +6,7 @@ class Alive_Being:
     """
     Mother class for player and enemies
     """
-    def __init__(self, health, speed, position):
+    def __init__(self, health, speed, position, width, height):
         """
         Constructor
 
@@ -17,7 +17,7 @@ class Alive_Being:
         self.health_points = health
         self.speed = speed
         self.position = position
-        self.hitbox = pygame.Rect()
+        self.hitbox = pygame.rect.Rect(width, height)
 
 class Enemy(Alive_Being):
     """
@@ -81,8 +81,8 @@ class Player(Alive_Being):
     def movement(self):
         """Function responsible for movement of player
         """
-        self.hitbox.move_ip()
+        self.hitbox.move_ip(self.speed)
         pygame.draw.rect(screen.screen, ("white"), self.hitbox)
 
 
-player = Player(100, 100, (500,500))
+player = Player(100, 100, (500,500), const['PLAYER_WIDTH'], const['PLAYER_HEIGHT'])

@@ -29,6 +29,6 @@
         "PLAYER_HEALTH": 250,
         "PLAYER_SPEED": 1.5,
         
-        "ITEM_BORDER": 5
+        "ITEM_BORDER": 3
     
     }

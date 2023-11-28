@@ -1,4 +1,5 @@
 import pygame
+import screen
 from settings import *
 
 class Alive_Being:
@@ -16,8 +17,7 @@ class Alive_Being:
         self.health_points = health
         self.speed = speed
         self.position = position
-    def __del__(self):
-        pass
+        self.hitbox = pygame.Rect()
 
 class Enemy(Alive_Being):
     """
@@ -56,7 +56,7 @@ class Player(Alive_Being):
     """_summary_
 
     Args:
-        Alive_Being (object): mother class ??
+        Alive_Being (object): Parent class
     """
              
     def handling_equipment(self) -> int:
@@ -76,18 +76,13 @@ class Player(Alive_Being):
             return 4
         if self.player_controls[pygame.K_5]:
             return 5
-        if self.player_controls[pygame.K_6]:
-            return 6
-        if self.player_controls[pygame.K_7]:
-            return 7
-        if self.player_controls[pygame.K_8]:
-            return 8
-        if self.player_controls[pygame.K_9]:
-            return 9
         return 0
     
     def movement(self):
-        pass
+        """Function responsible for movement of player
+        """
+        self.hitbox.move_ip()
+        pygame.draw.rect(screen.screen, ("white"), self.hitbox)
 
 
 player = Player(100, 100, (500,500))

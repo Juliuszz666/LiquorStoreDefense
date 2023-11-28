@@ -29,20 +29,22 @@ def display():
     if entities.player.handling_equipment():
         selected = entities.player.handling_equipment()
     
-    for i in range(0,9):
+    for i in range(0,5):
             
-        border = pygame.Surface((eq_item_height, eq_item_height))
-        border.fill("black")
+        border = pygame.Rect(0,0, eq_item_height-const['ITEM_BORDER']*2, eq_item_height-const['ITEM_BORDER']*2)
+                
+        equipment_item = pygame.image.load(f"img/item{i+1}.png")
+        pygame.transform.scale(equipment_item,(eq_item_height-const['ITEM_BORDER']*2, eq_item_height-const['ITEM_BORDER']*2))
+        eq_item.append(equipment_item)                   
         if i == selected -1:
-            border.fill("pink")
-        equipment_item = pygame.Surface((eq_item_height-(2*const['ITEM_BORDER']), eq_item_height-(2*const['ITEM_BORDER'])))
-        equipment_item.fill("white")
-        border.blit(equipment_item, (const['ITEM_BORDER'], const['ITEM_BORDER']))
-        eq_item.append(border)
-        
-                   
-    
+            pygame.draw.rect(eq_item[i], "pink", border, const['ITEM_BORDER'])    
+        else:
+            pygame.draw.rect(eq_item[i], "yellow", border, const['ITEM_BORDER'])  
         screen.blit(eq_item[i], (eq_item_base + (i*eq_item_space), eq_item_base))
+        
+    player_health = pygame.Surface((screen.get_width()*0.3, screen.get_height()/10))
+    player_health.fill("red")
+    screen.blit(player_health, (screen.get_width()*0.7, 0))
     
     pygame.display.flip()
 

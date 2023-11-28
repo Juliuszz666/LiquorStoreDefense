@@ -8,6 +8,7 @@ import pygame
 
 # pygame setup
 pygame.init()
+pygame.display.set_caption("LSD 1.0")
 clock = pygame.time.Clock()
 running = True
 freeze = False
@@ -38,6 +39,6 @@ while running:
         entities.player.handling_equipment()
 
     
-    clock.tick(60)  # limits FPS to 60
+    clock.tick(settings['FPS'])  # limits FPS to 60
 
 pygame.quit()

@@ -1,5 +1,6 @@
 {
     "FULLSCREEN": 0,
     "SCREEN_WIDTH": 1440,
-    "SCREEN_HEIGHT": 720
+    "SCREEN_HEIGHT": 720,
+    "FPS": 60
 }

@@ -10,7 +10,7 @@ class ThrownObject:
         Args:
             speed (float): _description_
             position (tuple): _description_
-            direction (-1/1): _description_
+            direction (-1/1): -1 - left | 1 - right
             damage (float): _description_
             width (int): _description_
             height (int): _description_

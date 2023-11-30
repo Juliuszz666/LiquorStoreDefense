@@ -17,6 +17,8 @@ freeze = False
 
 
 while running:
+    """Game loop
+    """
 
     event_key = pygame.key.get_pressed()
     for event in pygame.event.get():

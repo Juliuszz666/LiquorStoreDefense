@@ -42,11 +42,4 @@ def display():
             pygame.draw.rect(eq_item[i], "yellow", border, const['ITEM_BORDER'])  
         screen.blit(eq_item[i], (eq_item_base + (i*eq_item_space), eq_item_base))
         
-    player_health = pygame.Surface((screen.get_width()*0.3, screen.get_height()/10))
-    player_health.fill("red")
-    screen.blit(player_health, (screen.get_width()*0.7, 0))
-    
-    pygame.display.flip()
-
-
-    
+     

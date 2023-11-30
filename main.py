@@ -39,7 +39,7 @@ while running:
         entities.player.handling_equipment()
         entities.player.movement()
 
-    
+    pygame.display.flip()
     clock.tick(settings['FPS'])  # limits FPS to 60
 
 pygame.quit()

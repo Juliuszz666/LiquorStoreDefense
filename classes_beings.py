@@ -16,8 +16,8 @@ class Alive_Being:
         """
         self.health_points = health
         self.speed = speed
-        self.position = position
-        self.hitbox = pygame.rect.Rect(300, 300, width, height)
+        (self.position_x, self.position_y) = position
+        self.hitbox = pygame.Rect(self.position_x, self.position_y, width, height)
 
 class Enemy(Alive_Being):
     """
@@ -81,9 +81,21 @@ class Player(Alive_Being):
     def movement(self):
         """Function responsible for movement of player
         """
-        pygame.draw.rect(screen.screen, ("white"), self.hitbox)
-        self.hitbox.move_ip(self.speed, self.speed)
+        self.player_movement = pygame.key.get_pressed()
+        if self.player_movement[pygame.K_w] and self.hitbox.top>settings['SCREEN_HEIGHT']/10:
+            self.hitbox.move_ip(0, -self.speed)
+        if self.player_movement[pygame.K_a] and self.hitbox.left>0:
+            self.hitbox.move_ip(-self.speed, 0)
+        if self.player_movement[pygame.K_s] and self.hitbox.bottom<settings['SCREEN_HEIGHT']:
+            self.hitbox.move_ip(0, self.speed)
+        if self.player_movement[pygame.K_d] and self.hitbox.right<settings['SCREEN_WIDTH']:
+            self.hitbox.move_ip(self.speed, 0)                    
+
+        pygame.draw.rect(screen.screen, "white", self.hitbox)
+        
         
 
-
-player = Player(const['PLAYER_HEALTH'], const['PLAYER_SPEED'], (500,500), const['PLAYER_WIDTH'], const['PLAYER_HEIGHT'])
+        """Initialazing player"""
+player = Player(const['PLAYER_HEALTH'], const['PLAYER_SPEED'], 
+                (0,(settings['SCREEN_HEIGHT']-const['PLAYER_HEIGHT'])/2), 
+                const['PLAYER_WIDTH'], const['PLAYER_HEIGHT'])

@@ -29,10 +29,18 @@ class Enemy(Alive_Being):
     Args:
         Alive_Being (object): heritance mechanism
     """
+    def __init__(self, health, speed, position, width, height, color):
+        """Abstract constructor
+
+        Args:
+            color (string): enemies color (in future image)
+        """
+        super().__init__(health, speed, position, width, height)
+        self.color = color
         
     def movement(self):
         self.hitbox.move_ip(-self.speed, 0)
-        pygame.draw.rect(screen.screen, "green", self.hitbox)
+        pygame.draw.rect(screen.screen, self.color, self.hitbox)
     
 class MeleeEnemy(Enemy):
     """
@@ -49,14 +57,14 @@ class MeleeEnemy(Enemy):
         pass
 
 class RangedEnemy(Enemy):
-    """_summary_
+    """Class for ranged enemy
 
     Args:
-        Enemy (object): 
+        Enemy (object): Parent 
     """    
 
 class Player(Alive_Being):
-    """_summary_
+    """Player class
 
     Args:
         Alive_Being (object): Parent class
@@ -107,5 +115,8 @@ enemies = []
 
 for i in range(0, 10):
     height_range = random.randint(settings['SCREEN_HEIGHT']/10, settings['SCREEN_HEIGHT'])
-    enemy = Enemy(100, 3, (settings['SCREEN_WIDTH'], height_range), 50, 50)
+    if height_range%2==0:
+        enemy = RangedEnemy(100, 3, (settings['SCREEN_WIDTH'], height_range), 50, 50, "white")
+    else:
+        enemy = MeleeEnemy(100, 3, (settings['SCREEN_WIDTH'], height_range), 50, 50, "red")
     enemies.append(enemy)

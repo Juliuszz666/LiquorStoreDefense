@@ -21,8 +21,9 @@
         "ENEMY_DIRECTION": -1,
         "ENEMY_SPEED": 1,
 
-        "AURA_RANGE": 50,
+        "AURA_RANGE": 75,
         "MELEE_HEALTH": 200,
+        "MELEE_DAMAGE": 100,
 
         "RANGED_HEALTH": 100,
             

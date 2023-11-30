@@ -2,6 +2,7 @@ import random
 import pygame
 import screen
 from settings import *
+import time
 
 class Alive_Being:
     """
@@ -49,11 +50,21 @@ class MeleeEnemy(Enemy):
     Args:
         Enemy (object): _description_
     """
-    def attack(self, player):
-        self.damage_aura = pygame.rect.Rect(self.position, (const['AURA_RANGE'], const['AURA_RANGE']))
-        if self.damage_aura.colliderect(player):
-            pass
-        del self.damage_aura
+    def __init__(self, health, speed, position, width, height, color):
+        super().__init__(health, speed, position, width, height, color)
+        self.damage_aura = pygame.rect.Rect((self.position_x-(const['AURA_RANGE']/2), 
+                                    self.position_y-(const['AURA_RANGE']/2)), 
+                                    (const['AURA_RANGE'], const['AURA_RANGE']))
+            
+    def attack(self, player_hitbox):
+        self.damage_aura.move_ip(-self.speed, 0)
+        pygame.draw.rect(screen.screen, "yellow", self.damage_aura)
+        
+        if self.damage_aura.colliderect(player_hitbox):
+            player.get_damage(const['MELEE_DAMAGE'])
+            pygame.time.wait(500) 
+        
+        #time.sleep(0.1)
         pass
 
 class RangedEnemy(Enemy):
@@ -62,6 +73,8 @@ class RangedEnemy(Enemy):
     Args:
         Enemy (object): Parent 
     """    
+    def attack(self, player):
+        pass
 
 class Player(Alive_Being):
     """Player class
@@ -104,6 +117,11 @@ class Player(Alive_Being):
 
         pygame.draw.rect(screen.screen, "white", self.hitbox)
         
+    def get_damage(self, hp):
+        self.health -= hp
+        if hp<=0:
+            del self
+        
         
 
         """Initialazing player"""
@@ -111,12 +129,15 @@ player = Player(const['PLAYER_HEALTH'], const['PLAYER_SPEED'],
                 (0,(settings['SCREEN_HEIGHT']-const['PLAYER_HEIGHT'])/2), 
                 const['PLAYER_WIDTH'], const['PLAYER_HEIGHT'])
 
-enemies = []
+enemies_m = []
+enemies_r = []
 
 for i in range(0, 10):
     height_range = random.randint(settings['SCREEN_HEIGHT']/10, settings['SCREEN_HEIGHT'])
     if height_range%2==0:
         enemy = RangedEnemy(100, 3, (settings['SCREEN_WIDTH'], height_range), 50, 50, "white")
+        enemies_r.append(enemy)
     else:
         enemy = MeleeEnemy(100, 3, (settings['SCREEN_WIDTH'], height_range), 50, 50, "red")
-    enemies.append(enemy)
+        enemies_m.append(enemy)
+    

@@ -6,6 +6,7 @@ import pygame
 
 
 
+
 # pygame setup
 pygame.init()
 pygame.display.set_caption("LSD 1.0")
@@ -40,8 +41,11 @@ while running:
         display()
         entities.player.handling_equipment()
         entities.player.movement()
-        for i in range(0,10):
-            entities.enemies[i].movement()
+        for i in range(0,len(entities.enemies_m)):
+            entities.enemies_m[i].movement()
+            entities.enemies_m[i].attack(entities.player.hitbox)
+            
+
 
     pygame.display.flip()
     clock.tick(settings['FPS'])  # limits FPS to 60

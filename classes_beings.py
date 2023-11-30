@@ -1,3 +1,4 @@
+import random
 import pygame
 import screen
 from settings import *
@@ -105,5 +106,6 @@ player = Player(const['PLAYER_HEALTH'], const['PLAYER_SPEED'],
 enemies = []
 
 for i in range(0, 10):
-    enemy = Enemy(100, 3, (settings['SCREEN_WIDTH'], 300), 50, 50)
+    height_range = random.randint(settings['SCREEN_HEIGHT']/10, settings['SCREEN_HEIGHT'])
+    enemy = Enemy(100, 3, (settings['SCREEN_WIDTH'], height_range), 50, 50)
     enemies.append(enemy)

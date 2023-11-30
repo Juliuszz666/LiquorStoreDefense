@@ -38,7 +38,8 @@ while running:
         display()
         entities.player.handling_equipment()
         entities.player.movement()
-        #entities.enemies[3].movement()
+        for i in range(0,10):
+            entities.enemies[i].movement()
 
     pygame.display.flip()
     clock.tick(settings['FPS'])  # limits FPS to 60

@@ -7,12 +7,14 @@ class Alive_Being:
     Mother class for player and enemies
     """
     def __init__(self, health, speed, position, width, height):
-        """
-        Constructor
+        """Constructor
 
         Args:
-            health (int): health points
-            speed (int): speed of movement
+            health (int): it's obvious
+            speed (int): it's obvious
+            position (tuple): it's obvious
+            width (int): used only to generate rect
+            height (int): used only to generate rect
         """
         self.health_points = health
         self.speed = speed
@@ -26,11 +28,11 @@ class Enemy(Alive_Being):
     Args:
         Alive_Being (object): heritance mechanism
     """
-    def __init__(self, weapon_type, health, speed, position):
-        Alive_Being.__init__(health, speed, position)
-        self.weapon = weapon_type
+        
+    def movement(self):
+        self.hitbox.move_ip(-self.speed, 0)
+        pygame.draw.rect(screen.screen, "green", self.hitbox)
     
-
 class MeleeEnemy(Enemy):
     """
     Class for melee enemies
@@ -99,3 +101,9 @@ class Player(Alive_Being):
 player = Player(const['PLAYER_HEALTH'], const['PLAYER_SPEED'], 
                 (0,(settings['SCREEN_HEIGHT']-const['PLAYER_HEIGHT'])/2), 
                 const['PLAYER_WIDTH'], const['PLAYER_HEIGHT'])
+
+enemies = []
+
+for i in range(0, 10):
+    enemy = Enemy(100, 3, (settings['SCREEN_WIDTH'], 300), 50, 50)
+    enemies.append(enemy)

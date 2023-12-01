@@ -44,6 +44,8 @@ while running:
         for i in range(0,len(entities.enemies_m)):
             entities.enemies_m[i].movement()
             entities.enemies_m[i].attack(entities.player.hitbox)            
+        for i in range(0, len(entities.enemies_r)):
+            entities.enemies_r[i].movement()
 
     print(entities.player.health_points)
 

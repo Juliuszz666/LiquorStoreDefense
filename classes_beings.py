@@ -73,7 +73,7 @@ class RangedEnemy(Enemy):
     Args:
         Enemy (object): Parent class
     """    
-    def attack(self, player):
+    def attack(self):
         pass
 
 class Player(Alive_Being):
@@ -139,7 +139,7 @@ for i in range(0, 50):
     height_range = random.randint(settings['SCREEN_HEIGHT']/10, settings['SCREEN_HEIGHT']-const['ENEMY_HEIGHT'])
     if height_range%7==0:
         enemy = RangedEnemy(const['RANGED_HEALTH'], const['ENEMY_SPEED'], 
-                            (settings['SCREEN_WIDTH'], height_range), 50, 50, (255, 255, 5*i))
+                            (settings['SCREEN_WIDTH']-const['ENEMY_WIDTH'], height_range), 50, 50, (255, 255, 5*i))
         enemies_r.append(enemy)
     else:
         enemy = MeleeEnemy(const['MELEE_HEALTH'], const['ENEMY_SPEED'], 

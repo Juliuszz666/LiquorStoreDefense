@@ -15,8 +15,6 @@ running = True
 freeze = False
 
 
-
-
 while running:
     """Game loop
     """
@@ -41,11 +39,23 @@ while running:
         display()
         entities.player.handling_equipment()
         entities.player.movement()
-        for i in range(0,len(entities.enemies_m)):
-            entities.enemies_m[i].movement()
-            entities.enemies_m[i].attack(entities.player.hitbox)            
-        for i in range(0, len(entities.enemies_r)):
-            entities.enemies_r[i].movement()
+        i = len(entities.enemies_r)-1
+        j = len(entities.enemies_m)-1
+        
+        while(i or j):
+            if(j):
+                entities.enemies_m[j].movement()
+                entities.enemies_m[j].attack(entities.player.hitbox)
+                j-=1
+            if(i):
+                entities.enemies_r[i].movement()
+                entities.enemies_r[i].attack()
+                i-=1
+#        for i in range(0,len(entities.enemies_m)):
+#            entities.enemies_m[i].movement()
+#            entities.enemies_m[i].attack(entities.player.hitbox)            
+#        for i in range(0, len(entities.enemies_r)):
+#            entities.enemies_r[i].movement()
 
     print(entities.player.health_points)
 

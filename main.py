@@ -43,9 +43,9 @@ while running:
         entities.player.movement()
         for i in range(0,len(entities.enemies_m)):
             entities.enemies_m[i].movement()
-            entities.enemies_m[i].attack(entities.player.hitbox)
-            
+            entities.enemies_m[i].attack(entities.player.hitbox)            
 
+    print(entities.player.health_points)
 
     pygame.display.flip()
     clock.tick(settings['FPS'])  # limits FPS to 60

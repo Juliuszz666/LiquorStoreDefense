@@ -61,11 +61,9 @@ class MeleeEnemy(Enemy):
         pygame.draw.rect(screen.screen, "yellow", self.damage_aura)
         
         if self.damage_aura.colliderect(player_hitbox):
-            player.get_damage(const['MELEE_DAMAGE'])
-            pygame.time.wait(500) 
-        
+            player.get_damage(const['MELEE_DAMAGE'])    
         #time.sleep(0.1)
-        pass
+
 
 class RangedEnemy(Enemy):
     """Class for ranged enemy
@@ -117,11 +115,12 @@ class Player(Alive_Being):
 
         pygame.draw.rect(screen.screen, "white", self.hitbox)
         
-    def get_damage(self, hp):
-        self.health -= hp
-        if hp<=0:
+    def get_damage(self, damage):
+        if self.health_points>=0:
+            self.health_points -= damage
+        else:
             del self
-        
+       
         
 
         """Initialazing player"""

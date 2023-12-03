@@ -102,7 +102,23 @@ class Player(Alive_Being):
             if self.player_controls[pygame.K_5]:
                 return 5
             return 0
-        
+
+    def machete(self):
+        damage_aura = pygame.rect.Rect((self.position_x-((const['AURA_RANGE']-const['PLAYER_WIDTH'])/2), 
+                                    self.position_y-((const['AURA_RANGE']-const['PLAYER_HEIGHT'])/2)), 
+                                    (const['AURA_RANGE'], const['AURA_RANGE']))
+        if damage_aura.collidelist[enemies_m] or damage_aura.collidelist[enemies_r]:
+            pass
+    
+    def pistol():
+        pass        
+    
+    def shotgun():
+        pass
+
+    def bow():
+        pass
+    
     def medkit(self):
         use = pygame.key.get_pressed()[pygame.K_SPACE]
         if use:

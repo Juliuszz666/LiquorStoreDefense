@@ -30,15 +30,16 @@ def display():
         selected = entities.player.handling_equipment()
     match selected:
         case 1:
-            pass
+            entities.player.machete()
         case 2:
-            pass
+            entities.player.pistol()
         case 3:
-            pass
+            entities.player.shotgun()
         case 4:
-            pass
+            entities.player.bow()
         case 5:
             entities.player.medkit()
+            
     
     for i in range(0,5):
             

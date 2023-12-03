@@ -8,12 +8,12 @@ class ThrownObject:
         """Constructor
 
         Args:
-            speed (float): _description_
-            position (tuple): _description_
+            speed (float): it's obvious 
+            position (tuple): it's obvious 
             direction (-1/1): -1 - left | 1 - right
-            damage (float): _description_
-            width (int): _description_
-            height (int): _description_
+            damage (float): it's obvious
+            width (int): size of bullet on screen
+            height (int): size of bullet on screen
         """
         self.speed = speed
         self.position = position
@@ -28,10 +28,10 @@ class ThrownObject:
         """
         self.bullet.move_ip(self.speed*self.direction, 0)
 
-    def give_damage(self):
+    def give_damage(self, target):
         """Function responsible for giving damage to objects
         """
-        if self.hitbox.collidedict():
+        if self.hitbox.collidedict(target):
             del self
  
      

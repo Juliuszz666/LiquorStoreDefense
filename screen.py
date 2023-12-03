@@ -28,6 +28,17 @@ def display():
     
     if entities.player.handling_equipment():
         selected = entities.player.handling_equipment()
+    match selected:
+        case 1:
+            pass
+        case 2:
+            pass
+        case 3:
+            pass
+        case 4:
+            pass
+        case 5:
+            entities.player.medkit()
     
     for i in range(0,5):
             

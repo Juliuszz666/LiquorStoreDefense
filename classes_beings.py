@@ -92,22 +92,22 @@ class Player(Alive_Being):
         if self.visible:
             self.player_controls = pygame.key.get_pressed()
             if self.player_controls[pygame.K_1]:
-                machete()
                 return 1
             if self.player_controls[pygame.K_2]:
-                pistol()
                 return 2
             if self.player_controls[pygame.K_3]:
-                shotgun()
                 return 3
             if self.player_controls[pygame.K_4]:
-                bow()
                 return 4
             if self.player_controls[pygame.K_5]:
-                medkit()
                 return 5
             return 0
         
+    def medkit(self):
+        use = pygame.key.get_pressed()[pygame.K_SPACE]
+        if use:
+            self.health_points+=50
+            print(self.health_points)
     
     def movement(self):
         """Function responsible for movement of player
@@ -131,23 +131,23 @@ class Player(Alive_Being):
         else:
             self.visible = False
     
-    def attack(self, selected):
-        if self.handling_equipment() == 0:
-            weapon = selected
-        if self.handling_equipment():
-            weapon = self.handling_equipment()
-        match weapon:
-            case 1:
-                pass
-            case 2:
-                pass
-            case 3:
-                pass
-            case 4:
-                pass
-            case 5:
-                pass
-        print(weapon)
+#    def attack(self, selected):
+#        if self.handling_equipment() == 0:
+#            weapon = selected
+#        if self.handling_equipment():
+#            weapon = self.handling_equipment()
+#        match weapon:
+#            case 1:
+#                pass
+#            case 2:
+#                pass
+#            case 3:
+#                pass
+#            case 4:
+#                pass
+#            case 5:
+#                pass
+#        print(weapon)
 
 """Initialazing player"""
 player = Player(const['PLAYER_HEALTH'], const['PLAYER_SPEED'], 
@@ -170,4 +170,3 @@ for i in range(0, 50):
         enemy = MeleeEnemy(const['MELEE_HEALTH'], const['ENEMY_SPEED'], 
                            (settings['SCREEN_WIDTH']-const['ENEMY_WIDTH'], height_range), 50, 50, (150, 150, 255-(i*5)))
         enemies_m.append(enemy)
-    

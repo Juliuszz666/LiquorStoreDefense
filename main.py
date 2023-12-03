@@ -35,7 +35,7 @@ while running:
         display()
         entities.player.handling_equipment()
         entities.player.movement()
-        entities.player.attack(selected)
+        #entities.player.attack(selected)
         i = len(entities.enemies_r)-1
         j = len(entities.enemies_m)-1
 

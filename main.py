@@ -4,9 +4,6 @@ from screen import *
 import pygame
 
 
-
-
-
 # pygame setup
 pygame.init()
 pygame.display.set_caption("LSD 1.0")
@@ -34,30 +31,26 @@ while running:
         if event.type == pygame.WINDOWRESTORED:
             freeze = False
 
-
     if not freeze:
         display()
         entities.player.handling_equipment()
         entities.player.movement()
+        entities.player.attack(selected)
         i = len(entities.enemies_r)-1
         j = len(entities.enemies_m)-1
-        
+
         while(i or j):
             if(j):
                 entities.enemies_m[j].movement()
                 entities.enemies_m[j].attack(entities.player.hitbox)
-                j-=1
+                j -= 1
             if(i):
                 entities.enemies_r[i].movement()
                 entities.enemies_r[i].attack()
-                i-=1
-#        for i in range(0,len(entities.enemies_m)):
-#            entities.enemies_m[i].movement()
-#            entities.enemies_m[i].attack(entities.player.hitbox)            
-#        for i in range(0, len(entities.enemies_r)):
-#            entities.enemies_r[i].movement()
+                i -= 1
 
-    print(entities.player.health_points)
+
+#  print(entities.player.health_points)
 
     pygame.display.flip()
     clock.tick(settings['FPS'])  # limits FPS to 60

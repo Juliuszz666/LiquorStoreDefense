@@ -92,16 +92,22 @@ class Player(Alive_Being):
         if self.visible:
             self.player_controls = pygame.key.get_pressed()
             if self.player_controls[pygame.K_1]:
+                machete()
                 return 1
             if self.player_controls[pygame.K_2]:
+                pistol()
                 return 2
             if self.player_controls[pygame.K_3]:
+                shotgun()
                 return 3
             if self.player_controls[pygame.K_4]:
+                bow()
                 return 4
             if self.player_controls[pygame.K_5]:
+                medkit()
                 return 5
             return 0
+        
     
     def movement(self):
         """Function responsible for movement of player
@@ -124,8 +130,24 @@ class Player(Alive_Being):
             self.health_points -= damage
         else:
             self.visible = False
-       
-        
+    
+    def attack(self, selected):
+        if self.handling_equipment() == 0:
+            weapon = selected
+        if self.handling_equipment():
+            weapon = self.handling_equipment()
+        match weapon:
+            case 1:
+                pass
+            case 2:
+                pass
+            case 3:
+                pass
+            case 4:
+                pass
+            case 5:
+                pass
+        print(weapon)
 
 """Initialazing player"""
 player = Player(const['PLAYER_HEALTH'], const['PLAYER_SPEED'], 
@@ -135,14 +157,17 @@ player = Player(const['PLAYER_HEALTH'], const['PLAYER_SPEED'],
 enemies_m = []
 enemies_r = []
 
+#
+
 for i in range(0, 50):
+    rnd_pos = random.randint(-3, 3)
     height_range = random.randint(settings['SCREEN_HEIGHT']/10, settings['SCREEN_HEIGHT']-const['ENEMY_HEIGHT'])
     if height_range%7==0:
         enemy = RangedEnemy(const['RANGED_HEALTH'], const['ENEMY_SPEED'], 
-                            (settings['SCREEN_WIDTH']-const['ENEMY_WIDTH'], height_range), 50, 50, (255, 255, 5*i))
+                            (settings['SCREEN_WIDTH']-const['ENEMY_WIDTH'], height_range), 50, 50, (55, 55, 5*i))
         enemies_r.append(enemy)
     else:
         enemy = MeleeEnemy(const['MELEE_HEALTH'], const['ENEMY_SPEED'], 
-                           (settings['SCREEN_WIDTH']-const['ENEMY_WIDTH'], height_range), 50, 50, (0, 0, 255-(i*5)))
+                           (settings['SCREEN_WIDTH']-const['ENEMY_WIDTH'], height_range), 50, 50, (150, 150, 255-(i*5)))
         enemies_m.append(enemy)
     

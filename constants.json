@@ -32,6 +32,9 @@
         "PLAYER_SPEED": 1.5,
         "PLAYER_HEIGHT": 100,
         "PLAYER_WIDTH": 40,
+
+        "MACHETE_DAMAGE": 50,
+        "MACHETE_RANGE": 200,
         
         "ITEM_BORDER": 3
     

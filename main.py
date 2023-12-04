@@ -43,10 +43,12 @@ while running:
             if(j):
                 entities.enemies_m[j].movement()
                 entities.enemies_m[j].attack(entities.player.hitbox)
+                entities.enemies_m[j].get_melee_damage()
                 j -= 1
             if(i):
                 entities.enemies_r[i].movement()
                 entities.enemies_r[i].attack()
+                entities.enemies_r[i].get_melee_damage()
                 i -= 1
 
 

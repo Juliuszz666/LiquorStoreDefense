@@ -2,31 +2,11 @@ import random
 import pygame
 import screen
 from settings import *
+from alive_being import *
 import time
 
-class Alive_Being:
-    """
-    Parent class for player and enemies
-    """
-    def __init__(self, health, speed, position, width, height, aura_range):
-        """Constructor
+medkit_uses = const['MEDKIT_USES']
 
-        Args:
-            health (int): it's obvious
-            speed (int): it's obvious
-            position (tuple): (x,y)
-            width (int): used only to generate rect
-            height (int): used only to generate rect
-            visible (bool): used when being is destroyed
-        """
-        self.visible = True
-        self.health_points = health
-        self.speed = speed
-        (self.position_x, self.position_y) = position
-        self.hitbox = pygame.Rect(self.position_x, self.position_y, width, height)
-        self.damage_aura = pygame.rect.Rect((self.position_x-((aura_range - width)/2), 
-                                    self.position_y-((aura_range -height)/2)), 
-                                    (aura_range, aura_range))
 
 class Enemy(Alive_Being):
     """
@@ -136,8 +116,10 @@ class Player(Alive_Being):
     def medkit(self):
         if self.visible:
             use = pygame.key.get_pressed()[pygame.K_SPACE]
-            if use:
-                self.health_points+=50
+            global medkit_uses
+            if use and medkit_uses:
+                self.health_points+=const['MEDKIT_POWER']
+                medkit_uses -= 1
                 print(self.health_points)
     
     def movement(self):

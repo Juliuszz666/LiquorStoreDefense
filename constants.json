@@ -35,6 +35,9 @@
 
         "MACHETE_DAMAGE": 50,
         "MACHETE_RANGE": 200,
+
+        "MEDKIT_USES": 5,
+        "MEDKIT_POWER": 100,
         
         "ITEM_BORDER": 3
     

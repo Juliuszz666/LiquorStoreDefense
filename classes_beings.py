@@ -8,7 +8,7 @@ class Alive_Being:
     """
     Parent class for player and enemies
     """
-    def __init__(self, health, speed, position, width, height):
+    def __init__(self, health, speed, position, width, height, aura_range):
         """Constructor
 
         Args:
@@ -24,6 +24,9 @@ class Alive_Being:
         self.speed = speed
         (self.position_x, self.position_y) = position
         self.hitbox = pygame.Rect(self.position_x, self.position_y, width, height)
+        self.damage_aura = pygame.rect.Rect((self.position_x-((aura_range - width)/2), 
+                                    self.position_y-((aura_range -height)/2)), 
+                                    (aura_range, aura_range))
 
 class Enemy(Alive_Being):
     """
@@ -32,13 +35,13 @@ class Enemy(Alive_Being):
     Args:
         Alive_Being (object): heritance mechanism
     """
-    def __init__(self, health, speed, position, width, height, color):
+    def __init__(self, health, speed, position, width, height, color, aura_range):
         """Abstract constructor
 
         Args:
             color (string): enemies color (in future image)
         """
-        super().__init__(health, speed, position, width, height)
+        super().__init__(health, speed, position, width, height, aura_range)
         self.color = color
         
     def movement(self):
@@ -47,7 +50,7 @@ class Enemy(Alive_Being):
             pygame.draw.rect(screen.screen, self.color, self.hitbox)
         
     def get_melee_damage(self):
-        if self.health_points>0 and self.visible and self.hitbox.colliderect(player.damage_aura):
+        if self.visible and self.hitbox.colliderect(player.damage_aura):
             self.health_points -= const['MACHETE_DAMAGE']
         if self.health_points<=0:
             self.visible = False
@@ -59,12 +62,7 @@ class MeleeEnemy(Enemy):
     Args:
         Enemy (object): Parent class
     """
-    def __init__(self, health, speed, position, width, height, color):
-        super().__init__(health, speed, position, width, height, color)
-        self.damage_aura = pygame.rect.Rect((self.position_x-((const['AURA_RANGE']-const['ENEMY_WIDTH'])/2), 
-                                    self.position_y-((const['AURA_RANGE']-const['ENEMY_HEIGHT'])/2)), 
-                                    (const['AURA_RANGE'], const['AURA_RANGE']))
-            
+                
     def attack(self, player_hitbox):
         if self.visible:    
             self.damage_aura.move_ip(-self.speed, 0)
@@ -112,11 +110,18 @@ class Player(Alive_Being):
             return 0
 
     def machete(self):
-        if self.visible:
-            self.damage_aura = pygame.rect.Rect((self.position_x-((const['MACHETE_RANGE']-const['PLAYER_WIDTH'])/2), 
-                                        self.position_y-((const['MACHETE_RANGE']-const['PLAYER_HEIGHT'])/2)), 
-                                        (const['MACHETE_RANGE'], const['MACHETE_RANGE']))
+        if self.visible and pygame.key.get_pressed()[pygame.K_SPACE]:
             pygame.draw.rect(screen.screen, "purple", self.damage_aura)
+            i = len(enemies_r)-1
+            j = len(enemies_m)-1
+
+            while(i or j):
+                if(j):
+                    enemies_m[j].get_melee_damage()
+                    j -= 1
+                if(i):
+                    enemies_r[i].get_melee_damage()
+                    i -= 1
             
 
     def pistol():
@@ -142,12 +147,16 @@ class Player(Alive_Being):
             self.player_movement = pygame.key.get_pressed()
             if self.player_movement[pygame.K_w] and self.hitbox.top>settings['SCREEN_HEIGHT']/10:
                 self.hitbox.move_ip(0, -self.speed)
+                self.damage_aura.move_ip(0, -self.speed)
             if self.player_movement[pygame.K_a] and self.hitbox.left>0:
                 self.hitbox.move_ip(-self.speed, 0)
+                self.damage_aura.move_ip(-self.speed, 0)
             if self.player_movement[pygame.K_s] and self.hitbox.bottom<settings['SCREEN_HEIGHT']:
                 self.hitbox.move_ip(0, self.speed)
+                self.damage_aura.move_ip(0, self.speed)
             if self.player_movement[pygame.K_d] and self.hitbox.right<settings['SCREEN_WIDTH']:
                 self.hitbox.move_ip(self.speed, 0)                    
+                self.damage_aura.move_ip(self.speed, 0)
 
             pygame.draw.rect(screen.screen, "white", self.hitbox)
         
@@ -156,29 +165,11 @@ class Player(Alive_Being):
             self.health_points -= damage
         else:
             self.visible = False
-    
-#    def attack(self, selected):
-#        if self.handling_equipment() == 0:
-#            weapon = selected
-#        if self.handling_equipment():
-#            weapon = self.handling_equipment()
-#        match weapon:
-#            case 1:
-#                pass
-#            case 2:
-#                pass
-#            case 3:
-#                pass
-#            case 4:
-#                pass
-#            case 5:
-#                pass
-#        print(weapon)
 
 """Initialazing player"""
 player = Player(const['PLAYER_HEALTH'], const['PLAYER_SPEED'], 
                 (0,(settings['SCREEN_HEIGHT']-const['PLAYER_HEIGHT'])/2), 
-                const['PLAYER_WIDTH'], const['PLAYER_HEIGHT'])
+                const['PLAYER_WIDTH'], const['PLAYER_HEIGHT'], const['MACHETE_RANGE'])
 
 enemies_m = []
 enemies_r = []
@@ -190,11 +181,11 @@ for i in range(0, 50):
     height_range = random.randint(settings['SCREEN_HEIGHT']/10, settings['SCREEN_HEIGHT']-const['ENEMY_HEIGHT'])
     if height_range%7==0:
         enemy = RangedEnemy(const['RANGED_HEALTH'], const['ENEMY_SPEED'], 
-                            (settings['SCREEN_WIDTH']-const['ENEMY_WIDTH'], height_range), 50, 50, (55, 55, 5*i))
+                            (settings['SCREEN_WIDTH']-const['ENEMY_WIDTH'], height_range), 50, 50, (55, 55, 5*i), const['AURA_RANGE'])
         enemy_rect.append(enemy.hitbox)
         enemies_r.append(enemy)
     else:
         enemy = MeleeEnemy(const['MELEE_HEALTH'], const['ENEMY_SPEED'], 
-                            (settings['SCREEN_WIDTH']-const['ENEMY_WIDTH'], height_range), 50, 50, (150, 150, 255-(i*5)))
+                            (settings['SCREEN_WIDTH']-const['ENEMY_WIDTH'], height_range), 50, 50, (150, 150, 255-(i*5)), const['AURA_RANGE'])
         enemy_rect.append(enemy.hitbox)
         enemies_m.append(enemy)

@@ -47,10 +47,11 @@ class MeleeEnemy(Enemy):
         if self.visible:    
             self.damage_aura.move_ip(-self.speed, 0)
             #pygame.draw.rect(screen.screen, "yellow", self.damage_aura)
-
-            if self.damage_aura.colliderect(player_hitbox):
-                player.get_damage(const['MELEE_DAMAGE'])    
-            #time.sleep(0.1)
+            time_start = time.time()
+            while time.time() - time_start < 0:
+                if self.damage_aura.colliderect(player_hitbox):
+                    player.get_damage(const['MELEE_DAMAGE'])    
+            
 
 
 class RangedEnemy(Enemy):
@@ -121,6 +122,9 @@ class Player(Alive_Being):
                 self.health_points+=const['MEDKIT_POWER']
                 medkit_uses -= 1
                 print(self.health_points)
+                use = 0
+            elif not use:
+                use = 1
     
     def movement(self):
         """Function responsible for movement of player

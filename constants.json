@@ -5,6 +5,7 @@
         "P_BULLET_SPEED": 5,
         "P_BULLET_DIR": 1,             
         "P_BULLET_DAMAGE": 69,
+        "INIT_PISTOL_AMMO": 69,
 
         "S_BULLET_WIDTH": 15, 
         "S_BULLET_HEIGHT": 15,

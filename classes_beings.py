@@ -6,6 +6,7 @@ from alive_being import *
 import time
 
 medkit_uses = const['MEDKIT_USES']
+pistol_ammo = const['INIT_PISTOL_AMMO']
 
 class Enemy(Alive_Being):
     """
@@ -107,13 +108,17 @@ class Player(Alive_Being):
                     enemies_r[i].get_melee_damage()
                     i -= 1
 
-    def pistol():
-        pass        
+    def pistol(self):
+        if self.visible:
+            global pistol_ammo
+            shot = pygame.key.get_pressed()[pygame.K_SPACE]
+            if shot and pistol_ammo:
+                pass
     
-    def shotgun():
+    def shotgun(self):
         pass
 
-    def bow():
+    def bow(self):
         pass
     
     def medkit(self):
@@ -124,9 +129,6 @@ class Player(Alive_Being):
                 self.health_points+=const['MEDKIT_POWER']
                 medkit_uses -= 1
                 print(self.health_points)
-                use = 0
-            elif not use:
-                use = 1
     
     def movement(self):
         """Function responsible for movement of player
@@ -151,6 +153,7 @@ class Player(Alive_Being):
     def get_damage(self, damage):
         if self.health_points>=0 and self.visible:
             self.health_points -= damage
+            print(self.health_points)
         else:
             self.visible = False
             screen.display_defeat()

@@ -47,10 +47,11 @@ class MeleeEnemy(Enemy):
         if self.visible:    
             self.damage_aura.move_ip(-self.speed, 0)
             #pygame.draw.rect(screen.screen, "yellow", self.damage_aura)
-            time_start = time.time()
-            while time.time() - time_start < 0:
-                if self.damage_aura.colliderect(player_hitbox):
-                    player.get_damage(const['MELEE_DAMAGE'])    
+            buffer = time.time()
+            if self.damage_aura.colliderect(player_hitbox):
+                if time.time()-buffer==2:
+                    player.get_damage(const['MELEE_DAMAGE'])
+                    
             
 
 
@@ -147,6 +148,7 @@ class Player(Alive_Being):
             pygame.draw.rect(screen.screen, "white", self.hitbox)
         
     def get_damage(self, damage):
+        print("Halo")
         if self.health_points>=0 and self.visible:
             self.health_points -= damage
         else:

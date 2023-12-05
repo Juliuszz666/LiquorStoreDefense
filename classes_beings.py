@@ -47,10 +47,8 @@ class MeleeEnemy(Enemy):
         if self.visible:    
             self.damage_aura.move_ip(-self.speed, 0)
             #pygame.draw.rect(screen.screen, "yellow", self.damage_aura)
-            buffer = time.time()
             if self.damage_aura.colliderect(player_hitbox):
-                if time.time()-buffer==2:
-                    player.get_damage(const['MELEE_DAMAGE'])
+                player.get_damage(const['MELEE_DAMAGE'])
                     
             
 

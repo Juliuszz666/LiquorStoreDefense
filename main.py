@@ -11,7 +11,6 @@ clock = pygame.time.Clock()
 running = True
 freeze = False
 
-
 while running:
     """Game loop
     """

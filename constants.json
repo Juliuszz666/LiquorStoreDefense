@@ -24,7 +24,7 @@
 
         "AURA_RANGE": 75,
         "MELEE_HEALTH": 200,
-        "MELEE_DAMAGE": 100,
+        "MELEE_DAMAGE": 0.1,
         
         "RANGED_HEALTH": 100,
             
@@ -33,7 +33,7 @@
         "PLAYER_HEIGHT": 100,
         "PLAYER_WIDTH": 40,
 
-        "MACHETE_DAMAGE": 50,
+        "MACHETE_DAMAGE": 5,
         "MACHETE_RANGE": 200,
 
         "MEDKIT_USES": 5,

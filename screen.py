@@ -53,5 +53,11 @@ def display():
         else:
             pygame.draw.rect(eq_item[i], "yellow", border, const['ITEM_BORDER'])  
         screen.blit(eq_item[i], (eq_item_base + (i*eq_item_space), eq_item_base))
-        
+
+def display_defeat():
+    screen.fill("black")
+    defeat_font = pygame.sysfont.SysFont('arial', 50)
+    defeat_text = defeat_font.render("YOU LOST", True, "white")
+    screen.blit(defeat_text, (settings['SCREEN_WIDTH']/2, settings['SCREEN_HEIGHT']/2))    
+    freeze = True
      

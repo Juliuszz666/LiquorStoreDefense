@@ -34,6 +34,10 @@ class Enemy(Alive_Being):
         if self.health_points<=0:
             self.visible = False
 
+    def defeat(self):
+        if self.visible:
+            if self.hitbox.left<=0:
+                screen.display_defeat()
 
 class MeleeEnemy(Enemy):
     """
@@ -102,7 +106,6 @@ class Player(Alive_Being):
                 if(i):
                     enemies_r[i].get_melee_damage()
                     i -= 1
-            
 
     def pistol():
         pass        
@@ -117,7 +120,7 @@ class Player(Alive_Being):
         if self.visible:
             use = pygame.key.get_pressed()[pygame.K_SPACE]
             global medkit_uses
-            if use and medkit_uses:
+            if use and medkit_uses and self.health_points<250:
                 self.health_points+=const['MEDKIT_POWER']
                 medkit_uses -= 1
                 print(self.health_points)
@@ -146,11 +149,11 @@ class Player(Alive_Being):
             pygame.draw.rect(screen.screen, "white", self.hitbox)
         
     def get_damage(self, damage):
-        print("Halo")
         if self.health_points>=0 and self.visible:
             self.health_points -= damage
         else:
             self.visible = False
+            screen.display_defeat()
 
 """Initialazing player"""
 player = Player(const['PLAYER_HEALTH'], const['PLAYER_SPEED'], 

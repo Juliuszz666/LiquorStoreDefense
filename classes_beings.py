@@ -7,7 +7,6 @@ import time
 
 medkit_uses = const['MEDKIT_USES']
 
-
 class Enemy(Alive_Being):
     """
     Abstract class for enemies (zule i menele)
@@ -34,7 +33,8 @@ class Enemy(Alive_Being):
             self.health_points -= const['MACHETE_DAMAGE']
         if self.health_points<=0:
             self.visible = False
-    
+
+
 class MeleeEnemy(Enemy):
     """
     Class for melee enemies

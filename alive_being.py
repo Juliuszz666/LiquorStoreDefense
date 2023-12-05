@@ -1,4 +1,6 @@
 import pygame
+import screen
+from settings import *
 
 
 class Alive_Being:
@@ -9,7 +11,7 @@ class Alive_Being:
         """Constructor
 
         Args:
-            health (int): it's obvious
+            health (float): it's obvious
             speed (int): it's obvious
             position (tuple): (x,y)
             width (int): used only to generate rect

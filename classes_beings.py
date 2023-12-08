@@ -24,12 +24,10 @@ class Enemy(Alive_Being):
         super().__init__(health, speed, position, width, height, aura_range)
         self.color = color
         
-    def movement(self):
+    def update(self) -> None:
         if self.visible:
             self.hitbox.move_ip(-self.speed, 0)
             pygame.draw.rect(screen.screen, self.color, self.hitbox)
-        
-    def get_melee_damage(self):
         if self.visible and self.hitbox.colliderect(player.damage_aura):
             self.health_points -= const['MACHETE_DAMAGE']
         if self.health_points<=0:

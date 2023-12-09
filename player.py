@@ -1,69 +1,6 @@
-import random
 import pygame
-import screen
-from settings import *
 from alive_being import *
-import time
-
-medkit_uses = const['MEDKIT_USES']
-pistol_ammo = const['INIT_PISTOL_AMMO']
-
-class Enemy(Alive_Being):
-    """
-    Abstract class for enemies (zule i menele)
-
-    Args:
-        Alive_Being (object): heritance mechanism
-    """
-    def __init__(self, health, speed, position, width, height, color, aura_range):
-        """Abstract constructor
-
-        Args:
-            color (string): enemies color (in future image)
-        """
-        super().__init__(health, speed, position, width, height, aura_range)
-        self.color = color
-        
-    def update(self) -> None:
-        if self.visible:
-            self.hitbox.move_ip(-self.speed, 0)
-            pygame.draw.rect(screen.screen, self.color, self.hitbox)
-        if self.visible and self.hitbox.colliderect(player.damage_aura):
-            self.health_points -= const['MACHETE_DAMAGE']
-        if self.health_points<=0:
-            self.visible = False
-
-    def defeat(self):
-        if self.visible:
-            if self.hitbox.left<=0:
-                screen.display_defeat()
-
-class MeleeEnemy(Enemy):
-    """
-    Class for melee enemies
-
-    Args:
-        Enemy (object): Parent class
-    """
-                
-    def attack(self, player_hitbox):
-        if self.visible:    
-            self.damage_aura.move_ip(-self.speed, 0)
-            #pygame.draw.rect(screen.screen, "yellow", self.damage_aura)
-            if self.damage_aura.colliderect(player_hitbox):
-                player.get_damage(const['MELEE_DAMAGE'])
-                    
-            
-
-
-class RangedEnemy(Enemy):
-    """Class for ranged enemy
-
-    Args:
-        Enemy (object): Parent class
-    """    
-    def attack(self):
-        pass
+from enemies import *
 
 class Player(Alive_Being):
     """Player class
@@ -160,22 +97,3 @@ class Player(Alive_Being):
 player = Player(const['PLAYER_HEALTH'], const['PLAYER_SPEED'], 
                 (0,(settings['SCREEN_HEIGHT']-const['PLAYER_HEIGHT'])/2), 
                 const['PLAYER_WIDTH'], const['PLAYER_HEIGHT'], const['MACHETE_RANGE'])
-
-enemies_m = []
-enemies_r = []
-enemy_rect = []
-
-
-for i in range(0, 50):
-    #nd_pos = random.randint(-3, 3)
-    height_range = random.randint(settings['SCREEN_HEIGHT']/10, settings['SCREEN_HEIGHT']-const['ENEMY_HEIGHT'])
-    if height_range%7==0:
-        enemy = RangedEnemy(const['RANGED_HEALTH'], const['ENEMY_SPEED'], 
-                            (settings['SCREEN_WIDTH']-const['ENEMY_WIDTH'], height_range), 50, 50, (55, 55, 5*i), const['AURA_RANGE'])
-        enemy_rect.append(enemy.hitbox)
-        enemies_r.append(enemy)
-    else:
-        enemy = MeleeEnemy(const['MELEE_HEALTH'], const['ENEMY_SPEED'], 
-                            (settings['SCREEN_WIDTH']-const['ENEMY_WIDTH'], height_range), 50, 50, (150, 150, 255-(i*5)), const['AURA_RANGE'])
-        enemy_rect.append(enemy.hitbox)
-        enemies_m.append(enemy)

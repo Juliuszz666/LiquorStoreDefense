@@ -1,4 +1,4 @@
-import classes_beings as entities
+import enemies as entities
 import classes_bullets as bullet
 from screen import *
 import pygame

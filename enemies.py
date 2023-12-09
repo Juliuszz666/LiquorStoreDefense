@@ -3,6 +3,7 @@ import pygame
 import screen
 from settings import *
 from alive_being import *
+import player
 import time
 
 medkit_uses = const['MEDKIT_USES']
@@ -51,7 +52,7 @@ class MeleeEnemy(Enemy):
             self.damage_aura.move_ip(-self.speed, 0)
             #pygame.draw.rect(screen.screen, "yellow", self.damage_aura)
             if self.damage_aura.colliderect(player_hitbox):
-                player.get_damage(const['MELEE_DAMAGE'])
+                player.player.get_damage(const['MELEE_DAMAGE'])
                     
             
 

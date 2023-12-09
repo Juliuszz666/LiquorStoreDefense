@@ -1,4 +1,5 @@
-import enemies as entities
+import enemies
+import player
 import classes_bullets as bullet
 from screen import *
 import pygame
@@ -32,25 +33,25 @@ while running:
 
     if not freeze:
         display()
-        entities.player.handling_equipment()
-        entities.player.movement()
-        i = len(entities.enemies_r)-1
-        j = len(entities.enemies_m)-1
+        player.player.handling_equipment()
+        player.player.movement()
+        i = len(enemies.enemies_r)-1
+        j = len(enemies.enemies_m)-1
 
         while(i or j):
             if(j):
-                entities.enemies_m[j].update()
-                #ntities.enemies_m[j].attack(entities.player.hitbox)
-                entities.enemies_m[j].defeat()
+                enemies.enemies_m[j].update()
+                #ntities.enemies_m[j].attack(enemies.player.hitbox)
+                enemies.enemies_m[j].defeat()
                 j -= 1
             if(i):
-                entities.enemies_r[i].update()
-                #      entities.enemies_r[i].attack()
-                entities.enemies_m[j].defeat()
+                enemies.enemies_r[i].update()
+                #      enemies.enemies_r[i].attack()
+                enemies.enemies_m[j].defeat()
                 i -= 1
 
 
-#  print(entities.player.health_points)
+#  print(enemies.player.health_points)
 
     pygame.display.flip()
     clock.tick(settings['FPS'])  # limits FPS to 60

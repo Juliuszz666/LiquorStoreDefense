@@ -1,5 +1,5 @@
 import pygame
-import classes_beings as entities
+import enemies
 import math
 
 class ThrownObject(pygame.sprite.Sprite):

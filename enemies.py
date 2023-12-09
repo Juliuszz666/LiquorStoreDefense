@@ -29,7 +29,7 @@ class Enemy(Alive_Being):
         if self.visible:
             self.hitbox.move_ip(-self.speed, 0)
             pygame.draw.rect(screen.screen, self.color, self.hitbox)
-        if self.visible and self.hitbox.colliderect(player.damage_aura):
+        if self.visible and self.hitbox.colliderect(player.player.damage_aura):
             self.health_points -= const['MACHETE_DAMAGE']
         if self.health_points<=0:
             self.visible = False

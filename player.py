@@ -1,6 +1,7 @@
 import pygame
 from alive_being import *
 from enemies import *
+from player import *
 
 class Player(Alive_Being):
     """Player class

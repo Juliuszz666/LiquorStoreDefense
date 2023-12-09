@@ -1,5 +1,6 @@
 import pygame
-import classes_beings as entities
+import enemies
+import player
 from settings import *
 
 screen_flag = 0
@@ -26,19 +27,19 @@ def display():
     
     eq_item = []
     
-    if entities.player.handling_equipment():
-        selected = entities.player.handling_equipment()
+    if player.player.handling_equipment():
+        selected = player.player.handling_equipment()
     match selected:
         case 1:
-            entities.player.machete()
+            player.player.machete()
         case 2:
-            entities.player.pistol()
+            player.player.pistol()
         case 3:
-            entities.player.shotgun()
+            player.player.shotgun()
         case 4:
-            entities.player.bow()
+            player.player.bow()
         case 5:
-            entities.player.medkit()
+            player.player.medkit()
             
     
     for i in range(0,5):

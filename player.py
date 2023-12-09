@@ -3,6 +3,7 @@ from alive_being import *
 from enemies import *
 from player import *
 
+
 class Player(Alive_Being):
     """Player class
 
@@ -16,40 +17,31 @@ class Player(Alive_Being):
         Returns:
             int: index no. of item/weapon
         """
-        if self.visible:
-            self.player_controls = pygame.key.get_pressed()
-            if self.player_controls[pygame.K_1]:
-                return 1
-            if self.player_controls[pygame.K_2]:
-                return 2
-            if self.player_controls[pygame.K_3]:
-                return 3
-            if self.player_controls[pygame.K_4]:
-                return 4
-            if self.player_controls[pygame.K_5]:
-                return 5
-            return 0
+    
+        self.player_controls = pygame.key.get_pressed()
+        if self.player_controls[pygame.K_1]:
+            return 1
+        if self.player_controls[pygame.K_2]:
+            return 2
+        if self.player_controls[pygame.K_3]:
+            return 3
+        if self.player_controls[pygame.K_4]:
+            return 4
+        if self.player_controls[pygame.K_5]:
+            return 5
+        return 0
 
     def machete(self):
-        if self.visible and pygame.key.get_pressed()[pygame.K_SPACE]:
+        if pygame.key.get_pressed()[pygame.K_SPACE]:
             pygame.draw.rect(screen.screen, "purple", self.damage_aura)
-            i = len(enemies_r)-1
-            j = len(enemies_m)-1
 
-            while(i or j):
-                if(j):
-                    enemies_m[j].get_melee_damage()
-                    j -= 1
-                if(i):
-                    enemies_r[i].get_melee_damage()
-                    i -= 1
+
 
     def pistol(self):
-        if self.visible:
-            global pistol_ammo
-            shot = pygame.key.get_pressed()[pygame.K_SPACE]
-            if shot and pistol_ammo:
-                pass
+        global pistol_ammo
+        shot = pygame.key.get_pressed()[pygame.K_SPACE]
+        if shot and pistol_ammo:
+            pass
     
     def shotgun(self):
         pass
@@ -58,40 +50,39 @@ class Player(Alive_Being):
         pass
     
     def medkit(self):
-        if self.visible:
-            use = pygame.key.get_pressed()[pygame.K_SPACE]
-            global medkit_uses
-            if use and medkit_uses and self.health_points<250:
-                self.health_points+=const['MEDKIT_POWER']
-                medkit_uses -= 1
-                print(self.health_points)
+        use = pygame.key.get_pressed()[pygame.K_SPACE]
+        global medkit_uses
+        if use and medkit_uses and self.health_points<250:
+            self.health_points+=const['MEDKIT_POWER']
+            medkit_uses -= 1
+            print(self.health_points)
     
-    def movement(self):
-        """Function responsible for movement of player
+    def update(self):
+        """_summary_
         """
-        if self.visible:
-            self.player_movement = pygame.key.get_pressed()
-            if self.player_movement[pygame.K_w] and self.hitbox.top>settings['SCREEN_HEIGHT']/10:
-                self.hitbox.move_ip(0, -self.speed)
-                self.damage_aura.move_ip(0, -self.speed)
-            if self.player_movement[pygame.K_a] and self.hitbox.left>0:
-                self.hitbox.move_ip(-self.speed, 0)
-                self.damage_aura.move_ip(-self.speed, 0)
-            if self.player_movement[pygame.K_s] and self.hitbox.bottom<settings['SCREEN_HEIGHT']:
-                self.hitbox.move_ip(0, self.speed)
-                self.damage_aura.move_ip(0, self.speed)
-            if self.player_movement[pygame.K_d] and self.hitbox.right<settings['SCREEN_WIDTH']:
-                self.hitbox.move_ip(self.speed, 0)                    
-                self.damage_aura.move_ip(self.speed, 0)
-
-            pygame.draw.rect(screen.screen, "white", self.hitbox)
+        self.player_movement = pygame.key.get_pressed()
+        if self.player_movement[pygame.K_w] and self.hitbox.top>settings['SCREEN_HEIGHT']/10:
+            self.hitbox.move_ip(0, -self.speed)
+            self.damage_aura.move_ip(0, -self.speed)
+        if self.player_movement[pygame.K_a] and self.hitbox.left>0:
+            self.hitbox.move_ip(-self.speed, 0)
+            self.damage_aura.move_ip(-self.speed, 0)
+        if self.player_movement[pygame.K_s] and self.hitbox.bottom<settings['SCREEN_HEIGHT']:
+            self.hitbox.move_ip(0, self.speed)
+            self.damage_aura.move_ip(0, self.speed)
+        if self.player_movement[pygame.K_d] and self.hitbox.right<settings['SCREEN_WIDTH']:
+            self.hitbox.move_ip(self.speed, 0)                    
+            self.damage_aura.move_ip(self.speed, 0)
         
+        pygame.draw.rect(screen.screen, "white", self.hitbox)
+    
+    
     def get_damage(self, damage):
-        if self.health_points>=0 and self.visible:
+        if self.health_points>=0:
             self.health_points -= damage
             print(self.health_points)
         else:
-            self.visible = False
+            self.kill()
             screen.display_defeat()
 
 """Initialazing player"""

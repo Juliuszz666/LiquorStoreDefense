@@ -25,7 +25,7 @@ class Alive_Being(pygame.sprite.Sprite):
         self.hitbox = self.hitbox = pygame.Rect(self.position_x, self.position_y, width, height)
         self.damage_aura = pygame.rect.Rect((self.position_x - ((aura_range - width) / 2),
                                              self.position_y - ((aura_range - height) / 2)), (aura_range, aura_range))
-        self.visible = True
+
 
     def update(self) -> None:
         pygame.sprite.Sprite.update(self)

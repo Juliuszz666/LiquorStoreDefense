@@ -34,19 +34,19 @@ while running:
     if not freeze:
         display()
         player.player.handling_equipment()
-        player.player.movement()
+        player.player.update()
         i = len(enemies.enemies_r)-1
         j = len(enemies.enemies_m)-1
 
         while(i or j):
             if(j):
                 enemies.enemies_m[j].update()
-                #ntities.enemies_m[j].attack(enemies.player.hitbox)
+                enemies.enemies_m[j].attack(player.player.hitbox)
                 enemies.enemies_m[j].defeat()
                 j -= 1
             if(i):
                 enemies.enemies_r[i].update()
-                #      enemies.enemies_r[i].attack()
+                enemies.enemies_r[i].attack()
                 enemies.enemies_m[j].defeat()
                 i -= 1
 

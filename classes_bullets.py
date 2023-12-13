@@ -24,7 +24,6 @@ class ThrownObject(pygame.sprite.Sprite):
         self.direction = dir
         
     def update(self):
-        pygame.sprite.Sprite.update(self)
         
         if self.hitbox.top <= settings['SCREEN_HEIGHT'] / 10:
             self.kill()

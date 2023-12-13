@@ -1,5 +1,4 @@
 import pygame
-import screen
 from settings import *
 
 
@@ -7,7 +6,7 @@ class Alive_Being(pygame.sprite.Sprite):
     """
     Parent class for player and enemies
     """
-    def __init__(self, health, speed, position, width, height, aura_range):
+    def __init__(self, being_dict):
         """Abstract constructor
 
         Args:
@@ -19,13 +18,13 @@ class Alive_Being(pygame.sprite.Sprite):
             aura_range (float): for melee being area where enemy takes damage
         """
         pygame.sprite.Sprite.__init__(self)
-        self.health_points = health
-        self.speed = speed
-        (self.position_x, self.position_y) = position
-        self.hitbox = self.hitbox = pygame.Rect(self.position_x, self.position_y, width, height)
-        self.damage_aura = pygame.rect.Rect((self.position_x - ((aura_range - width) / 2),
-                                             self.position_y - ((aura_range - height) / 2)), (aura_range, aura_range))
+        self.health_points = being_dict['hp']
+        self.speed = being_dict['speed']
+        (self.position_x, self.position_y) = being_dict['pos']
+        self.hitbox = self.hitbox = pygame.Rect(self.position_x, self.position_y, being_dict['width'], being_dict['height'])
+        self.damage_aura = pygame.rect.Rect((self.position_x - ((being_dict['aura'] - being_dict['width']) / 2),
+                                             self.position_y - ((being_dict['aura'] - being_dict['height']) / 2)), (being_dict['aura'], being_dict['aura']))
 
 
     def update(self) -> None:
-        pygame.sprite.Sprite.update(self)
+        pass

@@ -1,5 +1,18 @@
 
     {
+        "player_init": {
+            "hp": 250,
+            "speed": 1.5,
+            "height": 100,
+            "width": 40,
+            "pos": [0, 400],
+            "aura": 200
+        },
+        "player_other":
+        {
+            "m_cooldown": 180,
+            "r_cooldown": 30
+        },
         "P_BULLET_WIDTH": 15, 
         "P_BULLET_HEIGHT": 15,
         "P_BULLET_SPEED": 5,
@@ -28,11 +41,6 @@
         "MELEE_DAMAGE": 0.1,
         
         "RANGED_HEALTH": 100,
-            
-        "PLAYER_HEALTH": 250,
-        "PLAYER_SPEED": 1.5,
-        "PLAYER_HEIGHT": 100,
-        "PLAYER_WIDTH": 40,
 
         "MACHETE_DAMAGE": 5,
         "MACHETE_RANGE": 200,

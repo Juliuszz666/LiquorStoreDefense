@@ -2,7 +2,8 @@ import pygame
 from alive_being import *
 from enemies import *
 from player import *
-
+from settings import *
+import screen
 
 class Player(Alive_Being):
     """Player class
@@ -10,6 +11,11 @@ class Player(Alive_Being):
     Args:
         Alive_Being (object): Parent class
     """
+    
+    def __init__(self):
+        Alive_Being.__init__(self, const['player_init'])
+        self.cooldown_melee = 0
+        self.cooldown_ranged = 0            
              
     def handling_equipment(self) -> int:
         """Function detects if player pressed key responsible for selecting item from the equipment 
@@ -32,16 +38,19 @@ class Player(Alive_Being):
         return 0
 
     def machete(self):
-        if pygame.key.get_pressed()[pygame.K_SPACE]:
+        
+        if pygame.key.get_pressed()[pygame.K_SPACE] and self.cooldown_melee<=0:
             pygame.draw.rect(screen.screen, "purple", self.damage_aura)
-
+            self.cooldown_melee = const['player_other']['m_cooldown']
+        else:
+            self.cooldown_melee -= 1
 
 
     def pistol(self):
         global pistol_ammo
         shot = pygame.key.get_pressed()[pygame.K_SPACE]
         if shot and pistol_ammo:
-            pass
+            return None # bullet constructor
     
     def shotgun(self):
         pass
@@ -86,6 +95,4 @@ class Player(Alive_Being):
             screen.display_defeat()
 
 """Initialazing player"""
-player = Player(const['PLAYER_HEALTH'], const['PLAYER_SPEED'], 
-                (0,(settings['SCREEN_HEIGHT']-const['PLAYER_HEIGHT'])/2), 
-                const['PLAYER_WIDTH'], const['PLAYER_HEIGHT'], const['MACHETE_RANGE'])
+player = Player()

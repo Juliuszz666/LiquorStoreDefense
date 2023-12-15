@@ -13,6 +13,7 @@
             "m_cooldown": 180,
             "p_cooldown": 30,
             "s_cooldown": 360,
+            "b_cooldown": 10,
             "machete_dmg": 100,
             "medkit_uses": 5,
             "medkit_healing": 100
@@ -39,6 +40,15 @@
             "dir": 1,
             "scale": [0.1, 0.1],
             "angle": 5
+        },
+        "arrow":
+        {
+            "src_file": "img/b_pistol.png",
+            "speed": 10,
+            "dmg": 50,
+            "dir": 1,
+            "scale": [0.1, 0.1],
+            "angle": 15
         },
 
         "INIT_PISTOL_AMMO": 69,

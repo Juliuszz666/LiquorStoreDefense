@@ -19,6 +19,7 @@ class Player(Alive_Being):
         self.cooldown_melee = 0
         self.cooldown_pistol = 0            
         self.cooldown_shotgun = 0
+        self.cooldown_bow = 0
         
     def is_use(self):
         return pygame.key.get_pressed()[pygame.K_SPACE]
@@ -76,7 +77,14 @@ class Player(Alive_Being):
             self.cooldown_shotgun -= 1
 
     def bow(self):
-        pass
+        if self.is_use() and self.cooldown_bow<=0:
+            bullet_player = Arrow(const['arrow'], self.hitbox.topright, const['arrow']['angle'])
+            all_sprite.add(bullet_player)
+            bullets.add(bullet_player)
+            player_bullets.add(bullet_player)
+            self.cooldown_bow = const['player_other']['b_cooldown']
+        else:
+            self.cooldown_bow -= 1
     
     def medkit(self):
         if self.is_use() and medkit_uses and self.health_points<250:

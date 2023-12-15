@@ -12,7 +12,7 @@
         {
             "m_cooldown": 180,
             "p_cooldown": 30,
-            "s_cooldown": 600,
+            "s_cooldown": 360,
             "machete_dmg": 100,
             "medkit_uses": 5,
             "medkit_healing": 100

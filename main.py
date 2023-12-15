@@ -5,14 +5,18 @@ from screen import *
 import pygame
 
 
+
 # pygame setup
 pygame.init()
 pygame.display.set_caption("LSD 1.0")
 clock = pygame.time.Clock()
-running = True
-freeze = False
 
-if __name__ == "__main__":
+
+
+
+def game_loop():
+    running = True
+    freeze = False
     while running:
         """Game loop
         """
@@ -31,15 +35,21 @@ if __name__ == "__main__":
                 freeze = True
             if event.type == pygame.WINDOWRESTORED:
                 freeze = False
+                
+        pygame.display.flip()
+        clock.tick(settings['FPS'])  # limits FPS to 60
     
         if not freeze:
             display()
             all_sprite.update()
+
+if __name__ == "__main__":
+    game_loop()
+        
             
             
                                                             
-        pygame.display.flip()
-        clock.tick(settings['FPS'])  # limits FPS to 60
+
     
 
 

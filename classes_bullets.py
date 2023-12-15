@@ -37,8 +37,6 @@ class ThrownObject(pygame.sprite.Sprite):
             self.kill()
         if self.hitbox.left <= 0:
             self.kill()
-        #if self.hitbox.collideobjects(Alive_Being.hitbox):
-        #    self.kill()
             
         screen.screen.blit(self.graphics, self.hitbox)
         
@@ -58,3 +56,11 @@ class ShotgunBullet(ThrownObject):
     def update(self):
         ThrownObject.update(self)
         self.hitbox.move_ip(self.speed * self.direction * math.cos(self.angle), self.dir_y * self.speed * math.sin(self.angle))
+        
+        
+class Parabolic(ThrownObject):
+    
+    def __init__(self, bullet_dict, pos, angle):
+        ThrownObject.__init__(self, bullet_dict, pos)
+        self.angle - math.radians(angle)
+        self.ini_pos = pos

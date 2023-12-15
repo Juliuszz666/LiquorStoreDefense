@@ -19,6 +19,9 @@ class Player(Alive_Being):
         self.cooldown_melee = 0
         self.cooldown_pistol = 0            
         self.cooldown_shotgun = 0
+        
+    def is_use(self):
+        return pygame.key.get_pressed()[pygame.K_SPACE]
              
     def handling_equipment(self) -> int:
         """Function detects if player pressed key responsible for selecting item from the equipment 
@@ -43,18 +46,15 @@ class Player(Alive_Being):
 
     def machete(self):
         
-        if pygame.key.get_pressed()[pygame.K_SPACE] and self.cooldown_melee<=0:
+        if self.is_use() and self.cooldown_melee<=0:
             self.cooldown_melee = const['player_other']['m_cooldown']
-            #melee_collision = pygame.sprite.spritecollide(self, enemies, True)
-            #for enemy in melee_collision:
-            #    enemy.get_damage()
+
         else:
             self.cooldown_melee -= 1
 
 
     def pistol(self):
-        shot = pygame.key.get_pressed()[pygame.K_SPACE]
-        if shot and self.cooldown_pistol<=0:
+        if self.is_use() and self.cooldown_pistol<=0:
             bullet_player = PistolBullet(const['b_pistol'], self.hitbox.topleft)
             all_sprite.add(bullet_player)
             bullets.add(bullet_player)
@@ -64,8 +64,8 @@ class Player(Alive_Being):
             self.cooldown_pistol -= 1
         
     def shotgun(self):
-        shot = pygame.key.get_pressed()[pygame.K_SPACE]
-        if shot and self.cooldown_shotgun<=0:
+        
+        if self.is_use() and self.cooldown_shotgun<=0:
             for i in range(-1, 2, 1):
                 bullet_player = ShotgunBullet(self.hitbox.topleft, const['b_shotgun']['angle'], i)
                 all_sprite.add(bullet_player)
@@ -79,8 +79,7 @@ class Player(Alive_Being):
         pass
     
     def medkit(self):
-        use = pygame.key.get_pressed()[pygame.K_SPACE]
-        if use and medkit_uses and self.health_points<250:
+        if self.is_use() and medkit_uses and self.health_points<250:
             self.health_points+=const['MEDKIT_POWER']
             medkit_uses -= 1
             print(self.health_points)
@@ -105,10 +104,9 @@ class Player(Alive_Being):
     def get_damage(self, damage):
         if self.health_points>=0:
             self.health_points -= damage
-            print(self.health_points)
         else:
             self.kill()
-            screen.display_defeat()
+
 
 """Initialazing player"""
 protagonist = Player((50, 200))

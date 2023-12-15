@@ -15,7 +15,6 @@ class Alive_Being(pygame.sprite.Sprite):
             position (tuple): top left of being (x,y)
             width (float): being width
             height (float): being height
-            aura_range (float): for melee being area where enemy takes damage
         """
         pygame.sprite.Sprite.__init__(self)
         self.health_points = being_dict['hp']

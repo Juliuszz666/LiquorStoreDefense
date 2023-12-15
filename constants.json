@@ -5,19 +5,42 @@
             "speed": 1.5,
             "height": 100,
             "width": 40,
-            "pos": [0, 400],
-            "aura": 200
+            "src_file": "img/redneck.png",
+            "scale": [0.1, 0.1]
         },
         "player_other":
         {
             "m_cooldown": 180,
-            "r_cooldown": 30
+            "p_cooldown": 30,
+            "s_cooldown": 600,
+            "machete_dmg": 100,
+            "medkit_uses": 5,
+            "medkit_healing": 100
         },
-        "P_BULLET_WIDTH": 15, 
-        "P_BULLET_HEIGHT": 15,
-        "P_BULLET_SPEED": 5,
-        "P_BULLET_DIR": 1,             
-        "P_BULLET_DAMAGE": 69,
+        "enemy_melee": {
+            "hp": 150,
+            "speed": 1,
+            "height": 100,
+            "width": 40
+        },
+        "b_pistol":
+        {
+            "src_file": "img/b_pistol.png",
+            "speed": 5,
+            "dmg": 69,
+            "dir": 1,
+            "scale": [0.1, 0.1]
+        },
+        "b_shotgun":
+        {
+            "src_file": "img/b_pistol.png",
+            "speed": 20,
+            "dmg": 100,
+            "dir": 1,
+            "scale": [0.1, 0.1],
+            "angle": 5
+        },
+
         "INIT_PISTOL_AMMO": 69,
 
         "S_BULLET_WIDTH": 15, 
@@ -41,13 +64,7 @@
         "MELEE_DAMAGE": 0.1,
         
         "RANGED_HEALTH": 100,
-
-        "MACHETE_DAMAGE": 5,
-        "MACHETE_RANGE": 200,
-
-        "MEDKIT_USES": 5,
-        "MEDKIT_POWER": 100,
-        
+       
         "ITEM_BORDER": 3
     
     }

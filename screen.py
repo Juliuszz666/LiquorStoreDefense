@@ -13,7 +13,8 @@ selected = 1
 def display():
     global selected
 
-    screen.fill("blue")    
+    bg = pygame.transform.scale2x(pygame.image.load("img/bg_test.jpg"))    
+    screen.blit(bg, (0, 0))
     
     player_details = pygame.Surface((screen.get_width(), 
                                      screen.get_height()/10))
@@ -27,19 +28,19 @@ def display():
     
     eq_item = []
     
-    if player.player.handling_equipment():
-        selected = player.player.handling_equipment()
+    if player.protagonist.handling_equipment():
+        selected = player.protagonist.handling_equipment()
     match selected:
         case 1:
-            player.player.machete()
+            player.protagonist.machete()
         case 2:
-            player.player.pistol()
+            player.protagonist.pistol()
         case 3:
-            player.player.shotgun()
+            player.protagonist.shotgun()
         case 4:
-            player.player.bow()
+            player.protagonist.bow()
         case 5:
-            player.player.medkit()
+            player.protagonist.medkit()
             
     
     for i in range(0,5):

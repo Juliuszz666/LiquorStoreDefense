@@ -1,6 +1,6 @@
-import enemies
-import player
-import classes_bullets as bullet
+from enemies import *
+from player import *
+from classes_bullets import *
 from screen import *
 import pygame
 
@@ -34,24 +34,10 @@ if __name__ == "__main__":
     
         if not freeze:
             display()
-            player.player.handling_equipment()
-            player.player.update()
-            #i = len(enemies.enemies_r)-1
-            #j = len(enemies.enemies_m)-1
-    
-            #while(i or j):
-            #    if(j):
-            #        enemies.enemies_m[j].update()
-            #        enemies.enemies_m[j].attack(player.player.hitbox)
-            #        enemies.enemies_m[j].defeat()
-            #        j -= 1
-            #    if(i):
-            #        enemies.enemies_r[i].update()
-            #        enemies.enemies_r[i].attack()
-            #        enemies.enemies_m[j].defeat()
-            #        i -= 1
-        #  print(enemies.player.health_points)
-    
+            all_sprite.update()
+            
+            
+                                                            
         pygame.display.flip()
         clock.tick(settings['FPS'])  # limits FPS to 60
     

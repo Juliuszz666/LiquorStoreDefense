@@ -10,17 +10,16 @@ class Alive_Being(pygame.sprite.Sprite):
         """Abstract constructor
 
         Args:
-            health (float): no need to explain
-            speed (float): no need to explain
-            position (tuple): top left of being (x,y)
-            width (float): being width
-            height (float): being height
+            being_dict (_type_): _description_
+            position (_type_): _description_
         """
         pygame.sprite.Sprite.__init__(self)
         self.health_points = being_dict['hp']
         self.speed = being_dict['speed']
         (self.position_x, self.position_y) = position
-        self.hitbox = self.hitbox = pygame.Rect(self.position_x, self.position_y, being_dict['width'], being_dict['height'])
+        self.graphics = pygame.transform.scale_by(pygame.image.load(being_dict['src_file']), being_dict['scale'])
+        self.hitbox = self.graphics.get_rect()
+        self.hitbox.topleft = (self.position_x, self.position_y)
         
     def update(self) -> None:
-        pass
+        pygame.sprite.Sprite.update(self)

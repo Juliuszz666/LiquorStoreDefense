@@ -1,11 +1,13 @@
 import pygame
 from settings import *
 from alive_being import *
+import math
+import screen
 import enemies
 import math
 
 class ThrownObject(pygame.sprite.Sprite):
-    def __init__(self, speed, position, width, height, damage, dir):
+    def __init__(self, bullet_dict, pos):
         """_summary_
 
         Args:
@@ -16,12 +18,14 @@ class ThrownObject(pygame.sprite.Sprite):
             damage (float): _description_
             dir (-1/1): -1 left | 1 right
         """
-        pygame.sprite.Sprite.__init__()
-        (self.position_x, self.position_y) = position
-        self.hitbox = pygame.rect.Rect(self.position_x, self.position_y, width, height)
-        self.damage = damage
-        self.speed = speed
-        self.direction = dir
+        pygame.sprite.Sprite.__init__(self)
+        (self.position_x, self.position_y) = pos
+        self.graphics = pygame.transform.scale_by(pygame.image.load(bullet_dict['src_file']), bullet_dict['scale'])
+        self.hitbox = self.graphics.get_rect()
+        self.hitbox.topleft = (self.position_x, self.position_y)
+        self.damage = bullet_dict['dmg']
+        self.speed = bullet_dict['speed']
+        self.direction = bullet_dict['dir']
         
     def update(self):
         
@@ -33,7 +37,24 @@ class ThrownObject(pygame.sprite.Sprite):
             self.kill()
         if self.hitbox.left <= 0:
             self.kill()
-        if self.hitbox.collideobjects(Alive_Being.hitbox):
-            self.kill()
+        #if self.hitbox.collideobjects(Alive_Being.hitbox):
+        #    self.kill()
             
+        screen.screen.blit(self.graphics, self.hitbox)
+        
+class PistolBullet(ThrownObject):
+    
+    def update(self):
+        ThrownObject.update(self)
         self.hitbox.move_ip(self.speed * self.direction, 0)
+        
+class ShotgunBullet(ThrownObject):
+    
+    def __init__(self, pos, angle, dir_y):
+        ThrownObject.__init__(self, const['b_shotgun'], pos)
+        self.angle = math.radians(angle)
+        self.dir_y = dir_y
+        
+    def update(self):
+        ThrownObject.update(self)
+        self.hitbox.move_ip(self.speed * self.direction * math.cos(self.angle), self.dir_y * self.speed * math.sin(self.angle))

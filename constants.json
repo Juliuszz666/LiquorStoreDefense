@@ -16,7 +16,8 @@
             "b_cooldown": 10,
             "machete_dmg": 100,
             "medkit_uses": 5,
-            "medkit_healing": 100
+            "medkit_healing": 100,
+            "medkit_cooldown": 600
         },
         "enemy_melee": {
             "hp": 150,
@@ -48,9 +49,10 @@
             "dmg": 50,
             "dir": 1,
             "scale": [0.1, 0.1],
-            "angle": 15
+            "angle": 15,
+            "gravity_a": 0.04
         },
-
+        
         "INIT_PISTOL_AMMO": 69,
 
         "S_BULLET_WIDTH": 15, 

@@ -60,8 +60,8 @@ class ShotgunBullet(ThrownObject):
         
 class Arrow(ThrownObject):
     
-    def __init__(self, bullet_dict, pos, angle):
-        ThrownObject.__init__(self, bullet_dict, pos)
+    def __init__(self, pos, angle):
+        ThrownObject.__init__(self, const['arrow'], pos)
         self.angle = math.radians(angle)
         self.speed_x = math.cos(self.angle) * self.speed
         self.speed_y = -math.sin(self.angle) * self.speed
@@ -70,7 +70,7 @@ class Arrow(ThrownObject):
         ThrownObject.update(self)
 
         self.hitbox.move_ip(self.speed_x, self.speed_y)
-        self.speed_y += 0.05
+        self.speed_y += const['arrow']['gravity_a']
         
         if self.hitbox.top >= self.position_y:
             self.kill()

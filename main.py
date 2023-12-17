@@ -46,7 +46,7 @@ def game_loop():
             for bottle in player_hit:
                 protagonist.get_damage(const['bottle']['dmg'])
             pistol_hit = pygame.sprite.groupcollide(all_enemies, pistol_bullets, False, True)
-            shotgun_hit = pygame.sprite.groupcollide(all_enemies, shotgun_bullets, False, True)
+            shotgun_hit = pygame.sprite.groupcollide(all_enemies, shotgun_bullets, False, False)
             bow_hit = pygame.sprite.groupcollide(all_enemies, arrows, False, True)
             for enemy in pistol_hit.keys():
                 enemy.get_damage(const['b_pistol']['dmg'])

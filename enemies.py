@@ -5,7 +5,8 @@ from settings import *
 from alive_being import *
 import player
 import time
-
+from sprites_groups import *
+from classes_bullets import *
 
 
 class Enemy(Alive_Being):
@@ -17,25 +18,16 @@ class Enemy(Alive_Being):
     """
     def update(self) -> None:
         Alive_Being.update(self)
-        self.hitbox.move_ip(-self.speed, 0)
-        pygame.draw.rect(screen.screen, "black", self.hitbox)
-        if self.hitbox.left <= 0:
-            screen.display_defeat()
-        if self.health_points <=0:
-            self.kill()
+        self.rect.move_ip(-self.speed, 0)
+        screen.screen.blit(self.graphics, self.rect)
+        #if self.rect.left <= 0:
+        #    screen.display_defeat()
 
-    def get_damage(self, dmg_type):
-        match dmg_type:
-            case "machete":
-                self.health_points -= const['player_other']['machete_dmg']
-            case "pistol":
-                self.health_points -= const['player_other']['pistol_dmg']
-            case "shotgun":
-                self.health_points -= const['player_other']['shotgun_dmg']
-            case "bow":
-                self.health_points -= const['player_other']['bow_dmg']
-            case _:
-                pass
+    def get_damage(self, damage):
+        if self.health_points>=0:
+            self.health_points -= damage
+        else:
+            self.kill()
 
 class MeleeEnemy(Enemy):
     """
@@ -44,14 +36,9 @@ class MeleeEnemy(Enemy):
     Args:
         Enemy (object): Parent class
     """
-    def update(self) -> None:
+    def update(self):
         Enemy.update(self)
-
-    def attack(self, player_hitbox):
-        self.damage_aura.move_ip(-self.speed, 0)
-        # pygame.draw.rect(screen.screen, "yellow", self.damage_aura)
-        if self.damage_aura.colliderect(player_hitbox):
-            player.player.get_damage(const['MELEE_DAMAGE'])
+        
 
 
 class RangedEnemy(Enemy):
@@ -60,6 +47,31 @@ class RangedEnemy(Enemy):
     Args:
         Enemy (object): Parent class
     """
+    def __init__(self, being_dict, position):
+        Enemy.__init__(self, being_dict, position)
+        self.cooldown = 0        
 
     def attack(self):
-        pass
+        if  self.cooldown<=0:
+            bullet_enemy = Bottle(self.rect.center, const['arrow']['angle'])
+            all_sprite.add(bullet_enemy)
+            bullets.add(bullet_enemy)
+            enemy_bullets.add(bullet_enemy)
+            self.cooldown = const['enemies_other']['r_cooldown']
+        else:
+            self.cooldown -= 1
+            
+    def update(self):
+        Enemy.update(self)
+        self.attack()
+
+def spawn_enemy():
+    pos_y = random.randint(settings['SCREEN_HEIGHT']/10, settings['SCREEN_HEIGHT']-50)
+    enemy_type = random.choice(['melee', 'ranged'])
+    match enemy_type:
+        case 'melee':
+            enemy = MeleeEnemy(const['enemy_melee'], (settings['SCREEN_WIDTH'], pos_y))
+        case 'ranged':
+            enemy = RangedEnemy(const['enemy_ranged'], (settings['SCREEN_WIDTH'], pos_y))
+    all_sprite.add(enemy)
+    all_enemies.add(enemy)

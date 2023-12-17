@@ -3,15 +3,13 @@ from player import *
 from classes_bullets import *
 from screen import *
 import pygame
-
+import youtube_dl
 
 
 # pygame setup
 pygame.init()
 pygame.display.set_caption("LSD 1.0")
 clock = pygame.time.Clock()
-
-
 
 
 def game_loop():
@@ -35,15 +33,30 @@ def game_loop():
                 freeze = True
             if event.type == pygame.WINDOWRESTORED:
                 freeze = False
-                
+        
         pygame.display.flip()
         clock.tick(settings['FPS'])  # limits FPS to 60
     
         if not freeze:
             display()
+            if random.random() < 0.01:
+                enemies.spawn_enemy()
             all_sprite.update()
+            player_hit = pygame.sprite.spritecollide(protagonist, enemy_bullets, True)
+            for bottle in player_hit:
+                protagonist.get_damage(const['bottle']['dmg'])
+            pistol_hit = pygame.sprite.groupcollide(all_enemies, pistol_bullets, False, True)
+            shotgun_hit = pygame.sprite.groupcollide(all_enemies, shotgun_bullets, False, True)
+            bow_hit = pygame.sprite.groupcollide(all_enemies, arrows, False, True)
+            for enemy in pistol_hit.keys():
+                enemy.get_damage(const['b_pistol']['dmg'])
+            for enemy in shotgun_hit.keys():
+                enemy.get_damage(const['b_shotgun']['dmg'])
+            for enemy in bow_hit.keys():
+                enemy.get_damage(const['arrow']['dmg'])
+
 
 if __name__ == "__main__":
     game_loop()
-        
+
 pygame.quit()

@@ -21,30 +21,30 @@ class ThrownObject(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         (self.position_x, self.position_y) = pos
         self.graphics = pygame.transform.scale_by(pygame.image.load(bullet_dict['src_file']), bullet_dict['scale'])
-        self.hitbox = self.graphics.get_rect()
-        self.hitbox.topleft = (self.position_x, self.position_y)
+        self.rect = self.graphics.get_rect()
+        self.rect.bottomleft = (self.position_x, self.position_y)
         self.damage = bullet_dict['dmg']
         self.speed = bullet_dict['speed']
         self.direction = bullet_dict['dir']
         
     def update(self):
         
-        if self.hitbox.top <= settings['SCREEN_HEIGHT'] / 10:
+        if self.rect.top <= settings['SCREEN_HEIGHT'] / 10:
             self.kill()
-        if self.hitbox.bottom >= settings['SCREEN_HEIGHT']:
+        if self.rect.bottom >= settings['SCREEN_HEIGHT']:
             self.kill()
-        if self.hitbox.right >= settings['SCREEN_WIDTH']:
+        if self.rect.right >= settings['SCREEN_WIDTH']:
             self.kill()
-        if self.hitbox.left <= 0:
+        if self.rect.left <= 0:
             self.kill()
             
-        screen.screen.blit(self.graphics, self.hitbox)
+        screen.screen.blit(self.graphics, self.rect)
         
 class PistolBullet(ThrownObject):
     
     def update(self):
         ThrownObject.update(self)
-        self.hitbox.move_ip(self.speed * self.direction, 0)
+        self.rect.move_ip(self.speed * self.direction, 0)
         
 class ShotgunBullet(ThrownObject):
     
@@ -55,8 +55,7 @@ class ShotgunBullet(ThrownObject):
         
     def update(self):
         ThrownObject.update(self)
-        self.hitbox.move_ip(self.speed * self.direction * math.cos(self.angle), self.dir_y * self.speed * math.sin(self.angle))
-        
+        self.rect.move_ip(self.speed * self.direction * math.cos(self.angle), self.dir_y * self.speed * math.sin(self.angle))
         
 class Arrow(ThrownObject):
     
@@ -69,8 +68,25 @@ class Arrow(ThrownObject):
     def update(self):
         ThrownObject.update(self)
 
-        self.hitbox.move_ip(self.speed_x, self.speed_y)
+        self.rect.move_ip(self.speed_x, self.speed_y)
         self.speed_y += const['arrow']['gravity_a']
         
-        if self.hitbox.top >= self.position_y:
+        if self.rect.top >= self.position_y:
+            self.kill()
+
+
+class Bottle(ThrownObject):
+    
+    def __init__(self, pos, angle):
+        ThrownObject.__init__(self, const['bottle'], pos)
+        self.angle = math.radians(angle)
+        self.speed_x = math.cos(self.angle) * self.speed
+        self.speed_y = -math.sin(self.angle) * self.speed
+           
+    def update(self):
+        ThrownObject.update(self)
+
+        self.rect.move_ip(self.speed_x*self.direction, self.speed_y)
+        self.speed_y += const['arrow']['gravity_a']
+        if self.rect.top >= self.position_y:
             self.kill()

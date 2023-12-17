@@ -2,7 +2,7 @@
     {
         "player_init": {
             "hp": 250,
-            "speed": 1.5,
+            "speed": 3,
             "height": 100,
             "width": 40,
             "src_file": "img/redneck.png",
@@ -23,7 +23,22 @@
             "hp": 150,
             "speed": 1,
             "height": 100,
-            "width": 40
+            "width": 40,
+            "src_file": "img/redneck.png",
+            "scale": [0.1, 0.1]
+        },
+        "enemy_ranged": {
+            "hp": 100,
+            "speed": 1.25,
+            "height": 100,
+            "width": 40,
+            "src_file": "img/redneck.png",
+            "scale": [0.1, 0.1]
+        },
+        "enemies_other":
+        {
+            "r_cooldown": 180,
+            "m_cooldown": 60
         },
         "b_pistol":
         {
@@ -52,6 +67,16 @@
             "angle": 15,
             "gravity_a": 0.04
         },
+        "bottle":
+        {
+            "src_file": "img/b_pistol.png",
+            "speed": 12,
+            "dmg": 50,
+            "dir": -1,
+            "angle": 30,
+            "scale": [0.1, 0.1],
+            "gravity_b": 0.05
+        },
         
         "INIT_PISTOL_AMMO": 69,
 
@@ -60,12 +85,6 @@
         "S_BULLET_SPEED": 5,
         "S_BULLET_DIR": 1,             
         "S_BULLET_DAMAGE": 100,
-
-        "ARROW_WIDTH": 40,
-        "ARROW_HEIGHT": 10,
-        "ARROW_SPEED": 4,
-        "ARROW_DIR": 1,
-        "ARROW_DAMAGE": 50,
  
         "ENEMY_SPEED": 1,
         "ENEMY_WIDTH": 50,

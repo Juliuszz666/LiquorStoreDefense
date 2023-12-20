@@ -5,9 +5,17 @@
             "speed": 3,
             "height": 100,
             "width": 40,
-            "src_file": "img/redneck.png",
+            "src_file": "img/player_machete.png",
             "scale": [0.1, 0.1]
         },
+        "player_graphics":
+        [
+            "img/player_machete.png", 
+            "img/player_pistol.png", 
+            "img/player_shotgun.png", 
+            "img/player_bow.png", 
+            "img/player_medkit.png"
+        ],
         "player_other":
         {
             "m_cooldown": 180,
@@ -24,7 +32,7 @@
             "speed": 1,
             "height": 100,
             "width": 40,
-            "src_file": "img/redneck.png",
+            "src_file": "img/enemy_melee.png",
             "scale": [0.1, 0.1]
         },
         "enemy_ranged": {
@@ -32,7 +40,7 @@
             "speed": 1.25,
             "height": 100,
             "width": 40,
-            "src_file": "img/redneck.png",
+            "src_file": "img/enemy_ranged.png",
             "scale": [0.1, 0.1]
         },
         "enemies_other":

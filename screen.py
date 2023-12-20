@@ -14,7 +14,7 @@ selected = 1
 
 def display():
 
-    bg = pygame.transform.scale(pygame.image.load("img/bg_test.jpg"), (settings['SCREEN_WIDTH'], settings['SCREEN_HEIGHT']))
+    bg = pygame.image.load("img/background.png").convert()
     screen.blit(bg, (0, 0))
 
     player_details = pygame.Surface((screen.get_width(),

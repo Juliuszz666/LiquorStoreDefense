@@ -6,7 +6,7 @@
             "height": 100,
             "width": 40,
             "src_file": "img/player_machete.png",
-            "scale": [0.1, 0.1]
+            "scale": [0.05, 0.05]
         },
         "player_graphics":
         [
@@ -33,7 +33,7 @@
             "height": 100,
             "width": 40,
             "src_file": "img/enemy_melee.png",
-            "scale": [0.1, 0.1]
+            "scale": [0.05, 0.05]
         },
         "enemy_ranged": {
             "hp": 100,
@@ -41,7 +41,7 @@
             "height": 100,
             "width": 40,
             "src_file": "img/enemy_ranged.png",
-            "scale": [0.1, 0.1]
+            "scale": [0.05, 0.05]
         },
         "enemies_other":
         {
@@ -50,39 +50,39 @@
         },
         "b_pistol":
         {
-            "src_file": "img/b_pistol.png",
+            "src_file": "img/bullet_pistol.png",
             "speed": 5,
             "dmg": 69,
             "dir": 1,
-            "scale": [0.1, 0.1]
+            "scale": [0.02, 0.02]
         },
         "b_shotgun":
         {
-            "src_file": "img/b_pistol.png",
+            "src_file": "img/bullet_shotgun.png",
             "speed": 20,
             "dmg": 100,
             "dir": 1,
-            "scale": [0.1, 0.1],
+            "scale": [0.015, 0.015],
             "angle": 5
         },
         "arrow":
         {
-            "src_file": "img/b_pistol.png",
+            "src_file": "img/arrow.png",
             "speed": 10,
             "dmg": 50,
             "dir": 1,
-            "scale": [0.1, 0.1],
+            "scale": [0.02, 0.02],
             "angle": 15,
             "gravity_a": 0.04
         },
         "bottle":
         {
-            "src_file": "img/b_pistol.png",
+            "src_file": "img/bottle.png",
             "speed": 12,
             "dmg": 50,
             "dir": -1,
             "angle": 30,
-            "scale": [0.1, 0.1],
+            "scale": [0.02, 0.02],
             "gravity_b": 0.05
         },
         

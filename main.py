@@ -49,6 +49,7 @@ def game_loop():
         
         pygame.display.flip()
         clock.tick(settings['FPS'])  # limits FPS to 60
+        print(clock.tick(settings['FPS']))
     
         if not freeze:
             display()

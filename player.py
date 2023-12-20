@@ -80,14 +80,34 @@ class Player(Alive_Being):
             
         match self.selected:
             case 1:
+                pos = self.rect.topleft
+                self.graphics = pygame.transform.scale_by(pygame.image.load(const['player_graphics'][0]), const['player_init']['scale'])
+                self.rect = self.graphics.get_rect()
+                self.rect.topleft = pos
                 self.machete()
             case 2:
+                pos = self.rect.topleft
+                self.graphics = pygame.transform.scale_by(pygame.image.load(const['player_graphics'][1]), const['player_init']['scale'])
+                self.rect = self.graphics.get_rect()
+                self.rect.topleft = pos
                 self.pistol()
-            case 3: 
+            case 3:
+                pos = self.rect.topleft
+                self.graphics = pygame.transform.scale_by(pygame.image.load(const['player_graphics'][2]), const['player_init']['scale'])
+                self.rect = self.graphics.get_rect()
+                self.rect.topleft = pos
                 self.shotgun()
             case 4:
+                pos = self.rect.topleft
+                self.graphics = pygame.transform.scale_by(pygame.image.load(const['player_graphics'][3]), const['player_init']['scale'])
+                self.rect = self.graphics.get_rect()
+                self.rect.topleft = pos
                 self.bow()
             case 5:
+                pos = self.rect.topleft
+                self.graphics = pygame.transform.scale_by(pygame.image.load(const['player_graphics'][4]), const['player_init']['scale'])
+                self.rect = self.graphics.get_rect()
+                self.rect.topleft = pos
                 self.medkit()
 
     def machete(self):

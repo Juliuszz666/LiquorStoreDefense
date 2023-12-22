@@ -3,7 +3,6 @@ from settings import *
 from alive_being import *
 import math
 import screen
-import enemies
 import math
 
 class ThrownObject(pygame.sprite.Sprite):
@@ -42,6 +41,9 @@ class ThrownObject(pygame.sprite.Sprite):
         
 class PistolBullet(ThrownObject):
     
+    def __init__(self, pos):
+        ThrownObject.__init__(self, const['b_pistol'], pos)
+        
     def update(self):
         ThrownObject.update(self)
         self.rect.move_ip(self.speed * self.direction, 0)
@@ -73,7 +75,6 @@ class Arrow(ThrownObject):
         
         if self.rect.top >= self.position_y:
             self.kill()
-
 
 class Bottle(ThrownObject):
     

@@ -6,7 +6,7 @@
             "height": 100,
             "width": 40,
             "src_file": "img/player_machete.png",
-            "scale": [0.05, 0.05]
+            "scale": [0.15, 0.15]
         },
         "player_graphics":
         [
@@ -18,14 +18,14 @@
         ],
         "player_other":
         {
-            "m_cooldown": 180,
-            "p_cooldown": 30,
-            "s_cooldown": 360,
-            "b_cooldown": 10,
+            "m_cooldown": 90,
+            "p_cooldown": 15,
+            "s_cooldown": 180,
+            "b_cooldown": 5,
             "machete_dmg": 100,
             "medkit_uses": 5,
             "medkit_healing": 100,
-            "medkit_cooldown": 600
+            "medkit_cooldown": 300
         },
         "enemy_melee": {
             "hp": 150,
@@ -33,7 +33,7 @@
             "height": 100,
             "width": 40,
             "src_file": "img/enemy_melee.png",
-            "scale": [0.05, 0.05]
+            "scale": [0.15, 0.15]
         },
         "enemy_ranged": {
             "hp": 100,
@@ -41,7 +41,7 @@
             "height": 100,
             "width": 40,
             "src_file": "img/enemy_ranged.png",
-            "scale": [0.05, 0.05]
+            "scale": [0.15, 0.15]
         },
         "enemies_other":
         {
@@ -54,7 +54,7 @@
             "speed": 5,
             "dmg": 69,
             "dir": 1,
-            "scale": [0.02, 0.02]
+            "scale": [0.03, 0.03]
         },
         "b_shotgun":
         {
@@ -62,7 +62,7 @@
             "speed": 20,
             "dmg": 100,
             "dir": 1,
-            "scale": [0.015, 0.015],
+            "scale": [0.02, 0.02],
             "angle": 5
         },
         "arrow":
@@ -71,7 +71,7 @@
             "speed": 10,
             "dmg": 50,
             "dir": 1,
-            "scale": [0.02, 0.02],
+            "scale": [0.07, 0.07],
             "angle": 15,
             "gravity_a": 0.04
         },
@@ -82,28 +82,10 @@
             "dmg": 50,
             "dir": -1,
             "angle": 30,
-            "scale": [0.02, 0.02],
+            "scale": [0.07, 0.07],
             "gravity_b": 0.05
         },
-        
-        "INIT_PISTOL_AMMO": 69,
-
-        "S_BULLET_WIDTH": 15, 
-        "S_BULLET_HEIGHT": 15,
-        "S_BULLET_SPEED": 5,
-        "S_BULLET_DIR": 1,             
-        "S_BULLET_DAMAGE": 100,
- 
-        "ENEMY_SPEED": 1,
-        "ENEMY_WIDTH": 50,
-        "ENEMY_HEIGHT": 50,
-
-        "AURA_RANGE": 75,
-        "MELEE_HEALTH": 200,
-        "MELEE_DAMAGE": 0.1,
-        
-        "RANGED_HEALTH": 100,
-       
+        "enemy_height": 180,       
         "ITEM_BORDER": 3
     
     }

@@ -14,12 +14,12 @@ selected = 1
 
 def display():
 
-    bg = pygame.image.load("img/background.png").convert()
+    bg = pygame.image.load("img/background.png")
     screen.blit(bg, (0, 0))
 
     player_details = pygame.Surface((screen.get_width(),
-                                     screen.get_height()/10))
-    player_details.fill("green")
+                                     screen.get_height()/10), pygame.SRCALPHA)
+    player_details.fill((0,255,0, 128))
     screen.blit(player_details, (0, 0))
 
     display_weapons(player_details)
@@ -81,7 +81,14 @@ def display_weapons(player_details):
                                      eq_item_base + const['ITEM_BORDER']))
         screen.blit(eq_item_cooldown, (eq_item_base + i * eq_item_space,
                                        eq_item_base+eq_item_height*(1-cooldown_percent)))
-
+        
+    if player.protagonist.health_points > 0:
+        hp_percent = player.protagonist.health_points/const['player_init']['hp']
+    else:
+        hp_percent = 0
+    hp_width = 300*hp_percent
+    hp_display = pygame.Surface((hp_width, eq_item_height))
+    screen.blit(hp_display, ((screen.get_width()-300)/2, eq_item_base))
 
 def display_defeat():
     screen.fill("black")

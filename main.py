@@ -11,6 +11,7 @@ pygame.init()
 pygame.display.set_caption("LSD 1.0")
 clock = pygame.time.Clock()
 
+
 def collisions_sprites():
     player_hit = pygame.sprite.spritecollide(protagonist, enemy_bullets, True)
     for bottle in player_hit:
@@ -48,18 +49,18 @@ def game_loop():
                 freeze = False
         
         pygame.display.flip()
-        clock.tick(settings['FPS'])  # limits FPS to 60
-        print(clock.tick(settings['FPS']))
+        clock.tick(settings['FPS'])
+        print(clock)
     
         if not freeze:
             display()
-            if random.random() < 0.05:
+            if random.random() < 0.01:
                 enemies.spawn_enemy()
             all_sprite.update()
             collisions_sprites()
 
 
 if __name__ == "__main__":
-    game_loop()
+        game_loop()
 
 pygame.quit()

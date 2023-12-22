@@ -117,7 +117,7 @@ class Player(Alive_Being):
 
     def pistol(self):
         if self.is_use() and self.cooldown_pistol<=0:
-            bullet_player = PistolBullet(const['b_pistol'], self.rect.center)
+            bullet_player = PistolBullet((self.rect.centerx+15, self.rect.centery-20))
             all_sprite.add(bullet_player)
             pistol_bullets.add(bullet_player)
             bullets.add(bullet_player)
@@ -128,7 +128,7 @@ class Player(Alive_Being):
         
         if self.is_use() and self.cooldown_shotgun<=0:
             for i in range(-1, 2, 1):
-                bullet_player = ShotgunBullet(self.rect.center, const['b_shotgun']['angle'], i)
+                bullet_player = ShotgunBullet((self.rect.centerx+35, self.rect.centery-30), const['b_shotgun']['angle'], i)
                 all_sprite.add(bullet_player)
                 bullets.add(bullet_player)
                 shotgun_bullets.add(bullet_player)
@@ -139,7 +139,7 @@ class Player(Alive_Being):
 
     def bow(self):
         if self.is_use() and self.cooldown_bow<=0:
-            bullet_player = Arrow(self.rect.center, const['arrow']['angle'])
+            bullet_player = Arrow((self.rect.centerx, self.rect.centery-25), const['arrow']['angle'])
             all_sprite.add(bullet_player)
             bullets.add(bullet_player)
             arrows.add(bullet_player)
@@ -168,6 +168,7 @@ class Player(Alive_Being):
             self.health_points -= damage
         else:
             self.kill()
+            
 
 
 """Initialazing player"""

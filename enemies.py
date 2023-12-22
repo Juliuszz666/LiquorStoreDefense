@@ -66,7 +66,7 @@ class RangedEnemy(Enemy):
         self.attack()
 
 def spawn_enemy():
-    pos_y = random.randint(settings['SCREEN_HEIGHT']/10, settings['SCREEN_HEIGHT']-50)
+    pos_y = random.randint(settings['SCREEN_HEIGHT']/10, settings['SCREEN_HEIGHT']-const['enemy_height'])
     enemy_type = random.choice(['melee', 'ranged'])
     match enemy_type:
         case 'melee':

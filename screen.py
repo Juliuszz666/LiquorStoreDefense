@@ -56,6 +56,7 @@ def display_weapons(player_details):
     eq_item = []
     cooldowns = player.protagonist.cooldown_list()
 
+    # blitting items
     for i in range(5):
         if cooldowns[0][i] > 0:
             cooldown_percent = cooldowns[0][i] / cooldowns[1][i]
@@ -81,14 +82,26 @@ def display_weapons(player_details):
                                      eq_item_base + const['ITEM_BORDER']))
         screen.blit(eq_item_cooldown, (eq_item_base + i * eq_item_space,
                                        eq_item_base+eq_item_height*(1-cooldown_percent)))
-        
+    # bliting health    
     if player.protagonist.health_points > 0:
         hp_percent = player.protagonist.health_points/const['player_init']['hp']
+        if hp_percent > 1:
+            hp_percent = 1
     else:
         hp_percent = 0
-    hp_width = 300*hp_percent
-    hp_display = pygame.Surface((hp_width, eq_item_height))
-    screen.blit(hp_display, ((screen.get_width()-300)/2, eq_item_base))
+    hp_border = 300
+    hp_border_display = pygame.Surface((hp_border, eq_item_height))
+    hp_border_display.fill("black")
+    hp_width = (300- 2 * const['ITEM_BORDER'])*hp_percent
+    hp_display = pygame.Surface((hp_width, eq_item_height- 2*const['ITEM_BORDER']))
+    hp_display.fill((255,0,0))
+    screen.blit(hp_border_display, ((screen.get_width()-300)/2, eq_item_base))
+    screen.blit(hp_display, ((screen.get_width()-300)/2 + const['ITEM_BORDER'], eq_item_base + const['ITEM_BORDER']))
+    hp_font = pygame.sysfont.SysFont("Times New Roman", 50)
+    hp_counter = hp_font.render(str(player.protagonist.health_points), (0, 0, 0), "white")
+    hp_prompt = hp_counter.get_rect()
+    hp_prompt.center = (screen.get_width()/2, screen.get_height()/20)
+    screen.blit(hp_counter, hp_prompt)
 
 def display_defeat():
     screen.fill("black")

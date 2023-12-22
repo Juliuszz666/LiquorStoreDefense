@@ -164,10 +164,11 @@ class Player(Alive_Being):
         screen.screen.blit(self.graphics, self.rect)
         
     def get_damage(self, damage):
-        if self.health_points>=0:
+        if self.health_points>0:
             self.health_points -= damage
-        else:
+        if self.health_points<=0:
             self.kill()
+        
             
 
 

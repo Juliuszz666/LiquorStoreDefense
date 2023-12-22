@@ -3,8 +3,6 @@ from player import *
 from classes_bullets import *
 from screen import *
 import pygame
-import youtube_dl
-
 
 # pygame setup
 pygame.init()

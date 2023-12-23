@@ -1,7 +1,5 @@
 import pygame
-from alive_being import *
-from enemies import *
-from player import *
+from alive_being import Alive_Being
 from settings import *
 from classes_bullets import *
 from sprites_groups import *
@@ -24,6 +22,11 @@ class Player(Alive_Being):
         self.medkit_uses = const['player_other']['medkit_uses']
         self.selected = 1
         self.flag = True
+        self.score = 0
+        self.dead = False
+        
+    def add_score(self, points):
+        self.score += points
         
     def cooldown_list(self):
         max_cooldowns = const['player_other']
@@ -151,6 +154,7 @@ class Player(Alive_Being):
             self.health_points += const['player_other']['medkit_healing']
             self.medkit_uses -= 1
             self.cooldown_medkit = const['player_other']['medkit_cooldown']
+            self.add_score(-5)
     
     def update(self):
         """_summary_
@@ -167,10 +171,11 @@ class Player(Alive_Being):
         if self.health_points>0:
             self.health_points -= damage
         if self.health_points<=0:
+            self.dead = True
             self.kill()
-        
-            
 
+    def is_dead(self):
+        return self.dead
 
 """Initialazing player"""
 protagonist = Player((50, 200))

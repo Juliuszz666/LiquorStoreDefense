@@ -1,6 +1,4 @@
 import pygame
-from settings import *
-
 
 class Alive_Being(pygame.sprite.Sprite):
     """

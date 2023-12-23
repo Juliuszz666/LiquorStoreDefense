@@ -1,10 +1,8 @@
 import random
-import pygame
 import screen
 from settings import *
-from alive_being import *
-import player
-import time
+from alive_being import Alive_Being
+from player import protagonist
 from sprites_groups import *
 from classes_bullets import *
 
@@ -24,9 +22,10 @@ class Enemy(Alive_Being):
         #    screen.display_defeat()
 
     def get_damage(self, damage):
-        if self.health_points>=0:
+        if self.health_points>0:
             self.health_points -= damage
-        else:
+        if self.health_points<=0:
+            protagonist.add_score(10)
             self.kill()
 
 class MeleeEnemy(Enemy):
@@ -36,10 +35,12 @@ class MeleeEnemy(Enemy):
     Args:
         Enemy (object): Parent class
     """
+    def attack(self):
+        pass
+    
     def update(self):
         Enemy.update(self)
-        
-
+        self.attack()
 
 class RangedEnemy(Enemy):
     """Class for ranged enemy

@@ -49,6 +49,9 @@ def game():
                 exit()
             if event_key[pygame.K_ESCAPE]:
                 exit()
+            if event_key[pygame.K_p]: # only for testing
+                result = "lost"
+                running = False
             if event.type == pygame.WINDOWFOCUSLOST:
                 freeze = True
             if event.type == pygame.WINDOWFOCUSGAINED:
@@ -84,7 +87,7 @@ def game():
     
     match result:
         case "lost":
-            display_defeat()
+            display_defeat(protagonist.score)
         case "won":
             print("Chuj")
 

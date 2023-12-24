@@ -2,6 +2,7 @@ from enemies import *
 from player import *
 from classes_bullets import *
 from screen import *
+from sys import exit
 import pygame
 
 # pygame setup
@@ -37,7 +38,7 @@ def game():
     running = True
     freeze = False
     time_score = 0
-
+    
     while running:
         """Game loop
         """
@@ -45,9 +46,9 @@ def game():
         event_key = pygame.key.get_pressed()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                exit()
             if event_key[pygame.K_ESCAPE]:
-                running = False
+                exit()
             if event.type == pygame.WINDOWFOCUSLOST:
                 freeze = True
             if event.type == pygame.WINDOWFOCUSGAINED:
@@ -83,12 +84,16 @@ def game():
     
     match result:
         case "lost":
-            print("KURWA")
             display_defeat()
         case "won":
             print("Chuj")
 
 if __name__ == "__main__":
-    game()
+    while 1:    
+        match main_menu():
+            case "game":
+                game()
+            case "scoreboard":
+                scoreboard()
 
 pygame.quit()

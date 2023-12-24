@@ -2,11 +2,13 @@ import pygame
 from player import protagonist
 from settings import *
 
+
 screen_flag = 0
 if settings['FULLSCREEN']:
     screen_flag = pygame.FULLSCREEN
 
 screen = pygame.display.set_mode((settings['SCREEN_WIDTH'], settings['SCREEN_HEIGHT']), screen_flag)
+bg = pygame.image.load("img/background.png")
 player_details = pygame.Surface((screen.get_width(),
                                     screen.get_height()/10), pygame.SRCALPHA)
 player_details.fill((0,255,0, 128))
@@ -17,10 +19,57 @@ eq_item_base = int(screen.get_height()/100)
 
 selected = 1
 
+def scoreboard():
+    print("Chuj")
+    exit()
 
+def main_menu():
+    running = True
+    while running:
+        event_key = pygame.key.get_pressed()
+        screen.blit(bg, (0,0))
+        
+        button_texts = ["Scoreboard", "Play", "Quit"]
+        mouse_position = pygame.mouse.get_pos()
+        buttons = []
+        
+        menu_font = pygame.sysfont.SysFont("Arial", 50)
+        for i in range(3):
+            button_surface = pygame.Surface((300, 100))
+            button_rect = button_surface.get_rect()
+            button_rect.center = ((i+1)*screen.get_width()/4, screen.get_height()/2)
+            if button_rect.collidepoint(mouse_position):
+                button_surface.fill("purple")
+            else:
+                button_surface.fill("red")
+            buttons.append(button_rect)
+            screen.blit(button_surface, button_rect)
+            button_text = menu_font.render(button_texts[i], True, "white")
+            button_text_rect = button_text.get_rect()
+            button_text_rect.center = button_rect.center
+            screen.blit(button_text, button_text_rect)
+            
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                exit()
+            if event_key[pygame.K_ESCAPE]:
+                exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                for i in range(len(buttons)):
+                    if buttons[i].collidepoint(mouse_position):
+                        match i:
+                            case 0:
+                                return "scoreboard"
+                            case 1:
+                                return "game"
+                            case 2:
+                                exit()
+
+        pygame.display.flip()
+        
 def display():
 
-    bg = pygame.image.load("img/background.png")
+
     screen.blit(bg, (0, 0))
     screen.blit(player_details, (0, 0))
     display_health()
@@ -118,8 +167,63 @@ def display_score():
     screen.blit(score_text, score_text_rect)
 
 def display_defeat():
-    screen.fill("black")
-    defeat_font = pygame.sysfont.SysFont('arial', 50)
-    defeat_text = defeat_font.render("YOU LOST", True, "white")
-    screen.blit(defeat_text, (settings['SCREEN_WIDTH']/2, settings['SCREEN_HEIGHT']/2))
-    pygame.display.flip()
+    running = True
+    score = protagonist.score
+    user = "Julian"
+    with open("scoreboard.json", "a") as dump:
+        json.dump(f"{user}: {score},\n", dump)
+    while running:
+
+        
+        screen.blit(bg, (0,0))
+        
+        defeat_font = pygame.sysfont.SysFont('arial', 50)
+        
+        defeat_text = defeat_font.render("YOU LOST", True, "white")
+        defeat_rect= defeat_text.get_rect()
+        defeat_rect.centerx = screen.get_width()/2
+        defeat_rect.bottom = screen.get_height()/4
+        
+        defeat_score_text = defeat_font.render(f"Score: {score}", True, "white")
+        defeat_score_rect = defeat_score_text.get_rect()
+        defeat_score_rect.centerx = screen.get_width()/2
+        defeat_score_rect.top = screen.get_height()/4
+        
+        screen.blit(defeat_text, defeat_rect)
+        screen.blit(defeat_score_text, defeat_score_rect)
+        
+        button_texts = ["Scoreboard", "Quit game"]
+        mouse_position = pygame.mouse.get_pos()
+        buttons = []
+        
+        for i in range(2):
+            button_surface = pygame.Surface((300, 100))
+            button_rect = button_surface.get_rect()
+            button_rect.center = ((i+1)*screen.get_width()/3, screen.get_height()/2)
+            buttons.append(button_rect)
+            if button_rect.collidepoint(mouse_position):
+                button_surface.fill("purple")
+            else:
+                button_surface.fill("red")
+            screen.blit(button_surface, button_rect)
+            button_text = defeat_font.render(button_texts[i], True, "white")
+            button_text_rect = button_text.get_rect()
+            button_text_rect.center = button_rect.center
+            screen.blit(button_text, button_text_rect)
+            
+        event_key = pygame.key.get_pressed()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                exit()
+            if event_key[pygame.K_ESCAPE]:
+                exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                for i in range(len(buttons)):
+                    if buttons[i].collidepoint(mouse_position):
+                        match i:
+                            case 0:
+                                scoreboard()
+                            case 1:
+                                exit()
+        pygame.display.flip()
+        

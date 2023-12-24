@@ -2,9 +2,9 @@ import random
 import screen
 from settings import *
 from alive_being import Alive_Being
-from player import protagonist
 from sprites_groups import *
 from classes_bullets import *
+from scoring import *
 
 
 class Enemy(Alive_Being):
@@ -25,7 +25,7 @@ class Enemy(Alive_Being):
         if self.health_points>0:
             self.health_points -= damage
         if self.health_points<=0:
-            protagonist.add_score(10)
+            add_score(10)
             self.kill()
 
 class MeleeEnemy(Enemy):

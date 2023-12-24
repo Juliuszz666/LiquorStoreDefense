@@ -1,6 +1,7 @@
 from enemies import *
 from player import *
 from classes_bullets import *
+import scoring
 from screen import *
 from sys import exit
 import pygame
@@ -38,6 +39,9 @@ def game():
     running = True
     freeze = False
     time_score = 0
+    scoring.score = 0
+    protagonist.reset()
+    all_sprite.add(protagonist)
     
     while running:
         """Game loop
@@ -63,23 +67,23 @@ def game():
 
         pygame.display.flip()
         clock.tick(settings['FPS'])
-        print(clock)
+        #print(clock)
 
         if not freeze:
-            display()
+            display(protagonist.health_points, scoring.score)
             if random.random() < time_score/100000:
                 spawn_enemy()
             all_sprite.update()
             collisions_sprites()
             time_score += 1
             if time_score%(settings['FPS']*1)==0:
-                protagonist.add_score(1)
+                scoring.add_score(1)
             if is_gameover():
                 result = "lost"
                 for sprite in all_sprite:
                     sprite.kill()
                 running = False
-            if protagonist.score >= 10**9:
+            if score >= 10**9:
                 result = "won"
                 running = False
         if freeze:
@@ -87,7 +91,7 @@ def game():
     
     match result:
         case "lost":
-            display_defeat(protagonist.score)
+            display_defeat(scoring.score)
         case "won":
             print("Chuj")
 

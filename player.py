@@ -3,6 +3,7 @@ from alive_being import Alive_Being
 from settings import *
 from classes_bullets import *
 from sprites_groups import *
+from scoring import *
 import screen
 
 class Player(Alive_Being):
@@ -19,14 +20,9 @@ class Player(Alive_Being):
         self.cooldown_shotgun = 0
         self.cooldown_bow = 0
         self.cooldown_medkit = 0
-        self.medkit_uses = const['player_other']['medkit_uses']
         self.selected = 1
         self.flag = True
-        self.score = 0
         self.dead = False
-        
-    def add_score(self, points):
-        self.score += points
         
     def cooldown_list(self):
         max_cooldowns = const['player_other']
@@ -150,11 +146,10 @@ class Player(Alive_Being):
             self.cooldown_bow = const['player_other']['b_cooldown']
     
     def medkit(self):
-        if self.is_use() and self.medkit_uses and self.cooldown_medkit <= 0:
+        if self.is_use() and self.cooldown_medkit <= 0:
             self.health_points += const['player_other']['medkit_healing']
-            self.medkit_uses -= 1
             self.cooldown_medkit = const['player_other']['medkit_cooldown']
-            self.add_score(-5)
+            add_score(-5)
     
     def update(self):
         """_summary_
@@ -176,6 +171,11 @@ class Player(Alive_Being):
 
     def is_dead(self):
         return self.dead
+
+    def reset(self):
+        self.health_points = const['player_init']['hp']
+        self.rect.topleft = (self.position_x, self.position_y)
+        self.dead = False
 
 """Initialazing player"""
 protagonist = Player((50, 200))

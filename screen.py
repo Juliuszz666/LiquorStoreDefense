@@ -118,18 +118,18 @@ def main_menu():
         case "game":
             return "game"
         
-def display():
+def display(hp, score):
 
 
     screen.blit(bg, (0, 0))
     screen.blit(player_details, (0, 0))
-    display_health()
+    display_health(hp)
     display_weapons()
-    display_score()
+    display_score(score)
 
-def display_health():
-    if protagonist.health_points > 0:
-        hp_percent = protagonist.health_points/const['player_init']['hp']
+def display_health(player_hp):
+    if player_hp > 0:
+        hp_percent = player_hp/const['player_init']['hp']
         if hp_percent > 1:
             hp_percent = 1
     else:
@@ -143,7 +143,7 @@ def display_health():
     screen.blit(hp_border_display, ((screen.get_width()-300)-eq_item_base, eq_item_base))
     screen.blit(hp_display, ((screen.get_width()-300 - eq_item_base + const['ITEM_BORDER'], eq_item_base + const['ITEM_BORDER'])))
     hp_font = pygame.sysfont.SysFont("Times New Roman", 50)
-    hp_counter = hp_font.render("HP: "+str(protagonist.health_points), (0, 0, 0), "white")
+    hp_counter = hp_font.render("HP: "+str(player_hp), (0, 0, 0), "white")
     hp_prompt = hp_counter.get_rect()
     hp_prompt.center = (screen.get_width()-eq_item_base-150, screen.get_height()/20)
     screen.blit(hp_counter, hp_prompt)
@@ -204,15 +204,14 @@ def display_weapons():
         screen.blit(eq_item_cooldown, (eq_item_base + i * eq_item_space,
                                        eq_item_base+eq_item_height*(1-cooldown_percent)))
 
-def display_score():
-    score_local = protagonist.score
+def display_score(score):
     score_surface = pygame.Surface((300, eq_item_height))
     score_surface.fill("black")
     score_rect = score_surface.get_rect()
     score_rect.center = (screen.get_width()/2, screen.get_height()/20)
     screen.blit(score_surface, score_rect)
     score_font = pygame.sysfont.SysFont("Arial", 50)
-    score_text = score_font.render(str(score_local), (0,0,0), "white")
+    score_text = score_font.render(str(score), (0,0,0), "white")
     score_text_rect = score_text.get_rect()
     score_text_rect.center = (screen.get_width()/2, screen.get_height()/20)
     screen.blit(score_text, score_text_rect)

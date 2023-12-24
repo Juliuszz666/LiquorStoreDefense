@@ -1,6 +1,8 @@
 import pygame
+import webbrowser
 from player import protagonist
 from settings import *
+from scoreboard import *
 
 
 screen_flag = 0
@@ -19,33 +21,32 @@ eq_item_base = int(screen.get_height()/100)
 
 selected = 1
 
-def load_scoreboard():
-    try:
-        with open('scoreboard.json', 'r') as file:
-            data = json.load(file)
-    except (FileNotFoundError, json.decoder.JSONDecodeError):
-        data = []
-    return data
+def generate_buttons(font, num_of_buttons, mouse_pos, texts):
+    buttons = []
+    for i in range(num_of_buttons):
+        button_rect = pygame.Rect(0,0, 300, 100)
+        button_rect.center = ((i+1)*screen.get_width()/(num_of_buttons+1), screen.get_height()/2)
+        if button_rect.collidepoint(mouse_pos):
 
-def update_scoreboard(user_score):
-    try:
-        with open('scoreboard.json', 'r') as file:
-            data = json.load(file)
-    except (FileNotFoundError, json.decoder.JSONDecodeError):
-        data = []
-        
-    new_entry = {'USER': "Julian", 'SCORE': user_score}
-    data.append(new_entry)
+            pygame.draw.rect(screen, "purple", button_rect, 0, 15)
+        else:
 
-    with open('scoreboard.json', 'w') as file:
-        json.dump(data, file, indent=2)
+            pygame.draw.rect(screen, "red", button_rect, 0, 15)
+        buttons.append(button_rect)
+        button_text = font.render(texts[i], True, "white")
+        button_text_rect = button_text.get_rect()
+        button_text_rect.center = button_rect.center
+        screen.blit(button_text, button_text_rect)
+    return buttons
+
 
 
 def scoreboard():
     scores = load_scoreboard()
+    scores = sorted(scores, key=lambda dict: dict['SCORE'], reverse=True)
     max_rows = 10
     index = 0
-    scoreboard_font = pygame.sysfont.SysFont("Times new roman", 25)
+    scoreboard_font = pygame.sysfont.SysFont("Times new roman", 35)
     running_score = True
     while running_score:
         event_key = pygame.key.get_pressed()
@@ -56,14 +57,25 @@ def scoreboard():
                 exit()
             if event_key[pygame.K_p]:
                 running_score = False
+            if event_key[pygame.K_DOWN] and index<len(scores)-max_rows:
+                index+=1
+            if event_key[pygame.K_UP] and index>0:
+                index-=1
         screen.blit(bg, (0,0))
+        score_bg = pygame.Rect(0,0, 200, 400)
+        score_bg.center = (screen.get_width()/2, screen.get_height()/6+5*35)
+        pygame.draw.rect(screen, "black", score_bg, 0, 5)
         for i in range(max_rows):
             score_data = scores[index+i]
             score_text = scoreboard_font.render(f"{score_data['USER']}: {score_data['SCORE']}", True, (255, 255, 255))
             score_rect = score_text.get_rect()
-            score_rect.centerx = screen.get_width()/2
-            score_rect.top = screen.get_height()/8 + i * score_rect.height
+            score_rect.left = screen.get_width()/2-70
+            score_rect.top = screen.get_height()/6 + i * score_rect.height
             screen.blit(score_text, score_rect)
+            
+        button_texts = ["Menu", "Quit game"]
+        mouse_position = pygame.mouse.get_pos()
+        buttons = generate_buttons(scoreboard_font, 2, mouse_position, button_texts)
         pygame.display.flip()
 
 def main_menu():
@@ -74,23 +86,31 @@ def main_menu():
         
         button_texts = ["Scoreboard", "Play", "Quit"]
         mouse_position = pygame.mouse.get_pos()
-        buttons = []
+        
         
         menu_font = pygame.sysfont.SysFont("Arial", 50)
-        for i in range(3):
-            button_surface = pygame.Surface((300, 100))
-            button_rect = button_surface.get_rect()
-            button_rect.center = ((i+1)*screen.get_width()/4, screen.get_height()/2)
-            if button_rect.collidepoint(mouse_position):
-                button_surface.fill("purple")
-            else:
-                button_surface.fill("red")
-            buttons.append(button_rect)
-            screen.blit(button_surface, button_rect)
-            button_text = menu_font.render(button_texts[i], True, "white")
-            button_text_rect = button_text.get_rect()
-            button_text_rect.center = button_rect.center
-            screen.blit(button_text, button_text_rect)
+        buttons = generate_buttons(menu_font, 3, mouse_position, button_texts)
+            
+        credits_texts = ["Software by Julian Bednarek", "Graphics by Paweł Korabiewski"]
+        credit_font = pygame.sysfont.SysFont("Times New Roman", 25, False, True)
+        credits = []
+        credit_bg = pygame.Rect(0,0,400, 100)
+        credit_bg.center = (screen.get_width()/2, screen.get_height()*0.875)
+        pygame.draw.rect(screen, "white", credit_bg, 5, 15)
+        
+        for i in range(len(credits_texts)):
+            credits_text = credit_font.render(credits_texts[i], True, "white")
+            credits_rect = credits_text.get_rect()
+            credits_rect.centerx = screen.get_width()/2
+            match i:
+                case 0:
+                    credits_rect.bottom = screen.get_height()*0.87
+                case 1:
+                    credits_rect.top = screen.get_height()*0.88
+            credits.append(credits_rect)
+            screen.blit(credits_text, credits_rect)                    
+        
+
             
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -109,6 +129,13 @@ def main_menu():
                                 running_menu = False
                             case 2:
                                 exit()
+                for i in range(len(credits)):
+                    if credits[i].collidepoint(mouse_position):
+                        match i:
+                            case 0:
+                                webbrowser.open(r"https://github.com/Juliuszz666")
+                            case 1:
+                                webbrowser.open(r"https://www.instagram.com/xmakaronito/")
 
         pygame.display.flip()
         
@@ -228,7 +255,7 @@ def display_defeat(score):
         defeat_font = pygame.sysfont.SysFont('arial', 50)
         
         defeat_text = defeat_font.render("YOU LOST", True, "white")
-        defeat_rect= defeat_text.get_rect()
+        defeat_rect = defeat_text.get_rect()
         defeat_rect.centerx = screen.get_width()/2
         defeat_rect.bottom = screen.get_height()/4
         
@@ -240,24 +267,9 @@ def display_defeat(score):
         screen.blit(defeat_text, defeat_rect)
         screen.blit(defeat_score_text, defeat_score_rect)
         
-        button_texts = ["Scoreboard", "Quit game"]
+        button_texts = ["Scoreboard", "Menu", "Quit game"]
         mouse_position = pygame.mouse.get_pos()
-        buttons = []
-        
-        for i in range(2):
-            button_surface = pygame.Surface((300, 100))
-            button_rect = button_surface.get_rect()
-            button_rect.center = ((i+1)*screen.get_width()/3, screen.get_height()/2)
-            buttons.append(button_rect)
-            if button_rect.collidepoint(mouse_position):
-                button_surface.fill("purple")
-            else:
-                button_surface.fill("red")
-            screen.blit(button_surface, button_rect)
-            button_text = defeat_font.render(button_texts[i], True, "white")
-            button_text_rect = button_text.get_rect()
-            button_text_rect.center = button_rect.center
-            screen.blit(button_text, button_text_rect)
+        buttons = generate_buttons(defeat_font, 3, mouse_position, button_texts)
             
         event_key = pygame.key.get_pressed()
         for event in pygame.event.get():
@@ -273,6 +285,8 @@ def display_defeat(score):
                                 running_def = False
                                 scoreboard()
                             case 1:
+                                running_def = False
+                            case 2:
                                 exit()
         pygame.display.flip()
         

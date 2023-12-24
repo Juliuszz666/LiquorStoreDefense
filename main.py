@@ -40,6 +40,9 @@ def game():
     freeze = False
     time_score = 0
     scoring.score = 0
+    # reset mechanism if player decided to replay
+    for sprite in all_sprite:
+        sprite.kill()
     protagonist.reset()
     all_sprite.add(protagonist)
     
@@ -79,9 +82,7 @@ def game():
             if time_score%(settings['FPS']*1)==0:
                 scoring.add_score(1)
             if is_gameover():
-                result = "lost"
-                for sprite in all_sprite:
-                    sprite.kill()
+                result = "lost"        
                 running = False
             if score >= 10**9:
                 result = "won"

@@ -25,7 +25,7 @@ def collisions_sprites():
     for bottle in player_hit:
         protagonist.get_damage(const['bottle']['dmg'])
     pistol_hit = pygame.sprite.groupcollide(all_enemies, pistol_bullets, False, True)
-    shotgun_hit = pygame.sprite.groupcollide(all_enemies, shotgun_bullets, False, False)
+    shotgun_hit = pygame.sprite.groupcollide(all_enemies, shotgun_bullets, False, True)
     bow_hit = pygame.sprite.groupcollide(all_enemies, arrows, False, True)
     for enemy in pistol_hit.keys():
         enemy.get_damage(const['b_pistol']['dmg'])
@@ -74,7 +74,7 @@ def game():
 
         if not freeze:
             display(protagonist.health_points, scoring.score)
-            if random.random() < time_score/100000:
+            if random.random() < time_score/10000:
                 spawn_enemy()
             all_sprite.update()
             collisions_sprites()
@@ -97,7 +97,7 @@ def game():
             print("Chuj")
 
 if __name__ == "__main__":
-    while 1:    
+    while 1:
         match main_menu():
             case "game":
                 game()

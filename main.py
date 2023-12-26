@@ -5,7 +5,7 @@ import scoring
 from screen import *
 from sys import exit
 from display_menu import main_menu
-from display_defeat import display_defeat
+from display_result import display_result
 from scoreboard import scoreboard
 import pygame
 
@@ -105,9 +105,10 @@ def game():
     
     match result:
         case "lost":
-            display_defeat(scoring.score)
+            display_result(scoring.score, "GAME OVER", "darkred")
         case "won":
-            print("Chuj")
+            display_result(10**6, "YOU WON", "lightgreen")
+            
 
 if __name__ == "__main__":
     while 1:

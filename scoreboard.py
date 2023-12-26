@@ -4,7 +4,7 @@ from screen import screen, bg, generate_buttons
 
 def update_scoreboard(user_score, username):
     try:
-        with open('scoreboard.json', 'r') as file:
+        with open('json/scoreboard.json', 'r') as file:
             data = json.load(file)
     except (FileNotFoundError, json.decoder.JSONDecodeError):
         data = []
@@ -12,12 +12,12 @@ def update_scoreboard(user_score, username):
     new_entry = {'USER': username, 'SCORE': user_score}
     data.append(new_entry)
 
-    with open('scoreboard.json', 'w') as file:
+    with open('json/scoreboard.json', 'w') as file:
         json.dump(data, file, indent=2)
         
 def load_scoreboard():
     try:
-        with open('scoreboard.json', 'r') as file:
+        with open('json/scoreboard.json', 'r') as file:
             data = json.load(file)
     except (FileNotFoundError, json.decoder.JSONDecodeError):
         data = []
@@ -66,12 +66,18 @@ def scoreboard():
         if len(scores):
             for i in range(min(len(scores), max_rows)):
                 score_data = scores[index+i]
-                score_text_user = scoreboard_font.render(f"{score_data['USER']}: ", True, (255, 255, 255))
+                if score_data['SCORE']==10**6:
+                    score_text_user = scoreboard_font.render(f"{score_data['USER']}: ", True, (0, 255, 0))
+                    score_text = scoreboard_font.render(f"{score_data['SCORE']}", True, (0, 255, 0))
+                else:
+                    score_text_user = scoreboard_font.render(f"{score_data['USER']}: ", True, (255, 255, 255))
+                    score_text = scoreboard_font.render(f"{score_data['SCORE']}", True, (255, 255, 255))
+                    
                 score_rect_user = score_text_user.get_rect()
                 score_rect_user.left = screen.get_width()/2-185
                 score_rect_user.top = screen.get_height()/4 + i * 35
                 
-                score_text = scoreboard_font.render(f"{score_data['SCORE']}", True, (255, 255, 255))
+
                 score_rect = score_text.get_rect()
                 score_rect.right = screen.get_width()/2+185
                 score_rect.top = screen.get_height()/4 + i * 35

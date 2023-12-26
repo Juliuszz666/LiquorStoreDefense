@@ -2,6 +2,7 @@ import pygame
 
 all_sprite = pygame.sprite.Group()
 all_enemies = pygame.sprite.Group()
+all_melee = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
 player_bullets = pygame.sprite.Group()
 pistol_bullets = pygame.sprite.Group()

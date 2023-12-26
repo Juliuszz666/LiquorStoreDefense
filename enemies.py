@@ -18,8 +18,6 @@ class Enemy(Alive_Being):
         Alive_Being.update(self)
         self.rect.move_ip(-self.speed, 0)
         screen.screen.blit(self.graphics, self.rect)
-        #if self.rect.left <= 0:
-        #    screen.display_defeat()
 
     def get_damage(self, damage):
         if self.health_points>0:
@@ -35,8 +33,17 @@ class MeleeEnemy(Enemy):
     Args:
         Enemy (object): Parent class
     """
+    def __init__(self, position):
+        Enemy.__init__(self, const['enemy_melee'], position)
+        self.cooldown = 0
+    
     def attack(self):
-        pass
+        if self.cooldown<=0:
+            self.cooldown = const['enemies_other']['m_cooldown']
+            return True
+        else:
+            self.cooldown -= 1
+            return False
     
     def update(self):
         Enemy.update(self)
@@ -48,8 +55,8 @@ class RangedEnemy(Enemy):
     Args:
         Enemy (object): Parent class
     """
-    def __init__(self, being_dict, position):
-        Enemy.__init__(self, being_dict, position)
+    def __init__(self, position):
+        Enemy.__init__(self, const['enemy_ranged'], position)
         self.cooldown = 0        
 
     def attack(self):
@@ -71,8 +78,9 @@ def spawn_enemy():
     enemy_type = random.choice(['melee', 'ranged'])
     match enemy_type:
         case 'melee':
-            enemy = MeleeEnemy(const['enemy_melee'], (settings['SCREEN_WIDTH'], pos_y))
+            enemy = MeleeEnemy((settings['SCREEN_WIDTH'], pos_y))
+            all_melee.add(enemy)
         case 'ranged':
-            enemy = RangedEnemy(const['enemy_ranged'], (settings['SCREEN_WIDTH'], pos_y))
+            enemy = RangedEnemy((settings['SCREEN_WIDTH'], pos_y))
     all_sprite.add(enemy)
     all_enemies.add(enemy)

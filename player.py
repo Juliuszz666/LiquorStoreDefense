@@ -110,9 +110,13 @@ class Player(Alive_Being):
                 self.medkit()
 
     def machete(self):
-        
+        self.machete_aura = pygame.Rect(0,0, 200, 200)
+        self.machete_aura.center = self.rect.center
         if self.is_use() and self.cooldown_melee<=0:
             self.cooldown_melee = const['player_other']['m_cooldown']
+            for enemy in all_enemies:
+                if enemy.rect.colliderect(self.machete_aura):
+                    enemy.get_damage(const['player_other']['machete_dmg'])
 
     def pistol(self):
         if self.is_use() and self.cooldown_pistol<=0:

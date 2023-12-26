@@ -4,6 +4,9 @@ from classes_bullets import *
 import scoring
 from screen import *
 from sys import exit
+from display_menu import main_menu
+from display_defeat import display_defeat
+from scoreboard import scoreboard
 import pygame
 
 # pygame setup
@@ -21,9 +24,14 @@ def is_gameover():
     return False
 
 def collisions_sprites():
-    player_hit = pygame.sprite.spritecollide(protagonist, enemy_bullets, True)
-    for bottle in player_hit:
+    player_hit_r = pygame.sprite.spritecollide(protagonist, enemy_bullets, True)
+    for bottle in player_hit_r:
         protagonist.get_damage(const['bottle']['dmg'])
+        
+    player_hit_m = pygame.sprite.spritecollide(protagonist, all_melee, False)
+    for melee_attack in player_hit_m:
+        if melee_attack.attack():
+            protagonist.get_damage(const['enemies_other']['m_dmg'])
     pistol_hit = pygame.sprite.groupcollide(all_enemies, pistol_bullets, False, True)
     shotgun_hit = pygame.sprite.groupcollide(all_enemies, shotgun_bullets, False, True)
     bow_hit = pygame.sprite.groupcollide(all_enemies, arrows, False, True)
@@ -33,6 +41,7 @@ def collisions_sprites():
         enemy.get_damage(const['b_shotgun']['dmg'])
     for enemy in bow_hit.keys():
         enemy.get_damage(const['arrow']['dmg'])
+
 
 def game():
     
@@ -59,6 +68,8 @@ def game():
             if event_key[pygame.K_p]: # only for testing
                 result = "lost"
                 running = False
+            if event_key[pygame.K_o]:
+                scoring.add_score(10**5)
             if event.type == pygame.WINDOWFOCUSLOST:
                 freeze = True
             if event.type == pygame.WINDOWFOCUSGAINED:
@@ -73,8 +84,9 @@ def game():
         #print(clock)
 
         if not freeze:
+            print(clock)
             display(protagonist.health_points, scoring.score)
-            if random.random() < time_score/10000:
+            if random.random() < math.pow(time_score, 0.5)/10000+0.01:
                 spawn_enemy()
             all_sprite.update()
             collisions_sprites()
@@ -84,7 +96,8 @@ def game():
             if is_gameover():
                 result = "lost"        
                 running = False
-            if score >= 10**9:
+            if scoring.score >= 10**6:
+                print("chuj")
                 result = "won"
                 running = False
         if freeze:

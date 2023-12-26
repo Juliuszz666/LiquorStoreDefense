@@ -17,28 +17,55 @@
 <font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="classes_bullets.html">classes_bullets</a><br>
-</td><td width="25%" valign=top><a href="classes_beings.html">classes_beings</a><br>
-</td><td width="25%" valign=top><a href="json.html">json</a><br>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="json.html">json</a><br>
+<a href="math.html">math</a><br>
 </td><td width="25%" valign=top><a href="pygame.html">pygame</a><br>
-</td></tr></table></td></tr></table><p>
+<a href="random.html">random</a><br>
+</td><td width="25%" valign=top><a href="scoring.html">scoring</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-collisions_sprites"><strong>collisions_sprites</strong></a>()</dt></dl>
+ <dl><dt><a name="-exit"><strong>exit</strong></a>(status=None, /)</dt><dd><tt>Exit&nbsp;the&nbsp;interpreter&nbsp;by&nbsp;raising&nbsp;SystemExit(status).<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;status&nbsp;is&nbsp;omitted&nbsp;or&nbsp;None,&nbsp;it&nbsp;defaults&nbsp;to&nbsp;zero&nbsp;(i.e.,&nbsp;success).<br>
+If&nbsp;the&nbsp;status&nbsp;is&nbsp;an&nbsp;integer,&nbsp;it&nbsp;will&nbsp;be&nbsp;used&nbsp;as&nbsp;the&nbsp;system&nbsp;exit&nbsp;status.<br>
+If&nbsp;it&nbsp;is&nbsp;another&nbsp;kind&nbsp;of&nbsp;object,&nbsp;it&nbsp;will&nbsp;be&nbsp;printed&nbsp;and&nbsp;the&nbsp;system<br>
+exit&nbsp;status&nbsp;will&nbsp;be&nbsp;one&nbsp;(i.e.,&nbsp;failure).</tt></dd></dl>
+ <dl><dt><a name="-game"><strong>game</strong></a>()</dt></dl>
+ <dl><dt><a name="-is_gameover"><strong>is_gameover</strong></a>()</dt></dl>
+</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>clock</strong> = &lt;Clock(fps=61.35)&gt;<br>
-<strong>const</strong> = {'ARROW_DAMAGE': 50, 'ARROW_DIR': 1, 'ARROW_HEIGHT': 10, 'ARROW_SPEED': 4, 'ARROW_WIDTH': 40, 'AURA_RANGE': 75, 'ENEMY_HEIGHT': 50, 'ENEMY_SPEED': 1, 'ENEMY_WIDTH': 50, 'ITEM_BORDER': 3, ...}<br>
+<td width="100%"><strong>all_enemies</strong> = &lt;Group(0 sprites)&gt;<br>
+<strong>all_sprite</strong> = &lt;Group(1 sprites)&gt;<br>
+<strong>arrows</strong> = &lt;Group(0 sprites)&gt;<br>
+<strong>bg</strong> = &lt;Surface(1440x720x32 SW)&gt;<br>
+<strong>bullets</strong> = &lt;Group(0 sprites)&gt;<br>
+<strong>clock</strong> = &lt;Clock(fps=0.00)&gt;<br>
+<strong>const</strong> = {'ITEM_BORDER': 3, 'arrow': {'angle': 15, 'dir': 1, 'dmg': 50, 'gravity_a': 0.04, 'scale': [0.07, 0.07], 'speed': 10, 'src_file': 'img/arrow.png'}, 'b_pistol': {'dir': 1, 'dmg': 69, 'scale': [0.03, 0.03], 'speed': 5, 'src_file': 'img/bullet_pistol.png'}, 'b_shotgun': {'angle': 5, 'dir': 1, 'dmg': 150, 'scale': [0.02, 0.02], 'speed': 20, 'src_file': 'img/bullet_shotgun.png'}, 'bottle': {'angle': 30, 'dir': -1, 'dmg': 50, 'gravity_b': 0.05, 'scale': [0.07, 0.07], 'speed': 12, 'src_file': 'img/bottle.png'}, 'enemies_other': {'m_cooldown': 60, 'r_cooldown': 180}, 'enemy_height': 180, 'enemy_melee': {'height': 100, 'hp': 150, 'scale': [0.15, 0.15], 'speed': 1, 'src_file': 'img/enemy_melee.png', 'width': 40}, 'enemy_ranged': {'height': 100, 'hp': 100, 'scale': [0.15, 0.15], 'speed': 1.25, 'src_file': 'img/enemy_ranged.png', 'width': 40}, 'player_graphics': ['img/player_machete.png', 'img/player_pistol.png', 'img/player_shotgun.png', 'img/player_bow.png', 'img/player_medkit.png'], ...}<br>
 <strong>constants</strong> = &lt;_io.TextIOWrapper name='constants.json' mode='r' encoding='UTF-8'&gt;<br>
-<strong>event</strong> = &lt;Event(769-KeyUp {'unicode': '\x1b', 'key': 27, 'mod': 0, 'scancode': 41, 'window': None})&gt;<br>
-<strong>event_key</strong> = pygame.key.ScancodeWrapper(False, False, False, ... False, False, False, False, False, False, False)<br>
-<strong>freeze</strong> = False<br>
-<strong>i</strong> = 0<br>
-<strong>j</strong> = 0<br>
-<strong>running</strong> = False<br>
+<strong>enemy_bullets</strong> = &lt;Group(0 sprites)&gt;<br>
+<strong>eq_item_base</strong> = 7<br>
+<strong>eq_item_height</strong> = 57<br>
+<strong>eq_item_space</strong> = 64<br>
+<strong>options</strong> = &lt;_io.TextIOWrapper name='settings.json' mode='r' encoding='UTF-8'&gt;<br>
+<strong>pistol_bullets</strong> = &lt;Group(0 sprites)&gt;<br>
+<strong>player_bullets</strong> = &lt;Group(0 sprites)&gt;<br>
+<strong>player_details</strong> = &lt;Surface(1440x72x32 SW)&gt;<br>
+<strong>protagonist</strong> = &lt;Player Sprite(in 1 groups)&gt;<br>
+<strong>score</strong> = 0<br>
 <strong>screen</strong> = &lt;Surface(Dead Display)&gt;<br>
 <strong>screen_flag</strong> = 0<br>
 <strong>selected</strong> = 1<br>
-<strong>settings</strong> = {'FPS': 60, 'FULLSCREEN': 0, 'SCREEN_HEIGHT': 720, 'SCREEN_WIDTH': 1440}</td></tr></table>
+<strong>settings</strong> = {'FPS': 30, 'FULLSCREEN': 0, 'SCREEN_HEIGHT': 720, 'SCREEN_WIDTH': 1440, 'USERNAME': 'π≠²³¢€½§·«≤≥”„'}<br>
+<strong>shotgun_bullets</strong> = &lt;Group(0 sprites)&gt;</td></tr></table>
 </body></html>

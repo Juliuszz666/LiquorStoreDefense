@@ -1,30 +1,41 @@
 import random
 import screen
 from settings import *
-from alive_being import Alive_Being
+from alive_being import AliveBeing
 from sprites_groups import *
 from classes_bullets import *
 from scoring import *
 
 
-class Enemy(Alive_Being):
+class Enemy(AliveBeing):
     """
     Abstract class for enemies (zule i menele)
 
     Args:
-        Alive_Being (object): heritance mechanism
+        Alive_Being (object): parent class
     """
     def update(self) -> None:
-        Alive_Being.update(self)
+        """
+        This function is responsible for displaying and moving all enemies
+        """
+        AliveBeing.update(self)
         self.rect.move_ip(-self.speed, 0)
-        screen.screen.blit(self.graphics, self.rect)
+        screen.SCREEN.blit(self.graphics, self.rect)
 
     def get_damage(self, damage):
-        if self.health_points>0:
+        """This function is called when enemy is supposed to take damage
+        from player, this function also is responsible for killing enemy
+        and adding score after its death
+
+        Args:
+            damage (int/float): damage amount
+        """
+        if self.health_points > 0:
             self.health_points -= damage
-        if self.health_points<=0:
+        if self.health_points <= 0:
             add_score(10)
             self.kill()
+
 
 class MeleeEnemy(Enemy):
     """
@@ -34,33 +45,61 @@ class MeleeEnemy(Enemy):
         Enemy (object): Parent class
     """
     def __init__(self, position):
+        """
+        Constructor for melee enemy
+
+        Args:
+            position (tuple): spawn position
+        """
         Enemy.__init__(self, const['enemy_melee'], position)
         self.cooldown = 0
-    
+
     def attack(self):
-        if self.cooldown<=0:
+        """
+        Melee damage occur to player when they collide with enemy with
+        no cooldown so this function only changes cooldwon
+
+        Returns:
+            True/False: can/cannot give damage if collides with player
+        """
+        if self.cooldown <= 0:
             self.cooldown = const['enemies_other']['m_cooldown']
             return True
         else:
             self.cooldown -= 1
             return False
-    
+
     def update(self):
+        """
+        Function is combination of Enemy.update()
+        and attack function
+        """
         Enemy.update(self)
         self.attack()
 
+
 class RangedEnemy(Enemy):
-    """Class for ranged enemy
+    """
+    Class for ranged enemy
 
     Args:
         Enemy (object): Parent class
     """
     def __init__(self, position):
+        """Constructor for ranged enemy
+
+        Args:
+            position (tuple): spawn position
+        """
         Enemy.__init__(self, const['enemy_ranged'], position)
-        self.cooldown = 0        
+        self.cooldown = 0
 
     def attack(self):
-        if  self.cooldown<=0:
+        """
+        Ranged attack is about creating objects from class Bottle
+        if there is no cooldown
+        """
+        if self.cooldown <= 0:
             bullet_enemy = Bottle(self.rect.center, const['arrow']['angle'])
             all_sprite.add(bullet_enemy)
             bullets.add(bullet_enemy)
@@ -68,13 +107,24 @@ class RangedEnemy(Enemy):
             self.cooldown = const['enemies_other']['r_cooldown']
         else:
             self.cooldown -= 1
-            
+
     def update(self):
+        """
+        Function is combination of Enemy.update()
+        and attack function
+        """
         Enemy.update(self)
         self.attack()
 
+
 def spawn_enemy():
-    pos_y = random.randint(settings['SCREEN_HEIGHT']/10, settings['SCREEN_HEIGHT']-const['enemy_height'])
+    """
+    Function responsible for randomized spawning both types of enemies,
+    enemies spawn on the right side of the screen
+    """
+    pos_y = random.randint(settings['SCREEN_HEIGHT'] / 10,
+                           settings['SCREEN_HEIGHT']
+                           - const['enemies_other']['enemy_height'])
     enemy_type = random.choice(['melee', 'ranged'])
     match enemy_type:
         case 'melee':

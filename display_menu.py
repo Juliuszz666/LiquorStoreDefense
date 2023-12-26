@@ -1,30 +1,28 @@
 import pygame
 import webbrowser
 import settings
-from screen import generate_buttons, screen, bg
+from screen import generate_buttons, SCREEN, BG
 from sys import exit
-
-
 
 def blit_credits():
     credits_texts = ["Software by Julian Bednarek", "Graphics by Paweł Korabiewski"]
     credit_font = pygame.sysfont.SysFont("Times New Roman", 25, False, True)
     credits = []
     credit_bg = pygame.Rect(0,0,400, 100)
-    credit_bg.center = (screen.get_width()/2, screen.get_height()*0.875)
-    pygame.draw.rect(screen, "white", credit_bg, 5, 15)
+    credit_bg.center = (SCREEN.get_width()/2, SCREEN.get_height()*0.875)
+    pygame.draw.rect(SCREEN, "white", credit_bg, 5, 15)
     
     for i in range(len(credits_texts)):
         credits_text = credit_font.render(credits_texts[i], True, "white")
         credits_rect = credits_text.get_rect()
-        credits_rect.centerx = screen.get_width()/2
+        credits_rect.centerx = SCREEN.get_width()/2
         match i:
             case 0:
-                credits_rect.bottom = screen.get_height()*0.87
+                credits_rect.bottom = SCREEN.get_height()*0.87
             case 1:
-                credits_rect.top = screen.get_height()*0.88
+                credits_rect.top = SCREEN.get_height()*0.88
         credits.append(credits_rect)
-        screen.blit(credits_text, credits_rect)
+        SCREEN.blit(credits_text, credits_rect)
     
     return credits
 
@@ -33,7 +31,7 @@ def main_menu():
     running_menu = True
     while running_menu:
         
-        screen.blit(bg, (0,0))
+        SCREEN.blit(BG, (0,0))
         
         event_key = pygame.key.get_pressed()
         button_texts = ["Scoreboard", "Play", "Quit"]
@@ -47,27 +45,27 @@ def main_menu():
         credits = blit_credits()
         
         username_bg = pygame.Rect(0,0, 300, 50)
-        username_bg.centerx = screen.get_width()/2
-        username_bg.bottom = 5.5 * screen.get_height()/8 - 3
-        pygame.draw.rect(screen, "red", username_bg, 0, 10)
+        username_bg.centerx = SCREEN.get_width()/2
+        username_bg.bottom = 5.5 * SCREEN.get_height()/8 - 3
+        pygame.draw.rect(SCREEN, "red", username_bg, 0, 10)
         
         username_text = username_font.render("You are playing as:", True, "white")
         username_rect = username_text.get_rect(center = username_bg.center)
-        screen.blit(username_text, username_rect)
+        SCREEN.blit(username_text, username_rect)
         
         text = settings.get_username()
         max_len = 12
         text_input = pygame.Rect(0,0,300,50)
-        text_input.centerx = screen.get_width()/2
-        text_input.top = 5.5 * screen.get_height()/8 + 3
+        text_input.centerx = SCREEN.get_width()/2
+        text_input.top = 5.5 * SCREEN.get_height()/8 + 3
         if not active:
-            pygame.draw.rect(screen, "black", text_input, 0, 10)
+            pygame.draw.rect(SCREEN, "black", text_input, 0, 10)
         if active:
-            pygame.draw.rect(screen, (32,32,32), text_input, 0, 10)
+            pygame.draw.rect(SCREEN, (32,32,32), text_input, 0, 10)
         
         text_sur = username_font.render(text, True, "white")
         text_rect = text_sur.get_rect(center = text_input.center)
-        screen.blit(text_sur, text_rect)
+        SCREEN.blit(text_sur, text_rect)
             
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

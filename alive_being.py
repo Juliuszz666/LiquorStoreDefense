@@ -1,8 +1,9 @@
 import pygame
 
-class Alive_Being(pygame.sprite.Sprite):
+
+class AliveBeing(pygame.sprite.Sprite):
     """
-    Parent class for player and enemies
+    Parent and abstract class for player and enemies
     """
     def __init__(self, being_dict, position):
         """Abstract constructor
@@ -19,7 +20,8 @@ class Alive_Being(pygame.sprite.Sprite):
         self.health_points = being_dict['hp']
         self.speed = being_dict['speed']
         (self.position_x, self.position_y) = position
-        self.graphics = pygame.transform.scale_by(pygame.image.load(being_dict['src_file']), being_dict['scale'])
+        img = pygame.image.load(being_dict['src_file'])
+        self.graphics = pygame.transform.scale_by(img, being_dict['scale'])
         self.rect = self.graphics.get_rect()
         self.rect.topleft = (self.position_x, self.position_y)
 

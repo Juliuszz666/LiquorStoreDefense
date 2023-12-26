@@ -1,6 +1,6 @@
 import json
 import pygame
-from screen import screen, bg, generate_buttons
+from screen import SCREEN, BG, generate_buttons
 
 def update_scoreboard(user_score, username):
     try:
@@ -49,20 +49,20 @@ def scoreboard():
                     if buttons[i].collidepoint(mouse_position):
                         running_score = False
                 
-        screen.blit(bg, (0,0))
+        SCREEN.blit(BG, (0,0))
         
         score_title_bg = pygame.Rect(0,0,400,75)
-        score_title_bg.center = (screen.get_width()/2, screen.get_height()/8)
-        pygame.draw.rect(screen, "red", score_title_bg, 0, 15)
+        score_title_bg.center = (SCREEN.get_width()/2, SCREEN.get_height()/8)
+        pygame.draw.rect(SCREEN, "red", score_title_bg, 0, 15)
         
         score_title_text = titles_font.render("SCOREBOARD", True, "white")
         score_title_rect = score_title_text.get_rect()
-        score_title_rect.center = (screen.get_width()/2, screen.get_height()/8)
-        screen.blit(score_title_text, score_title_rect)
+        score_title_rect.center = (SCREEN.get_width()/2, SCREEN.get_height()/8)
+        SCREEN.blit(score_title_text, score_title_rect)
         
         score_bg = pygame.Rect(0,0, 400, 375)
-        score_bg.center = (screen.get_width()/2, screen.get_height()/4+5*35)
-        pygame.draw.rect(screen, "black", score_bg, 0, 5)
+        score_bg.center = (SCREEN.get_width()/2, SCREEN.get_height()/4+5*35)
+        pygame.draw.rect(SCREEN, "black", score_bg, 0, 5)
         if len(scores):
             for i in range(min(len(scores), max_rows)):
                 score_data = scores[index+i]
@@ -74,16 +74,16 @@ def scoreboard():
                     score_text = scoreboard_font.render(f"{score_data['SCORE']}", True, (255, 255, 255))
                     
                 score_rect_user = score_text_user.get_rect()
-                score_rect_user.left = screen.get_width()/2-185
-                score_rect_user.top = screen.get_height()/4 + i * 35
+                score_rect_user.left = SCREEN.get_width()/2-185
+                score_rect_user.top = SCREEN.get_height()/4 + i * 35
                 
 
                 score_rect = score_text.get_rect()
-                score_rect.right = screen.get_width()/2+185
-                score_rect.top = screen.get_height()/4 + i * 35
+                score_rect.right = SCREEN.get_width()/2+185
+                score_rect.top = SCREEN.get_height()/4 + i * 35
                 
-                screen.blit(score_text_user, score_rect_user)
-                screen.blit(score_text, score_rect)
+                SCREEN.blit(score_text_user, score_rect_user)
+                SCREEN.blit(score_text, score_rect)
             
         button_texts = ["Menu"]
         mouse_position = pygame.mouse.get_pos()

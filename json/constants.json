@@ -1,92 +1,110 @@
 
+{
+    "player_init": {
+        "hp": 250,
+        "speed": 3,
+        "height": 100,
+        "width": 40,
+        "src_file": "img/player_machete.png",
+        "scale": [0.15, 0.15]
+    },
+    "player_graphics":
+    [
+        "img/player_machete.png", 
+        "img/player_pistol.png", 
+        "img/player_shotgun.png", 
+        "img/player_bow.png", 
+        "img/player_medkit.png"
+    ],
+    "player_other":
     {
-        "player_init": {
-            "hp": 250,
-            "speed": 3,
-            "height": 100,
-            "width": 40,
-            "src_file": "img/player_machete.png",
-            "scale": [0.15, 0.15]
-        },
-        "player_graphics":
-        [
-            "img/player_machete.png", 
-            "img/player_pistol.png", 
-            "img/player_shotgun.png", 
-            "img/player_bow.png", 
-            "img/player_medkit.png"
-        ],
-        "player_other":
+        "m_cooldown": 90,
+        "p_cooldown": 15,
+        "s_cooldown": 300,
+        "b_cooldown": 10,
+        "machete_dmg": 100,
+        "medkit_uses": 5,
+        "medkit_healing": 100,
+        "medkit_cooldown": 600
+    },
+    "enemy_melee": {
+        "hp": 150,
+        "speed": 1,
+        "height": 100,
+        "width": 40,
+        "src_file": "img/enemy_melee.png",
+        "scale": [0.15, 0.15]
+    },
+    "enemy_ranged": {
+        "hp": 100,
+        "speed": 1.25,
+        "height": 100,
+        "width": 40,
+        "src_file": "img/enemy_ranged.png",
+        "scale": [0.15, 0.15]
+    },
+    "enemies_other":
+    {
+        "r_cooldown": 150,
+        "m_cooldown": 30,
+        "m_dmg": 100,
+        "enemy_height": 180
+    },
+    "b_pistol":
+    {
+        "src_file": "img/bullet_pistol.png",
+        "speed": 5,
+        "dmg": 69,
+        "dir": 1,
+        "scale": [0.03, 0.03]
+    },
+    "b_shotgun":
+    {
+        "src_file": "img/bullet_shotgun.png",
+        "speed": 20,
+        "dmg": 150,
+        "dir": 1,
+        "scale": [0.02, 0.02],
+        "angle": 5
+    },
+    "arrow":
+    {
+        "src_file": "img/arrow.png",
+        "speed": 10,
+        "dmg": 50,
+        "dir": 1,
+        "scale": [0.07, 0.07],
+        "angle": 15,
+        "gravity_a": 0.04
+    },
+    "bottle":
+    {
+        "src_file": "img/bottle.png",
+        "speed": 12,
+        "dmg": 50,
+        "dir": -1,
+        "angle": 30,
+        "scale": [0.07, 0.07],
+        "gravity_b": 0.05
+    },
+    "display":
+    {
+        "border": 3,
+        "font-sizes":
         {
-            "m_cooldown": 90,
-            "p_cooldown": 15,
-            "s_cooldown": 300,
-            "b_cooldown": 10,
-            "machete_dmg": 100,
-            "medkit_uses": 5,
-            "medkit_healing": 100,
-            "medkit_cooldown": 600
+            "XS": 25,
+            "S": 35,
+            "M": 40,
+            "L": 50
         },
-        "enemy_melee": {
-            "hp": 150,
-            "speed": 1,
-            "height": 100,
-            "width": 40,
-            "src_file": "img/enemy_melee.png",
-            "scale": [0.15, 0.15]
-        },
-        "enemy_ranged": {
-            "hp": 100,
-            "speed": 1.25,
-            "height": 100,
-            "width": 40,
-            "src_file": "img/enemy_ranged.png",
-            "scale": [0.15, 0.15]
-        },
-        "enemies_other":
+        "radius":
         {
-            "r_cooldown": 150,
-            "m_cooldown": 30,
-            "m_dmg": 100
+            "small": 5,
+            "big": 15
         },
-        "b_pistol":
-        {
-            "src_file": "img/bullet_pistol.png",
-            "speed": 5,
-            "dmg": 69,
-            "dir": 1,
-            "scale": [0.03, 0.03]
-        },
-        "b_shotgun":
-        {
-            "src_file": "img/bullet_shotgun.png",
-            "speed": 20,
-            "dmg": 150,
-            "dir": 1,
-            "scale": [0.02, 0.02],
-            "angle": 5
-        },
-        "arrow":
-        {
-            "src_file": "img/arrow.png",
-            "speed": 10,
-            "dmg": 50,
-            "dir": 1,
-            "scale": [0.07, 0.07],
-            "angle": 15,
-            "gravity_a": 0.04
-        },
-        "bottle":
-        {
-            "src_file": "img/bottle.png",
-            "speed": 12,
-            "dmg": 50,
-            "dir": -1,
-            "angle": 30,
-            "scale": [0.07, 0.07],
-            "gravity_b": 0.05
-        },
-        "enemy_height": 180,       
-        "ITEM_BORDER": 3
-    
+        "button": [300, 100]
     }
+           
+
+
+}

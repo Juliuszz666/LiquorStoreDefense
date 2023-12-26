@@ -84,7 +84,7 @@ def game():
         #print(clock)
 
         if not freeze:
-            print(clock)
+            #print(clock)
             display(protagonist.health_points, scoring.score)
             if random.random() < math.pow(time_score, 0.5)/10000+0.01:
                 spawn_enemy()

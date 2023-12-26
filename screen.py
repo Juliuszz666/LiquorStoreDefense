@@ -2,45 +2,49 @@ import pygame
 from player import protagonist
 from settings import *
 
-screen_flag = 0
-if settings['FULLSCREEN']:
-    screen_flag = pygame.FULLSCREEN
+display_dict = const['display']
+FONT_SIZE = display_dict['font-sizes']
+RADIUS = display_dict['radius']
+BUTTON = display_dict['button']
+BORDER_VALUE = display_dict['border']
 
-screen = pygame.display.set_mode((settings['SCREEN_WIDTH'], settings['SCREEN_HEIGHT']), screen_flag)
-bg = pygame.image.load("img/background.png")
-player_details = pygame.Surface((screen.get_width(),
-                                    screen.get_height()/10), pygame.SRCALPHA)
-player_details.fill((0,255,0, 128))
+SCREEN = pygame.display.set_mode((settings['SCREEN_WIDTH'], settings['SCREEN_HEIGHT']))
+BG = pygame.image.load("img/background.png")
+PLAYER_DETAILS = pygame.Surface((SCREEN.get_width(),
+                                    SCREEN.get_height()/10), pygame.SRCALPHA)
+PLAYER_DETAILS.fill((0,255,0, 128))
 
-eq_item_height = int(player_details.get_height()*0.8)
-eq_item_space = int(player_details.get_height()*0.9)
-eq_item_base = int(screen.get_height()/100)
+EQ_ITEM_HEIGHT = int(PLAYER_DETAILS.get_height()*0.8)
+EQ_ITEM_SPACE = int(PLAYER_DETAILS.get_height()*0.9)
+EQ_ITEM_BASE = int(SCREEN.get_height()/100)
 
 selected = 1
 
 def generate_buttons(font, num_of_buttons, mouse_pos, texts, height_co):
     buttons = []
     for i in range(num_of_buttons):
-        button_rect = pygame.Rect(0,0, 300, 100)
-        button_rect.center = ((i+1)*screen.get_width()/(num_of_buttons+1), screen.get_height()/height_co)
+        button_rect = pygame.Rect(0,0, BUTTON[0], BUTTON[1])
+        button_rect.center = ((i+1)*SCREEN.get_width()/(num_of_buttons+1), SCREEN.get_height()/height_co)
         if button_rect.collidepoint(mouse_pos):
-            pygame.draw.rect(screen, "purple", button_rect, 0, 15)
+            pygame.draw.rect(SCREEN, "purple", button_rect, 0, RADIUS['big'])
         else:
-            pygame.draw.rect(screen, "red", button_rect, 0, 15)
+            pygame.draw.rect(SCREEN, "red", button_rect, 0, RADIUS['big'])
         buttons.append(button_rect)
         button_text = font.render(texts[i], True, "white")
         button_text_rect = button_text.get_rect()
         button_text_rect.center = button_rect.center
-        screen.blit(button_text, button_text_rect)
+        SCREEN.blit(button_text, button_text_rect)
     return buttons
-
-
 
 def display(hp, score):
 
 
-    screen.blit(bg, (0, 0))
-    screen.blit(player_details, (0, 0))
+    SCREEN.blit(BG, (0, 0))
+    SCREEN.blit(PLAYER_DETAILS, (0, 0))
+    
+    # displaying player
+    SCREEN.blit(protagonist.graphics, protagonist.rect)
+    
     display_health(hp)
     display_weapons()
     display_score(score)
@@ -53,22 +57,22 @@ def display_health(player_hp):
     else:
         hp_percent = 0
     hp_border = 300
-    hp_border_display = pygame.Surface((hp_border, eq_item_height))
+    hp_border_display = pygame.Surface((hp_border, EQ_ITEM_HEIGHT))
     hp_border_display.fill("black")
     
-    hp_width = (300- 2 * const['ITEM_BORDER'])*hp_percent
-    hp_display = pygame.Surface((hp_width, eq_item_height- 2*const['ITEM_BORDER']))
+    hp_width = (hp_border- 2 * BORDER_VALUE)*hp_percent
+    hp_display = pygame.Surface((hp_width, EQ_ITEM_HEIGHT- 2*BORDER_VALUE))
     hp_display.fill((255,0,0))
     
-    screen.blit(hp_border_display, ((screen.get_width()-300)-eq_item_base, eq_item_base))
-    screen.blit(hp_display, ((screen.get_width()-300 - eq_item_base + const['ITEM_BORDER'], eq_item_base + const['ITEM_BORDER'])))
+    SCREEN.blit(hp_border_display, ((SCREEN.get_width()-hp_border)-EQ_ITEM_BASE, EQ_ITEM_BASE))
+    SCREEN.blit(hp_display, ((SCREEN.get_width() - hp_border - EQ_ITEM_BASE + BORDER_VALUE, EQ_ITEM_BASE + BORDER_VALUE)))
     
-    hp_font = pygame.sysfont.SysFont("Times New Roman", 50)
+    hp_font = pygame.sysfont.SysFont("Times New Roman", FONT_SIZE['L'])
     hp_counter = hp_font.render("HP: "+str(player_hp), (0, 0, 0), "white")
     hp_prompt = hp_counter.get_rect()
-    hp_prompt.center = (screen.get_width()-eq_item_base-150, screen.get_height()/20)
+    hp_prompt.center = (SCREEN.get_width() - EQ_ITEM_BASE - (hp_border / 2), SCREEN.get_height() / 20)
     
-    screen.blit(hp_counter, hp_prompt)
+    SCREEN.blit(hp_counter, hp_prompt)
 
 def display_weapons():
 
@@ -104,40 +108,37 @@ def display_weapons():
         else:
             cooldown_percent = 0
 
-        border = pygame.Rect(eq_item_base + i * eq_item_space, eq_item_base, eq_item_height, eq_item_height)
+        border = pygame.Rect(EQ_ITEM_BASE + i * EQ_ITEM_SPACE, EQ_ITEM_BASE, EQ_ITEM_HEIGHT, EQ_ITEM_HEIGHT)
 
         equipment_item = pygame.image.load(f"img/item{i + 1}.png").convert_alpha()
-        equipment_item = pygame.transform.scale(equipment_item, (eq_item_height - const['ITEM_BORDER'] * 2,
-                                                                 eq_item_height - const['ITEM_BORDER'] * 2))
+        equipment_item = pygame.transform.scale(equipment_item, (EQ_ITEM_HEIGHT - BORDER_VALUE * 2,
+                                                                 EQ_ITEM_HEIGHT - BORDER_VALUE * 2))
 
         eq_item.append(equipment_item)
-        eq_item_cooldown = pygame.Surface((eq_item_height, eq_item_height * cooldown_percent), pygame.SRCALPHA)
+        eq_item_cooldown = pygame.Surface((EQ_ITEM_HEIGHT, EQ_ITEM_HEIGHT * cooldown_percent), pygame.SRCALPHA)
         eq_item_cooldown.fill((255, 0, 0, 128))
 
         if i == selected - 1:
-            pygame.draw.rect(screen, "pink", border, const['ITEM_BORDER'])
+            pygame.draw.rect(SCREEN, "pink", border, BORDER_VALUE)
         else:
-            pygame.draw.rect(screen, "brown", border, const['ITEM_BORDER'])
+            pygame.draw.rect(SCREEN, "brown", border, BORDER_VALUE)
 
-        screen.blit(equipment_item, (eq_item_base + i * eq_item_space + const['ITEM_BORDER'],
-                                     eq_item_base + const['ITEM_BORDER']))
-        screen.blit(eq_item_cooldown, (eq_item_base + i * eq_item_space,
-                                       eq_item_base+eq_item_height*(1-cooldown_percent)))
+        SCREEN.blit(equipment_item, (EQ_ITEM_BASE + i * EQ_ITEM_SPACE + BORDER_VALUE,
+                                     EQ_ITEM_BASE + BORDER_VALUE))
+        SCREEN.blit(eq_item_cooldown, (EQ_ITEM_BASE + i * EQ_ITEM_SPACE,
+                                       EQ_ITEM_BASE+EQ_ITEM_HEIGHT*(1-cooldown_percent)))
 
 def display_score(score):
-    score_surface = pygame.Surface((300, eq_item_height))
+    score_surface = pygame.Surface((300, EQ_ITEM_HEIGHT))
     score_surface.fill("black")
     score_rect = score_surface.get_rect()
-    score_rect.center = (screen.get_width()/2, screen.get_height()/20)
+    score_rect.center = (SCREEN.get_width()/2, SCREEN.get_height()/20)
     
-    screen.blit(score_surface, score_rect)
+    SCREEN.blit(score_surface, score_rect)
     
-    score_font = pygame.sysfont.SysFont("Arial", 50)
+    score_font = pygame.sysfont.SysFont("Arial", FONT_SIZE['L'])
     score_text = score_font.render(str(score), (0,0,0), "white")
     score_text_rect = score_text.get_rect()
-    score_text_rect.center = (screen.get_width()/2, screen.get_height()/20)
+    score_text_rect.center = (SCREEN.get_width()/2, SCREEN.get_height()/20)
     
-    screen.blit(score_text, score_text_rect)
-
-
-        
+    SCREEN.blit(score_text, score_text_rect)

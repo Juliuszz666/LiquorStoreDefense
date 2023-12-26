@@ -42,5 +42,29 @@
   {
     "USER": "dupa",
     "SCORE": 5
+  },
+  {
+    "USER": "dzia\u0142a?",
+    "SCORE": 4
+  },
+  {
+    "USER": "dupa",
+    "SCORE": 1
+  },
+  {
+    "USER": "gracz",
+    "SCORE": 0
+  },
+  {
+    "USER": "gracz",
+    "SCORE": 1000000
+  },
+  {
+    "USER": "gracz",
+    "SCORE": 1000000
+  },
+  {
+    "USER": "gracz",
+    "SCORE": 3
   }
 ]

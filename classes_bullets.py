@@ -30,6 +30,9 @@ class ThrownObject(pygame.sprite.Sprite):
         self.direction = bullet_dict['dir']
 
     def update(self):
+        """
+        Fuction verifies if thrown object is in playable area and displays it
+        """
 
         if self.rect.top <= settings['SCREEN_HEIGHT'] / 10:
             self.kill()
@@ -49,6 +52,10 @@ class PistolBullet(ThrownObject):
         ThrownObject.__init__(self, const['b_pistol'], pos)
 
     def update(self):
+        """
+        Fucntion does the same thing as parent method and additionaly
+        moves bullet
+        """
         ThrownObject.update(self)
         self.rect.move_ip(self.speed * self.direction, 0)
 
@@ -56,11 +63,23 @@ class PistolBullet(ThrownObject):
 class ShotgunBullet(ThrownObject):
 
     def __init__(self, pos, angle, dir_y):
+        """
+        This constructor additionaly takes angle
+        and dir_y to make the shotgun effect
+
+        Args:
+            angle (degrees): delta angle
+            dir_y (-1, 0, 1): up/none/down
+        """
         ThrownObject.__init__(self, const['b_shotgun'], pos)
         self.angle = math.radians(angle)
         self.dir_y = dir_y
 
     def update(self):
+        """
+        Fucntion does the same thing as parent method and additionaly
+        moves bullet
+        """
         ThrownObject.update(self)
         self.rect.move_ip(self.speed * self.direction * math.cos(self.angle),
                           self.dir_y * self.speed * math.sin(self.angle))
@@ -69,12 +88,24 @@ class ShotgunBullet(ThrownObject):
 class Arrow(ThrownObject):
 
     def __init__(self, pos, angle):
+        """
+        This constructor additionaly takes angle
+        and dir_y to make the parabolic movement effect
+
+        Args:
+            angle (degrees): delta angle
+            dir_y (-1, 0, 1): up/none/down
+        """
         ThrownObject.__init__(self, const['arrow'], pos)
         self.angle = math.radians(angle)
         self.speed_x = math.cos(self.angle) * self.speed
         self.speed_y = -math.sin(self.angle) * self.speed
 
     def update(self):
+        """
+        Fucntion does the same thing as parent method and additionaly
+        moves arrow
+        """
         ThrownObject.update(self)
 
         self.rect.move_ip(self.speed_x, self.speed_y)
@@ -87,12 +118,24 @@ class Arrow(ThrownObject):
 class Bottle(ThrownObject):
 
     def __init__(self, pos, angle):
+        """
+        This constructor additionaly takes angle
+        and dir_y to make the parabolic movement effect
+
+        Args:
+            angle (degrees): delta angle
+            dir_y (-1, 0, 1): up/none/down
+        """
         ThrownObject.__init__(self, const['bottle'], pos)
         self.angle = math.radians(angle)
         self.speed_x = math.cos(self.angle) * self.speed
         self.speed_y = -math.sin(self.angle) * self.speed
 
     def update(self):
+        """
+        Fucntion does the same thing as parent method and additionaly
+        moves bottle
+        """
         ThrownObject.update(self)
 
         self.rect.move_ip(self.speed_x*self.direction, self.speed_y)

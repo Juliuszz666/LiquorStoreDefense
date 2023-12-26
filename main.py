@@ -14,8 +14,14 @@ pygame.init()
 pygame.display.set_caption("LSD 1.0")
 clock = pygame.time.Clock()
 
-    
+
 def is_gameover():
+    """
+    Function checks if there are satisfied losing conditions
+
+    Returns:
+        Bool: True/False
+    """
     for enemy in all_enemies:
         if enemy.rect.left < 0:
             return True
@@ -23,11 +29,15 @@ def is_gameover():
         return True
     return False
 
+
 def collisions_sprites():
+    """
+    Function investigates if there are any collision beetween speciffic groups
+    """
     player_hit_r = pygame.sprite.spritecollide(protagonist, enemy_bullets, True)
     for bottle in player_hit_r:
         protagonist.get_damage(const['bottle']['dmg'])
-        
+
     player_hit_m = pygame.sprite.spritecollide(protagonist, all_melee, False)
     for melee_attack in player_hit_m:
         if melee_attack.attack():
@@ -44,19 +54,23 @@ def collisions_sprites():
 
 
 def game():
-    
+    """
+    Main game funciton
+    """
+
     running = True
     freeze = False
+    # reset mechanism if player decided to replay
     time_score = 0
     scoring.score = 0
-    # reset mechanism if player decided to replay
     for sprite in all_sprite:
         sprite.kill()
     protagonist.reset()
     all_sprite.add(protagonist)
-    
+
     while running:
-        """Game loop
+        """
+        Game loop
         """
 
         event_key = pygame.key.get_pressed()
@@ -65,7 +79,7 @@ def game():
                 exit()
             if event_key[pygame.K_ESCAPE]:
                 exit()
-            if event_key[pygame.K_p]: # only for testing
+            if event_key[pygame.K_p]:  # only for testing
                 result = "lost"
                 running = False
             if event_key[pygame.K_o]:
@@ -81,34 +95,30 @@ def game():
 
         pygame.display.flip()
         clock.tick(settings['FPS'])
-        #print(clock)
 
         if not freeze:
-            #print(clock)
             display(protagonist.health_points, scoring.score)
             if random.random() < math.pow(time_score, 0.5)/10000+0.01:
                 spawn_enemy()
             all_sprite.update()
             collisions_sprites()
             time_score += 1
-            if time_score%(settings['FPS']*1)==0:
+            if time_score % (settings['FPS']) == 0:
                 scoring.add_score(1)
             if is_gameover():
-                result = "lost"        
+                result = "lost"
                 running = False
-            if scoring.score >= 10**6:
+            if scoring.score >= const['winning_score']:
                 print("chuj")
                 result = "won"
                 running = False
-        if freeze:
-            pass
-    
+
     match result:
         case "lost":
-            display_result(scoring.score, "GAME OVER", "darkred")
+            display_result(scoring.score, "GAME OVER", D_RED)
         case "won":
-            display_result(10**6, "YOU WON", "lightgreen")
-            
+            display_result(const['winning_score'], "YOU WON", L_GREEN)
+
 
 if __name__ == "__main__":
     while 1:

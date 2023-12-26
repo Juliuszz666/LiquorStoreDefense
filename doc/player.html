@@ -29,7 +29,7 @@
     
 <tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl>
-<dt><font face="helvetica, arial"><a href="alive_being.html#Alive_Being">alive_being.Alive_Being</a>(<a href="pygame.sprite.html#Sprite">pygame.sprite.Sprite</a>)
+<dt><font face="helvetica, arial"><a href="alive_being.html#AliveBeing">alive_being.AliveBeing</a>(<a href="pygame.sprite.html#Sprite">pygame.sprite.Sprite</a>)
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="player.html#Player">Player</a>
@@ -40,7 +40,7 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="Player">class <strong>Player</strong></a>(<a href="alive_being.html#Alive_Being">alive_being.Alive_Being</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="Player">class <strong>Player</strong></a>(<a href="alive_being.html#AliveBeing">alive_being.AliveBeing</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt><a href="#Player">Player</a>(position)<br>
@@ -48,60 +48,68 @@
 <a href="#Player">Player</a>&nbsp;class<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="alive_being.html#Alive_Being">Alive_Being</a>&nbsp;(object):&nbsp;Parent&nbsp;class<br>&nbsp;</tt></td></tr>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="alive_being.html#AliveBeing">AliveBeing</a>&nbsp;(object):&nbsp;Parent&nbsp;class<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="player.html#Player">Player</a></dd>
-<dd><a href="alive_being.html#Alive_Being">alive_being.Alive_Being</a></dd>
+<dd><a href="alive_being.html#AliveBeing">alive_being.AliveBeing</a></dd>
 <dd><a href="pygame.sprite.html#Sprite">pygame.sprite.Sprite</a></dd>
 <dd><a href="builtins.html#object">builtins.object</a></dd>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="Player-__init__"><strong>__init__</strong></a>(self, position)</dt><dd><tt>Abstract&nbsp;constructor<br>
+<dl><dt><a name="Player-__init__"><strong>__init__</strong></a>(self, position)</dt><dd><tt><a href="#Player">Player</a>'s&nbsp;constructor<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;being_dict&nbsp;(dictionary):<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Abstract&nbsp;dicitonary&nbsp;containint:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-health<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-speed<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-source&nbsp;file&nbsp;of&nbsp;being&nbsp;image&nbsp;and&nbsp;it's&nbsp;scale<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;position&nbsp;(tuple):&nbsp;initial&nbsp;position&nbsp;of&nbsp;being</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;position&nbsp;(tuple):&nbsp;spawning&nbsp;position</tt></dd></dl>
 
-<dl><dt><a name="Player-bow"><strong>bow</strong></a>(self)</dt></dl>
+<dl><dt><a name="Player-bow"><strong>bow</strong></a>(self)</dt><dd><tt>Fuction&nbsp;creates&nbsp;arrows</tt></dd></dl>
 
-<dl><dt><a name="Player-cooldown_list"><strong>cooldown_list</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="Player-cooldown_reduction"><strong>cooldown_reduction</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="Player-get_damage"><strong>get_damage</strong></a>(self, damage)</dt></dl>
-
-<dl><dt><a name="Player-handling_equipment"><strong>handling_equipment</strong></a>(self)</dt><dd><tt>Function&nbsp;detects&nbsp;if&nbsp;player&nbsp;pressed&nbsp;key&nbsp;responsible&nbsp;for&nbsp;selecting&nbsp;item&nbsp;from&nbsp;the&nbsp;equipment&nbsp;<br>
+<dl><dt><a name="Player-cooldown_list"><strong>cooldown_list</strong></a>(self)</dt><dd><tt>Function&nbsp;crucial&nbsp;for&nbsp;displaying&nbsp;cooldown&nbsp;on&nbsp;screen<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;int:&nbsp;index&nbsp;no.&nbsp;of&nbsp;item/weapon</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;list:&nbsp;first&nbsp;one&nbsp;are&nbsp;current&nbsp;cooldwons,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;second&nbsp;are&nbsp;maximum&nbsp;cooldown</tt></dd></dl>
 
-<dl><dt><a name="Player-is_dead"><strong>is_dead</strong></a>(self)</dt></dl>
+<dl><dt><a name="Player-cooldown_reduction"><strong>cooldown_reduction</strong></a>(self)</dt><dd><tt>Fuction&nbsp;responsible&nbsp;for&nbsp;reducing&nbsp;items'&nbsp;cooldowns&nbsp;over&nbsp;time</tt></dd></dl>
 
-<dl><dt><a name="Player-is_use"><strong>is_use</strong></a>(self)</dt></dl>
+<dl><dt><a name="Player-get_damage"><strong>get_damage</strong></a>(self, damage)</dt><dd><tt>This&nbsp;function&nbsp;is&nbsp;called&nbsp;when&nbsp;player&nbsp;is&nbsp;supposed&nbsp;to&nbsp;take&nbsp;damage<br>
+from&nbsp;enemies,&nbsp;this&nbsp;function&nbsp;also&nbsp;is&nbsp;responsible&nbsp;for&nbsp;killing&nbsp;player<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;damage&nbsp;(int/float):&nbsp;damage&nbsp;amount</tt></dd></dl>
 
-<dl><dt><a name="Player-machete"><strong>machete</strong></a>(self)</dt></dl>
+<dl><dt><a name="Player-handling_equipment"><strong>handling_equipment</strong></a>(self)</dt><dd><tt>Function&nbsp;responsible&nbsp;for&nbsp;weapon&nbsp;selection&nbsp;and&nbsp;using&nbsp;them.<br>
+Function&nbsp;also&nbsp;changes&nbsp;graphics&nbsp;of&nbsp;player&nbsp;depending&nbsp;on&nbsp;weapon&nbsp;selected<br>
+&nbsp;<br>
+self.<strong>flag</strong>&nbsp;makes&nbsp;that&nbsp;selected&nbsp;weapon&nbsp;changes&nbsp;only&nbsp;when&nbsp;other&nbsp;weapon&nbsp;is&nbsp;selected</tt></dd></dl>
 
-<dl><dt><a name="Player-medkit"><strong>medkit</strong></a>(self)</dt></dl>
+<dl><dt><a name="Player-is_dead"><strong>is_dead</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;player&nbsp;is&nbsp;dead<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Bool:&nbsp;dead/alive&nbsp;-&nbsp;true/false</tt></dd></dl>
 
-<dl><dt><a name="Player-movement"><strong>movement</strong></a>(self)</dt></dl>
+<dl><dt><a name="Player-is_use"><strong>is_use</strong></a>(self)</dt><dd><tt>Fuciton&nbsp;check&nbsp;if&nbsp;space&nbsp;is&nbsp;pressed<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Bool:&nbsp;pressed-True/not&nbsp;pressed-False</tt></dd></dl>
 
-<dl><dt><a name="Player-pistol"><strong>pistol</strong></a>(self)</dt></dl>
+<dl><dt><a name="Player-machete"><strong>machete</strong></a>(self)</dt><dd><tt>Function&nbsp;for&nbsp;player's&nbsp;melee&nbsp;damage,&nbsp;it&nbsp;creates&nbsp;damage&nbsp;aura&nbsp;which<br>
+if&nbsp;there&nbsp;is&nbsp;no&nbsp;cooldown&nbsp;and&nbsp;player&nbsp;uses&nbsp;it<br>
+aura&nbsp;give&nbsp;damage&nbsp;to&nbsp;every&nbsp;enemy&nbsp;in&nbsp;it's&nbsp;range</tt></dd></dl>
 
-<dl><dt><a name="Player-reset"><strong>reset</strong></a>(self)</dt></dl>
+<dl><dt><a name="Player-medkit"><strong>medkit</strong></a>(self)</dt><dd><tt>Fuction&nbsp;is&nbsp;responsible&nbsp;for&nbsp;using&nbsp;medkit&nbsp;and&nbsp;giving&nbsp;penalty&nbsp;for&nbsp;using&nbsp;it</tt></dd></dl>
 
-<dl><dt><a name="Player-shotgun"><strong>shotgun</strong></a>(self)</dt></dl>
+<dl><dt><a name="Player-movement"><strong>movement</strong></a>(self)</dt><dd><tt>Movement&nbsp;controls&nbsp;and&nbsp;veryfication&nbsp;if&nbsp;player&nbsp;is&nbsp;not&nbsp;going&nbsp;outside&nbsp;screen</tt></dd></dl>
 
-<dl><dt><a name="Player-update"><strong>update</strong></a>(self)</dt><dd><tt>_summary_</tt></dd></dl>
+<dl><dt><a name="Player-pistol"><strong>pistol</strong></a>(self)</dt><dd><tt>Fuction&nbsp;creates&nbsp;pistol&nbsp;bullets</tt></dd></dl>
+
+<dl><dt><a name="Player-reset"><strong>reset</strong></a>(self)</dt><dd><tt>Function&nbsp;is&nbsp;called&nbsp;when&nbsp;player&nbsp;wants&nbsp;a&nbsp;replay&nbsp;to&nbsp;make&nbsp;sure&nbsp;that&nbsp;player&nbsp;parameters&nbsp;are&nbsp;allright</tt></dd></dl>
+
+<dl><dt><a name="Player-shotgun"><strong>shotgun</strong></a>(self)</dt><dd><tt>Fuction&nbsp;creates&nbsp;3&nbsp;shotgun&nbsp;bullets&nbsp;which&nbsp;have&nbsp;different&nbsp;movement&nbsp;path</tt></dd></dl>
+
+<dl><dt><a name="Player-update"><strong>update</strong></a>(self)</dt><dd><tt>Function&nbsp;is&nbsp;combination&nbsp;of&nbsp;function,&nbsp;and&nbsp;it's&nbsp;crucial<br>
+for&nbsp;player's&nbsp;proper&nbsp;working</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="pygame.sprite.html#Sprite">pygame.sprite.Sprite</a>:<br>
@@ -177,18 +185,52 @@ set&nbsp;via&nbsp;the&nbsp;group's&nbsp;change_layer()&nbsp;method.<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>all_enemies</strong> = &lt;Group(0 sprites)&gt;<br>
+<td width="100%"><strong>BG</strong> = &lt;Surface(1440x720x32 SW)&gt;<br>
+<strong>BLACK</strong> = (0, 0, 0)<br>
+<strong>BORDER_VALUE</strong> = 3<br>
+<strong>BUTTON</strong> = [300, 100]<br>
+<strong>CREDITS</strong> = [400, 100]<br>
+<strong>CREDITS_BORDER</strong> = 5<br>
+<strong>CREDITS_DELTA</strong> = 0.005<br>
+<strong>CREDITS_HEIGHT_CO</strong> = 0.875<br>
+<strong>D_GREY</strong> = (32, 32, 32)<br>
+<strong>D_RED</strong> = (139, 0, 0)<br>
+<strong>EQ_ITEM_BASE</strong> = 7<br>
+<strong>EQ_ITEM_HEIGHT</strong> = 57<br>
+<strong>EQ_ITEM_SPACE</strong> = 64<br>
+<strong>FONT_SIZE</strong> = {'L': 50, 'M': 40, 'S': 35, 'XS': 25}<br>
+<strong>GREEN</strong> = (0, 255, 0)<br>
+<strong>GREEN_T</strong> = (0, 255, 0, 128)<br>
+<strong>HP_BORDER_WIDTH</strong> = 300<br>
+<strong>L_GREEN</strong> = (144, 238, 144)<br>
+<strong>MAX_LEN</strong> = 12<br>
+<strong>MAX_ROWS</strong> = 10<br>
+<strong>MENU_HEIGHT_CO</strong> = 2<br>
+<strong>PLAYER_DETAILS</strong> = &lt;Surface(1440x72x32 SW)&gt;<br>
+<strong>RADIUS</strong> = {'big': 15, 'medium': 10, 'small': 5}<br>
+<strong>RED</strong> = (255, 0, 0)<br>
+<strong>SCORE_BG</strong> = [400, 375]<br>
+<strong>SCORE_DELTA</strong> = 10<br>
+<strong>SCORE_HEIGHT_CO</strong> = 1.1428571428571428<br>
+<strong>SCORE_TITLE_BG</strong> = [400, 75]<br>
+<strong>SCREEN</strong> = &lt;Surface(Dead Display)&gt;<br>
+<strong>USERNAME</strong> = [300, 50]<br>
+<strong>USERNAME_HEIGHT_CO</strong> = 0.6875<br>
+<strong>WHITE</strong> = (255, 255, 255)<br>
+<strong>all_enemies</strong> = &lt;Group(0 sprites)&gt;<br>
+<strong>all_melee</strong> = &lt;Group(0 sprites)&gt;<br>
 <strong>all_sprite</strong> = &lt;Group(1 sprites)&gt;<br>
 <strong>arrows</strong> = &lt;Group(0 sprites)&gt;<br>
 <strong>bullets</strong> = &lt;Group(0 sprites)&gt;<br>
-<strong>const</strong> = {'ITEM_BORDER': 3, 'arrow': {'angle': 15, 'dir': 1, 'dmg': 50, 'gravity_a': 0.04, 'scale': [0.07, 0.07], 'speed': 10, 'src_file': 'img/arrow.png'}, 'b_pistol': {'dir': 1, 'dmg': 69, 'scale': [0.03, 0.03], 'speed': 5, 'src_file': 'img/bullet_pistol.png'}, 'b_shotgun': {'angle': 5, 'dir': 1, 'dmg': 150, 'scale': [0.02, 0.02], 'speed': 20, 'src_file': 'img/bullet_shotgun.png'}, 'bottle': {'angle': 30, 'dir': -1, 'dmg': 50, 'gravity_b': 0.05, 'scale': [0.07, 0.07], 'speed': 12, 'src_file': 'img/bottle.png'}, 'enemies_other': {'m_cooldown': 60, 'r_cooldown': 180}, 'enemy_height': 180, 'enemy_melee': {'height': 100, 'hp': 150, 'scale': [0.15, 0.15], 'speed': 1, 'src_file': 'img/enemy_melee.png', 'width': 40}, 'enemy_ranged': {'height': 100, 'hp': 100, 'scale': [0.15, 0.15], 'speed': 1.25, 'src_file': 'img/enemy_ranged.png', 'width': 40}, 'player_graphics': ['img/player_machete.png', 'img/player_pistol.png', 'img/player_shotgun.png', 'img/player_bow.png', 'img/player_medkit.png'], ...}<br>
-<strong>constants</strong> = &lt;_io.TextIOWrapper name='constants.json' mode='r' encoding='UTF-8'&gt;<br>
+<strong>const</strong> = {'arrow': {'angle': 15, 'dir': 1, 'dmg': 50, 'gravity_a': 0.04, 'scale': [0.07, 0.07], 'speed': 10, 'src_file': 'img/arrow.png'}, 'b_pistol': {'dir': 1, 'dmg': 69, 'scale': [0.03, 0.03], 'speed': 5, 'src_file': 'img/bullet_pistol.png'}, 'b_shotgun': {'angle': 5, 'dir': 1, 'dmg': 150, 'scale': [0.02, 0.02], 'speed': 20, 'src_file': 'img/bullet_shotgun.png'}, 'bottle': {'angle': 30, 'dir': -1, 'dmg': 50, 'gravity_b': 0.05, 'scale': [0.07, 0.07], 'speed': 12, 'src_file': 'img/bottle.png'}, 'display': {'border': 3, 'font-sizes': {'L': 50, 'M': 40, 'S': 35, 'XS': 25}, 'radius': {'big': 15, 'medium': 10, 'small': 5}}, 'enemies_other': {'enemy_height': 180, 'm_cooldown': 30, 'm_dmg': 100, 'r_cooldown': 150}, 'enemy_melee': {'height': 100, 'hp': 150, 'scale': [0.15, 0.15], 'speed': 1, 'src_file': 'img/enemy_melee.png', 'width': 40}, 'enemy_ranged': {'height': 100, 'hp': 100, 'scale': [0.15, 0.15], 'speed': 1.25, 'src_file': 'img/enemy_ranged.png', 'width': 40}, 'player_graphics': ['img/player_machete.png', 'img/player_pistol.png', 'img/player_shotgun.png', 'img/player_bow.png', 'img/player_medkit.png'], 'player_init': {'height': 100, 'hp': 250, 'scale': [0.15, 0.15], 'speed': 3, 'src_file': 'img/player_machete.png', 'width': 40}, ...}<br>
+<strong>constants</strong> = &lt;_io.TextIOWrapper name='json/constants.json' mode='r' encoding='UTF-8'&gt;<br>
+<strong>display_dict</strong> = {'border': 3, 'font-sizes': {'L': 50, 'M': 40, 'S': 35, 'XS': 25}, 'radius': {'big': 15, 'medium': 10, 'small': 5}}<br>
 <strong>enemy_bullets</strong> = &lt;Group(0 sprites)&gt;<br>
-<strong>options</strong> = &lt;_io.TextIOWrapper name='settings.json' mode='r' encoding='UTF-8'&gt;<br>
+<strong>options</strong> = &lt;_io.TextIOWrapper name='json/settings.json' mode='r' encoding='UTF-8'&gt;<br>
 <strong>pistol_bullets</strong> = &lt;Group(0 sprites)&gt;<br>
 <strong>player_bullets</strong> = &lt;Group(0 sprites)&gt;<br>
 <strong>protagonist</strong> = &lt;Player Sprite(in 1 groups)&gt;<br>
 <strong>score</strong> = 0<br>
-<strong>settings</strong> = {'FPS': 30, 'FULLSCREEN': 0, 'SCREEN_HEIGHT': 720, 'SCREEN_WIDTH': 1440, 'USERNAME': 'π≠²³¢€½§·«≤≥”„'}<br>
+<strong>settings</strong> = {'FPS': 30, 'FULLSCREEN': 0, 'SCREEN_HEIGHT': 720, 'SCREEN_WIDTH': 1440, 'USERNAME': 'niegracz1233'}<br>
 <strong>shotgun_bullets</strong> = &lt;Group(0 sprites)&gt;</td></tr></table>
 </body></html>

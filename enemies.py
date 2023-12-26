@@ -20,7 +20,7 @@ class Enemy(AliveBeing):
         """
         AliveBeing.update(self)
         self.rect.move_ip(-self.speed, 0)
-        screen.SCREEN.blit(self.graphics, self.rect)
+        SCREEN.blit(self.graphics, self.rect)
 
     def get_damage(self, damage):
         """This function is called when enemy is supposed to take damage

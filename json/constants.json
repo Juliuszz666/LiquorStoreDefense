@@ -100,11 +100,9 @@
         "radius":
         {
             "small": 5,
+            "medium": 10,
             "big": 15
-        },
-        "button": [300, 100]
-    }
-           
-
-
+        }
+    },
+    "winning_score": 1000000
 }

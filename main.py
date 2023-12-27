@@ -98,7 +98,7 @@ def game():
 
         if not freeze:
             display(protagonist.health_points, scoring.score)
-            if random.random() < math.pow(time_score, 0.5)/10000+0.01:
+            if random.random() < math.sqrt(time_score)/const['spawn_coefficient'] + const['base_spawn_rate']:
                 spawn_enemy()
             all_sprite.update()
             collisions_sprites()

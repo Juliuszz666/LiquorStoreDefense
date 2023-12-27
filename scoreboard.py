@@ -94,7 +94,7 @@ def scoreboard():
                     score_text = scoreboard_font.render(f"{score_data['SCORE']}", True, WHITE)
 
                 score_rect_user = score_text_user.get_rect()
-                score_rect_user.left = SCREEN.get_width()/2 - SCORE_BG[0]/2 - SCORE_DELTA
+                score_rect_user.left = SCREEN.get_width()/2 - SCORE_BG[0]/2 + SCORE_DELTA
                 score_rect_user.top = SCREEN.get_height()/4 + i * FONT_SIZE['S']
 
                 score_rect = score_text.get_rect()

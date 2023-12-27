@@ -104,5 +104,7 @@
             "big": 15
         }
     },
-    "winning_score": 1000000
+    "winning_score": 1000000,
+    "base_spawn_rate": 0.01,
+    "spawn_coefficient": 10000
 }

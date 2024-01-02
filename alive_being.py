@@ -13,7 +13,7 @@ class AliveBeing(pygame.sprite.Sprite):
             \tAbstract dicitonary containint:
                 \t-health\n
                 \t-speed\n
-                \t-source file of being image and it's scale\n
+                \t-source file of being's image, and it's scale\n
             position (tuple): initial position of being
         """
         pygame.sprite.Sprite.__init__(self)

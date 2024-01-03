@@ -71,7 +71,8 @@ def scoreboard():
 
         SCREEN.blit(BG, (0, 0))
 
-        score_title_bg = pygame.Rect(0, 0, SCORE_TITLE_BG[0], SCORE_TITLE_BG[1])
+        score_title_bg = pygame.Rect(
+            0, 0, SCORE_TITLE_BG[0], SCORE_TITLE_BG[1])
         score_title_bg.center = (SCREEN.get_width()/2, SCREEN.get_height()/8)
         pygame.draw.rect(SCREEN, RED, score_title_bg, 0, RADIUS['big'])
 
@@ -81,24 +82,32 @@ def scoreboard():
         SCREEN.blit(score_title_text, score_title_rect)
 
         score_bg = pygame.Rect(0, 0, SCORE_BG[0], SCORE_BG[1])
-        score_bg.center = (SCREEN.get_width()/2, SCREEN.get_height()/4+(MAX_ROWS / 2 * FONT_SIZE['S']))
+        score_bg.center = (
+            SCREEN.get_width()/2, SCREEN.get_height()/4+(MAX_ROWS / 2 * FONT_SIZE['S']))
         pygame.draw.rect(SCREEN, BLACK, score_bg, 0, RADIUS['small'])
         if len(scores):
             for i in range(min(len(scores), MAX_ROWS)):
                 score_data = scores[index+i]
                 if score_data['SCORE'] == const['winning_score']:
-                    score_text_user = scoreboard_font.render(f"{score_data['USER']}: ", True, GREEN)
-                    score_text = scoreboard_font.render(f"{score_data['SCORE']}", True, GREEN)
+                    score_text_user = scoreboard_font.render(
+                        f"{score_data['USER']}: ", True, GREEN)
+                    score_text = scoreboard_font.render(
+                        f"{score_data['SCORE']}", True, GREEN)
                 else:
-                    score_text_user = scoreboard_font.render(f"{score_data['USER']}: ", True, WHITE)
-                    score_text = scoreboard_font.render(f"{score_data['SCORE']}", True, WHITE)
+                    score_text_user = scoreboard_font.render(
+                        f"{score_data['USER']}: ", True, WHITE)
+                    score_text = scoreboard_font.render(
+                        f"{score_data['SCORE']}", True, WHITE)
 
                 score_rect_user = score_text_user.get_rect()
-                score_rect_user.left = SCREEN.get_width()/2 - SCORE_BG[0]/2 + SCORE_DELTA
-                score_rect_user.top = SCREEN.get_height()/4 + i * FONT_SIZE['S']
+                score_rect_user.left = SCREEN.get_width()/2 - \
+                    SCORE_BG[0]/2 + SCORE_DELTA
+                score_rect_user.top = SCREEN.get_height()/4 + i * \
+                    FONT_SIZE['S']
 
                 score_rect = score_text.get_rect()
-                score_rect.right = SCREEN.get_width()/2 + SCORE_BG[0]/2 - SCORE_DELTA
+                score_rect.right = SCREEN.get_width()/2 + \
+                    SCORE_BG[0]/2 - SCORE_DELTA
                 score_rect.top = SCREEN.get_height()/4 + i * FONT_SIZE['S']
 
                 SCREEN.blit(score_text_user, score_rect_user)
@@ -106,5 +115,6 @@ def scoreboard():
 
         button_texts = ["Menu"]
         mouse_position = pygame.mouse.get_pos()
-        buttons = generate_buttons(titles_font, len(button_texts), mouse_position, button_texts, SCORE_HEIGHT_CO)
+        buttons = generate_buttons(titles_font, len(
+            button_texts), mouse_position, button_texts, SCORE_HEIGHT_CO)
         pygame.display.flip()

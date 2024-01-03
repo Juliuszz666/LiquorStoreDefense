@@ -14,6 +14,7 @@ class Enemy(AliveBeing):
     Args:
         Alive_Being (object): parent class
     """
+
     def update(self) -> None:
         """
         This function is responsible for displaying and moving all enemies
@@ -44,6 +45,7 @@ class MeleeEnemy(Enemy):
     Args:
         Enemy (object): Parent class
     """
+
     def __init__(self, position):
         """
         Constructor for melee enemy
@@ -85,6 +87,7 @@ class RangedEnemy(Enemy):
     Args:
         Enemy (object): Parent class
     """
+
     def __init__(self, position):
         """Constructor for ranged enemy
 

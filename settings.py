@@ -64,7 +64,8 @@ CREDITS_BORDER = 5
 
 SCORE_DELTA = 10
 
-SCREEN = pygame.display.set_mode((settings['SCREEN_WIDTH'], settings['SCREEN_HEIGHT']))
+SCREEN = pygame.display.set_mode(
+    (settings['SCREEN_WIDTH'], settings['SCREEN_HEIGHT']))
 BG = pygame.image.load("img/background.png")
 PLAYER_DETAILS = pygame.Surface((SCREEN.get_width(),
                                 SCREEN.get_height()/10), pygame.SRCALPHA)

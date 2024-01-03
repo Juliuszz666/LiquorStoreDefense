@@ -8,6 +8,7 @@ class ThrownObject(pygame.sprite.Sprite):
     """
     Abstract class for every bullet-like object in game
     """
+
     def __init__(self, bullet_dict, pos):
         """Abstract constructor
 

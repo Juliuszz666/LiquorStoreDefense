@@ -118,35 +118,40 @@ class Player(AliveBeing):
             case 1:
                 pos = self.rect.topleft
                 img = pygame.image.load(const['player_graphics'][0])
-                self.graphics = pygame.transform.scale_by(img, const['player_init']['scale'])
+                self.graphics = pygame.transform.scale_by(
+                    img, const['player_init']['scale'])
                 self.rect = self.graphics.get_rect()
                 self.rect.topleft = pos
                 self.machete()
             case 2:
                 pos = self.rect.topleft
                 img = pygame.image.load(const['player_graphics'][1])
-                self.graphics = pygame.transform.scale_by(img, const['player_init']['scale'])
+                self.graphics = pygame.transform.scale_by(
+                    img, const['player_init']['scale'])
                 self.rect = self.graphics.get_rect()
                 self.rect.topleft = pos
                 self.pistol()
             case 3:
                 pos = self.rect.topleft
                 img = pygame.image.load(const['player_graphics'][2])
-                self.graphics = pygame.transform.scale_by(img, const['player_init']['scale'])
+                self.graphics = pygame.transform.scale_by(
+                    img, const['player_init']['scale'])
                 self.rect = self.graphics.get_rect()
                 self.rect.topleft = pos
                 self.shotgun()
             case 4:
                 pos = self.rect.topleft
                 img = pygame.image.load(const['player_graphics'][3])
-                self.graphics = pygame.transform.scale_by(img, const['player_init']['scale'])
+                self.graphics = pygame.transform.scale_by(
+                    img, const['player_init']['scale'])
                 self.rect = self.graphics.get_rect()
                 self.rect.topleft = pos
                 self.bow()
             case 5:
                 pos = self.rect.topleft
                 img = pygame.image.load(const['player_graphics'][4])
-                self.graphics = pygame.transform.scale_by(img, const['player_init']['scale'])
+                self.graphics = pygame.transform.scale_by(
+                    img, const['player_init']['scale'])
                 self.rect = self.graphics.get_rect()
                 self.rect.topleft = pos
                 self.medkit()
@@ -170,7 +175,8 @@ class Player(AliveBeing):
         Fuction creates pistol bullets
         """
         if self.is_use() and self.cooldown_pistol <= 0:
-            bullet_player = PistolBullet((self.rect.centerx + 15, self.rect.centery - 20))
+            bullet_player = PistolBullet(
+                (self.rect.centerx + 15, self.rect.centery - 20))
             all_sprite.add(bullet_player)
             pistol_bullets.add(bullet_player)
             bullets.add(bullet_player)
@@ -198,7 +204,8 @@ class Player(AliveBeing):
         Fuction creates arrows
         """
         if self.is_use() and self.cooldown_bow <= 0:
-            bullet_player = Arrow((self.rect.centerx, self.rect.centery - 25), const['arrow']['angle'])
+            bullet_player = Arrow(
+                (self.rect.centerx, self.rect.centery - 25), const['arrow']['angle'])
             all_sprite.add(bullet_player)
             bullets.add(bullet_player)
             arrows.add(bullet_player)

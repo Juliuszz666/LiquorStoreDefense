@@ -5,6 +5,7 @@ class AliveBeing(pygame.sprite.Sprite):
     """
     Parent and abstract class for player and enemies
     """
+
     def __init__(self, being_dict, position):
         """Abstract constructor
 

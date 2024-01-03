@@ -12,11 +12,13 @@ def blit_credits():
     Returns:
         List of buttons to be clicked (rect)
     """
-    credits_texts = ["Software by Julian Bednarek", "Graphics by Paweł Korabiewski"]
+    credits_texts = ["Software by Julian Bednarek",
+                     "Graphics by Paweł Korabiewski"]
     credit_font = pygame.sysfont.SysFont("Times New Roman", 25, False, True)
     credits = []
     credit_bg = pygame.Rect(0, 0, CREDITS[0], CREDITS[1])
-    credit_bg.center = (SCREEN.get_width()/2, SCREEN.get_height() * CREDITS_HEIGHT_CO)
+    credit_bg.center = (SCREEN.get_width()/2,
+                        SCREEN.get_height() * CREDITS_HEIGHT_CO)
     pygame.draw.rect(SCREEN, WHITE, credit_bg, CREDITS_BORDER, RADIUS['big'])
 
     for i in range(len(credits_texts)):
@@ -55,7 +57,8 @@ def main_menu():
         menu_font = pygame.sysfont.SysFont("Arial", FONT_SIZE['L'])
         username_font = pygame.sysfont.SysFont("Calibri", FONT_SIZE['S'])
 
-        buttons = generate_buttons(menu_font, len(button_texts), mouse_position, button_texts, MENU_HEIGHT_CO)
+        buttons = generate_buttons(menu_font, len(
+            button_texts), mouse_position, button_texts, MENU_HEIGHT_CO)
         credits = blit_credits()
 
         username_bg = pygame.Rect(0, 0, USERNAME[0], USERNAME[1])
@@ -63,7 +66,8 @@ def main_menu():
         username_bg.bottom = USERNAME_HEIGHT_CO * SCREEN.get_height() - BORDER_VALUE
         pygame.draw.rect(SCREEN, "red", username_bg, 0, RADIUS['medium'])
 
-        username_text = username_font.render("You are playing as:", True, "white")
+        username_text = username_font.render(
+            "You are playing as:", True, "white")
         username_rect = username_text.get_rect(center=username_bg.center)
         SCREEN.blit(username_text, username_rect)
 
@@ -105,9 +109,11 @@ def main_menu():
                     if credits[i].collidepoint(mouse_position):
                         match i:
                             case 0:
-                                webbrowser.open(r"https://github.com/Juliuszz666")
+                                webbrowser.open(
+                                    r"https://github.com/Juliuszz666")
                             case 1:
-                                webbrowser.open(r"https://www.instagram.com/xmakaronito/")
+                                webbrowser.open(
+                                    r"https://www.instagram.com/xmakaronito/")
             if event.type == pygame.KEYDOWN:
                 if active:
                     if event.key == pygame.K_RETURN:

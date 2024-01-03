@@ -23,7 +23,8 @@ def generate_buttons(font, num_of_buttons, mouse_pos, texts, height_co):
     buttons = []
     for i in range(num_of_buttons):
         button_rect = pygame.Rect(0, 0, BUTTON[0], BUTTON[1])
-        button_rect.center = ((i+1)*SCREEN.get_width()/(num_of_buttons+1), SCREEN.get_height()/height_co)
+        button_rect.center = ((i+1)*SCREEN.get_width() /
+                              (num_of_buttons+1), SCREEN.get_height()/height_co)
         if button_rect.collidepoint(mouse_pos):
             pygame.draw.rect(SCREEN, "purple", button_rect, 0, RADIUS['big'])
         else:
@@ -77,14 +78,16 @@ def display_health(player_hp):
     hp_display = pygame.Surface((hp_width, EQ_ITEM_HEIGHT - 2 * BORDER_VALUE))
     hp_display.fill(RED)
 
-    SCREEN.blit(hp_border_display, ((SCREEN.get_width()-HP_BORDER_WIDTH)-EQ_ITEM_BASE, EQ_ITEM_BASE))
+    SCREEN.blit(hp_border_display, ((SCREEN.get_width() -
+                HP_BORDER_WIDTH)-EQ_ITEM_BASE, EQ_ITEM_BASE))
     SCREEN.blit(hp_display, ((SCREEN.get_width() - HP_BORDER_WIDTH - EQ_ITEM_BASE + BORDER_VALUE,
                               EQ_ITEM_BASE + BORDER_VALUE)))
 
     hp_font = pygame.sysfont.SysFont("Times New Roman", FONT_SIZE['L'])
     hp_counter = hp_font.render("HP: "+str(player_hp), (0, 0, 0), "white")
     hp_prompt = hp_counter.get_rect()
-    hp_prompt.center = (SCREEN.get_width() - EQ_ITEM_BASE - (HP_BORDER_WIDTH / 2), SCREEN.get_height() / 20)
+    hp_prompt.center = (SCREEN.get_width() - EQ_ITEM_BASE -
+                        (HP_BORDER_WIDTH / 2), SCREEN.get_height() / 20)
 
     SCREEN.blit(hp_counter, hp_prompt)
 
@@ -127,14 +130,17 @@ def display_weapons():
         else:
             cooldown_percent = 0
 
-        border = pygame.Rect(EQ_ITEM_BASE + i * EQ_ITEM_SPACE, EQ_ITEM_BASE, EQ_ITEM_HEIGHT, EQ_ITEM_HEIGHT)
+        border = pygame.Rect(EQ_ITEM_BASE + i * EQ_ITEM_SPACE,
+                             EQ_ITEM_BASE, EQ_ITEM_HEIGHT, EQ_ITEM_HEIGHT)
 
-        equipment_item = pygame.image.load(f"img/item{i + 1}.png").convert_alpha()
+        equipment_item = pygame.image.load(
+            f"img/item{i + 1}.png").convert_alpha()
         equipment_item = pygame.transform.scale(equipment_item, (EQ_ITEM_HEIGHT - BORDER_VALUE * 2,
                                                                  EQ_ITEM_HEIGHT - BORDER_VALUE * 2))
 
         eq_item.append(equipment_item)
-        eq_item_cooldown = pygame.Surface((EQ_ITEM_HEIGHT, EQ_ITEM_HEIGHT * cooldown_percent), pygame.SRCALPHA)
+        eq_item_cooldown = pygame.Surface(
+            (EQ_ITEM_HEIGHT, EQ_ITEM_HEIGHT * cooldown_percent), pygame.SRCALPHA)
         eq_item_cooldown.fill(YELLOW_T)
 
         if i == selected - 1:

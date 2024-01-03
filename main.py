@@ -34,7 +34,8 @@ def collisions_sprites():
     """
     Function investigates if there are any collision beetween speciffic groups
     """
-    player_hit_r = pygame.sprite.spritecollide(protagonist, enemy_bullets, True)
+    player_hit_r = pygame.sprite.spritecollide(
+        protagonist, enemy_bullets, True)
     for bottle in player_hit_r:
         protagonist.get_damage(const['bottle']['dmg'])
 
@@ -42,8 +43,10 @@ def collisions_sprites():
     for melee_attack in player_hit_m:
         if melee_attack.attack():
             protagonist.get_damage(const['enemies_other']['m_dmg'])
-    pistol_hit = pygame.sprite.groupcollide(all_enemies, pistol_bullets, False, True)
-    shotgun_hit = pygame.sprite.groupcollide(all_enemies, shotgun_bullets, False, True)
+    pistol_hit = pygame.sprite.groupcollide(
+        all_enemies, pistol_bullets, False, True)
+    shotgun_hit = pygame.sprite.groupcollide(
+        all_enemies, shotgun_bullets, False, True)
     bow_hit = pygame.sprite.groupcollide(all_enemies, arrows, False, True)
     for enemy in pistol_hit.keys():
         enemy.get_damage(const['b_pistol']['dmg'])

@@ -19,7 +19,8 @@ def display_result(score, result, color):
         SCREEN.blit(BG, (0, 0))
 
         result_font = pygame.sysfont.SysFont('arial', FONT_SIZE['L'], True)
-        result_score_font = pygame.sysfont.SysFont('arial', FONT_SIZE['M'], False, True)
+        result_score_font = pygame.sysfont.SysFont(
+            'arial', FONT_SIZE['M'], False, True)
         button_font = pygame.sysfont.SysFont('arial', FONT_SIZE['L'])
 
         result_text = result_font.render(result, True, color)
@@ -27,7 +28,8 @@ def display_result(score, result, color):
         result_rect.centerx = SCREEN.get_width()/2
         result_rect.bottom = SCREEN.get_height()/4
 
-        result_score_text = result_score_font.render(f"Score: {score}", True, WHITE)
+        result_score_text = result_score_font.render(
+            f"Score: {score}", True, WHITE)
         result_score_rect = result_score_text.get_rect()
         result_score_rect.centerx = SCREEN.get_width()/2
         result_score_rect.top = SCREEN.get_height()/4
@@ -37,7 +39,8 @@ def display_result(score, result, color):
 
         button_texts = ["Scoreboard", "Menu", "Quit game"]
         mouse_position = pygame.mouse.get_pos()
-        buttons = generate_buttons(button_font, len(button_texts), mouse_position, button_texts, 2)
+        buttons = generate_buttons(button_font, len(
+            button_texts), mouse_position, button_texts, 2)
 
         event_key = pygame.key.get_pressed()
         for event in pygame.event.get():

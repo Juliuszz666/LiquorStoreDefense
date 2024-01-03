@@ -162,7 +162,8 @@ class Player(AliveBeing):
         if there is no cooldown and player uses it
         aura give damage to every enemy in it's range
         """
-        self.machete_aura = pygame.Rect(0, 0, 200, 200)
+        self.machete_aura = pygame.Rect(
+            0, 0, const['player_other']['aura_range'], const['player_other']['aura_range'])
         self.machete_aura.center = self.rect.center
         if self.is_use() and self.cooldown_melee <= 0:
             self.cooldown_melee = const['player_other']['m_cooldown']
@@ -176,7 +177,8 @@ class Player(AliveBeing):
         """
         if self.is_use() and self.cooldown_pistol <= 0:
             bullet_player = PistolBullet(
-                (self.rect.centerx + 15, self.rect.centery - 20))
+                (self.rect.centerx + const['pistol_vec'][0],
+                 self.rect.centery + const['pistol_vec'][1]))
             all_sprite.add(bullet_player)
             pistol_bullets.add(bullet_player)
             bullets.add(bullet_player)
@@ -189,7 +191,8 @@ class Player(AliveBeing):
         """
         if self.is_use() and self.cooldown_shotgun <= 0:
             for i in range(-1, 2, 1):
-                bullet_player = ShotgunBullet((self.rect.centerx + 35, self.rect.centery - 30),
+                bullet_player = ShotgunBullet((self.rect.centerx + const['shotgun_vec'][0],
+                                               self.rect.centery + const['shotgun_vec'][1]),
                                               const['b_shotgun']['angle'], i)
                 all_sprite.add(bullet_player)
                 bullets.add(bullet_player)
@@ -205,7 +208,9 @@ class Player(AliveBeing):
         """
         if self.is_use() and self.cooldown_bow <= 0:
             bullet_player = Arrow(
-                (self.rect.centerx, self.rect.centery - 25), const['arrow']['angle'])
+                (self.rect.centerx + const['bow_vec'][0],
+                 self.rect.centery + const['bow_vec'][1]),
+                const['arrow']['angle'])
             all_sprite.add(bullet_player)
             bullets.add(bullet_player)
             arrows.add(bullet_player)
@@ -264,5 +269,5 @@ class Player(AliveBeing):
 
 
 """Initialazing player"""
-protagonist = Player((50, 200))
+protagonist = Player(const['player_other']['ini_spawn'])
 all_sprite.add(protagonist)

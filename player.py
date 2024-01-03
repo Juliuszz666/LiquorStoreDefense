@@ -269,6 +269,11 @@ class Player(AliveBeing):
         self.health_points = const['player_init']['hp']
         self.rect.topleft = (self.position_x, self.position_y)
         self.dead = False
+        self.cooldown_melee = 0
+        self.cooldown_pistol = 0
+        self.cooldown_shotgun = 0
+        self.cooldown_bow = 0
+        self.cooldown_medkit = 0
 
 
 """Initialazing player"""

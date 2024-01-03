@@ -91,8 +91,10 @@ class Player(AliveBeing):
     def handling_equipment(self):
         """
         Function responsible for weapon selection and using them.
-        Function also changes graphics of player depending on weapon selected\n
-        self.flag makes that selected weapon changes only when other weapon is selected
+        Function also changes graphics of player
+        depending on weapon selected\n
+        self.flag makes that selected weapon changes only
+        when other weapon is selected
         """
 
         player_controls = pygame.key.get_pressed()

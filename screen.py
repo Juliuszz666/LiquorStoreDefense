@@ -1,4 +1,5 @@
 import pygame
+import pygame.transform as trans
 from player import protagonist
 from settings import *
 
@@ -135,8 +136,8 @@ def display_weapons():
 
         equipment_item = pygame.image.load(
             f"img/item{i + 1}.png").convert_alpha()
-        equipment_item = pygame.transform.scale(equipment_item, (EQ_ITEM_HEIGHT - BORDER_VALUE * 2,
-                                                                 EQ_ITEM_HEIGHT - BORDER_VALUE * 2))
+        equipment_item = trans.scale(equipment_item, (EQ_ITEM_HEIGHT - BORDER_VALUE * 2,
+                                                      EQ_ITEM_HEIGHT - BORDER_VALUE * 2))
 
         eq_item.append(equipment_item)
         eq_item_cooldown = pygame.Surface(

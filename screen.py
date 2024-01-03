@@ -135,7 +135,7 @@ def display_weapons():
 
         eq_item.append(equipment_item)
         eq_item_cooldown = pygame.Surface((EQ_ITEM_HEIGHT, EQ_ITEM_HEIGHT * cooldown_percent), pygame.SRCALPHA)
-        eq_item_cooldown.fill((255, 0, 0, 128))
+        eq_item_cooldown.fill(YELLOW_T)
 
         if i == selected - 1:
             pygame.draw.rect(SCREEN, "pink", border, BORDER_VALUE)

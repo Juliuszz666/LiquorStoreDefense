@@ -109,7 +109,6 @@ def game():
                 result = "lost"
                 running = False
             if scoring.score >= const['winning_score']:
-                print("chuj")
                 result = "won"
                 running = False
 

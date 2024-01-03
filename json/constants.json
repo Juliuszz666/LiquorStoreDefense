@@ -18,14 +18,14 @@
     ],
     "player_other":
     {
-        "m_cooldown": 90,
-        "p_cooldown": 15,
-        "s_cooldown": 300,
-        "b_cooldown": 10,
+        "m_cooldown": 120,
+        "p_cooldown": 30,
+        "s_cooldown": 450,
+        "b_cooldown": 30,
         "machete_dmg": 100,
         "medkit_uses": 5,
         "medkit_healing": 100,
-        "medkit_cooldown": 600
+        "medkit_cooldown": 1200
     },
     "enemy_melee": {
         "hp": 150,

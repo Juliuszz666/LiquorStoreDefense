@@ -11,7 +11,7 @@ class AliveBeing(pygame.sprite.Sprite):
 
         Args:
             being_dict (dictionary):\n
-            \tAbstract dicitonary containint:
+            Abstract dicitonary containint:
                 \t-health\n
                 \t-speed\n
                 \t-source file of being's image, and it's scale\n

@@ -56,6 +56,13 @@ def main_menu():
 
         menu_font = pygame.sysfont.SysFont("Arial", FONT_SIZE['L'])
         username_font = pygame.sysfont.SysFont("Calibri", FONT_SIZE['S'])
+        title_font = pygame.sysfont.SysFont(
+            "Times New Roman", FONT_SIZE['XXL'], False, True)
+
+        title = title_font.render("Liquor Store Defense", 1, "black")
+        title_rect = title.get_rect()
+        title_rect.center = (SCREEN.get_width()/2, SCREEN.get_height()/4)
+        SCREEN.blit(title, title_rect)
 
         buttons = generate_buttons(menu_font, len(
             button_texts), mouse_position, button_texts, MENU_HEIGHT_CO)

@@ -18,14 +18,14 @@
     ],
     "player_other":
     {
-        "m_cooldown": 120,
+        "m_cooldown": 60,
         "p_cooldown": 30,
         "s_cooldown": 450,
         "b_cooldown": 30,
         "machete_dmg": 100,
         "medkit_uses": 5,
         "medkit_healing": 100,
-        "medkit_cooldown": 1200,
+        "medkit_cooldown": 900,
         "aura_range": 200,
         "ini_spawn": [50, 200]
     },
@@ -97,7 +97,8 @@
             "XS": 25,
             "S": 35,
             "M": 40,
-            "L": 50
+            "L": 50,
+            "XXL": 100
         },
         "radius":
         {

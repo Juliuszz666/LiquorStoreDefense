@@ -261,7 +261,8 @@ class Player(AliveBeing):
 
     def reset(self):
         """
-        Function is called when player wants a replay to make sure that player parameters are allright
+        Function is called when player wants a replay
+        to make sure that player parameters are allright
         """
         self.health_points = const['player_init']['hp']
         self.rect.topleft = (self.position_x, self.position_y)

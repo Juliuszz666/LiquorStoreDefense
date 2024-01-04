@@ -90,6 +90,13 @@ def main_menu():
         text_sur = username_font.render(text, True, "white")
         text_rect = text_sur.get_rect(center=text_input.center)
         SCREEN.blit(text_sur, text_rect)
+        
+        controls = pygame.image.load("img/controls.png")
+        controls_rect = controls.get_rect()
+        controls_rect.bottomright = (SCREEN.get_width() - const['delta_controls'],
+                                     SCREEN.get_height() - const['delta_controls'])
+        pygame.draw.rect(SCREEN, "lightgreen", controls_rect, 0, RADIUS['medium'])
+        SCREEN.blit(controls, controls_rect)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

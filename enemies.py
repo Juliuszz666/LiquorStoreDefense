@@ -120,20 +120,83 @@ class RangedEnemy(Enemy):
         self.attack()
 
 
+class Boss(Enemy):
+    """
+    Class for boss - enhanced enemy that spawn rarely
+
+    Args:
+        Enemy (object): parent class
+    """
+
+    def __init__(self, position):
+        """
+        Constructor for boss
+
+        Args:
+            position (tuple): spawn posistion
+        """
+        Enemy.__init__(self, const['boss'], position)
+        self.cooldown_m = 0
+        self.cooldown_r = 0
+
+    def update(self):
+        """
+        Function blits boss to screen, calls attack and moves itself
+        """
+        Enemy.update(self)
+        self.attack_r()
+        self.attack()
+
+    def attack_r(self):
+        """
+        Ranged attack
+        """
+        if self.cooldown_r <= 0:
+            bullet_enemy = Bottle(self.rect.center, const['arrow']['angle'])
+            all_sprite.add(bullet_enemy)
+            bullets.add(bullet_enemy)
+            enemy_bullets.add(bullet_enemy)
+            self.cooldown_r = const['enemies_other']['r_cooldown']
+        else:
+            self.cooldown_r -= 1
+
+    def attack(self):
+        """Melee attack
+
+        Returns:
+            Bool: Whether boss can/cannot attack
+        """
+        if self.cooldown_m <= 0:
+            self.cooldown_m = const['enemies_other']['m_cooldown']
+            return True
+        else:
+            self.cooldown_m -= 1
+            return False
+
+
 def spawn_enemy():
     """
     Function responsible for randomized spawning both types of enemies,
     enemies spawn on the right side of the screen
     """
-    pos_y = random.randint(settings['SCREEN_HEIGHT'] / 10,
-                           settings['SCREEN_HEIGHT']
-                           - const['enemies_other']['enemy_height'])
-    enemy_type = random.choice(['melee', 'ranged'])
+    if random.randint(0, const['boss_spawn_rate']) == 1:
+        enemy_type = 'boss'
+        pos_y = random.randint(settings['SCREEN_HEIGHT'] / 10,
+                               settings['SCREEN_HEIGHT']
+                               - const['enemies_other']['boss_height'])
+    else:
+        enemy_type = random.choice(['melee', 'ranged'])
+        pos_y = random.randint(settings['SCREEN_HEIGHT'] / 10,
+                               settings['SCREEN_HEIGHT']
+                               - const['enemies_other']['enemy_height'])
     match enemy_type:
         case 'melee':
             enemy = MeleeEnemy((settings['SCREEN_WIDTH'], pos_y))
             all_melee.add(enemy)
         case 'ranged':
             enemy = RangedEnemy((settings['SCREEN_WIDTH'], pos_y))
+        case 'boss':
+            enemy = Boss((settings['SCREEN_WIDTH'], pos_y))
+            all_melee.add(enemy)
     all_sprite.add(enemy)
     all_enemies.add(enemy)

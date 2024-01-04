@@ -165,7 +165,8 @@ class Player(AliveBeing):
         aura give damage to every enemy in it's range
         """
         self.machete_aura = pygame.Rect(
-            0, 0, const['player_other']['aura_range'], const['player_other']['aura_range'])
+            0, 0, const['player_other']['aura_range'],
+            const['player_other']['aura_range'])
         self.machete_aura.center = self.rect.center
         if self.is_use() and self.cooldown_melee <= 0:
             self.cooldown_melee = const['player_other']['m_cooldown']
@@ -226,7 +227,7 @@ class Player(AliveBeing):
         if self.is_use() and self.cooldown_medkit <= 0:
             self.health_points += const['player_other']['medkit_healing']
             self.cooldown_medkit = const['player_other']['medkit_cooldown']
-            add_score(-5)
+            add_score(const['medkit_penalty'])
 
     def update(self):
         """

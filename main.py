@@ -11,7 +11,7 @@ import pygame
 
 # pygame setup
 pygame.init()
-pygame.display.set_caption("LSD 1.0")
+pygame.display.set_caption("LSD 4.2.0")
 clock = pygame.time.Clock()
 
 
@@ -86,7 +86,7 @@ def game():
                 result = "lost"
                 running = False
             if event_key[pygame.K_o]:
-                scoring.add_score(10**5)
+                protagonist.health_points += 1000
             if event.type == pygame.WINDOWFOCUSLOST:
                 freeze = True
             if event.type == pygame.WINDOWFOCUSGAINED:
@@ -101,7 +101,7 @@ def game():
 
         if not freeze:
             display(protagonist.health_points, scoring.score)
-            if random.random() < math.sqrt(time_score)/const['spawn_coefficient'] + const['base_spawn_rate']:
+            if random.random() < math.sqrt(time_score)/const['spawn_co'] + const['base_spawn']:
                 spawn_enemy()
             all_sprite.update()
             collisions_sprites()

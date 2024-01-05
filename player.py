@@ -169,6 +169,8 @@ class Player(AliveBeing):
             const['player_other']['aura_range'])
         self.machete_aura.center = self.rect.center
         if self.is_use() and self.cooldown_melee <= 0:
+            pygame.mixer.music.load("music/machete.mp3")
+            pygame.mixer.music.play()
             self.cooldown_melee = const['player_other']['m_cooldown']
             for enemy in all_enemies:
                 if enemy.rect.colliderect(self.machete_aura):
@@ -179,6 +181,8 @@ class Player(AliveBeing):
         Fuction creates pistol bullets
         """
         if self.is_use() and self.cooldown_pistol <= 0:
+            pygame.mixer.music.load("music/shot.mp3")
+            pygame.mixer.music.play()
             bullet_player = PistolBullet(
                 (self.rect.centerx + const['pistol_vec'][0],
                  self.rect.centery + const['pistol_vec'][1]))
@@ -193,6 +197,8 @@ class Player(AliveBeing):
         Fuction creates 3 shotgun bullets which have different movement path
         """
         if self.is_use() and self.cooldown_shotgun <= 0:
+            pygame.mixer.music.load("music/shot.mp3")
+            pygame.mixer.music.play()
             for i in range(-1, 2, 1):
                 bullet_player = ShotgunBullet((self.rect.centerx + const['shotgun_vec'][0],
                                                self.rect.centery + const['shotgun_vec'][1]),
@@ -210,6 +216,8 @@ class Player(AliveBeing):
         Fuction creates arrows
         """
         if self.is_use() and self.cooldown_bow <= 0:
+            pygame.mixer.music.load("music/bow.wav")
+            pygame.mixer.music.play()
             bullet_player = Arrow(
                 (self.rect.centerx + const['bow_vec'][0],
                  self.rect.centery + const['bow_vec'][1]),

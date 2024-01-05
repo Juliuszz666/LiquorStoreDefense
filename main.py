@@ -86,7 +86,7 @@ def game():
                 result = "lost"
                 running = False
             if event_key[pygame.K_o]:
-                protagonist.health_points += 1000
+                scoring.add_score(100000)
             if event.type == pygame.WINDOWFOCUSLOST:
                 freeze = True
             if event.type == pygame.WINDOWFOCUSGAINED:

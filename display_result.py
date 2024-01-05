@@ -10,12 +10,22 @@ def display_result(score, result, color):
 
     Args:
         score (int): points scored during the game
-        result (str): GAMEOVER / YOU WON
+        result (str): GAME OVER / YOU WON
         color (tuple): RGB color depending of result
     """
     running_res = True
     update_scoreboard(score, settings['USERNAME'])
+
+    match result:
+        case "GAME OVER":
+            pygame.mixer.music.load("music/lost.mp3")
+            pygame.mixer.music.play()
+        case 'YOU WON':
+            pygame.mixer.music.load("music/win.mp3")
+            pygame.mixer.music.play()
+
     while running_res:
+
         SCREEN.blit(BG, (0, 0))
 
         result_font = pygame.sysfont.SysFont('arial', FONT_SIZE['L'], True)
@@ -51,6 +61,8 @@ def display_result(score, result, color):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for i in range(len(buttons)):
                     if buttons[i].collidepoint(mouse_position):
+                        pygame.mixer.music.load("music/click.wav")
+                        pygame.mixer.music.play()
                         match i:
                             case 0:
                                 running_res = False

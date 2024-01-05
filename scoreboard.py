@@ -67,6 +67,8 @@ def scoreboard():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for i in range(len(buttons)):
                     if buttons[i].collidepoint(mouse_position):
+                        pygame.mixer.music.load("music/click.wav")
+                        pygame.mixer.music.play()
                         running_score = False
 
         SCREEN.blit(BG, (0, 0))

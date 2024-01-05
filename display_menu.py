@@ -112,6 +112,8 @@ def main_menu():
                     active = False
                 for i in range(len(buttons)):
                     if buttons[i].collidepoint(mouse_position):
+                        pygame.mixer.music.load("music/click.wav")
+                        pygame.mixer.music.play()
                         match i:
                             case 0:
                                 action = "scoreboard"

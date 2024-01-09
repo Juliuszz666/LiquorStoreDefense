@@ -21,7 +21,7 @@
         "m_cooldown": 60,
         "p_cooldown": 30,
         "s_cooldown": 450,
-        "b_cooldown": 30,
+        "b_cooldown": 20,
         "boost_duration": 150,
         "machete_dmg": 100,
         "medkit_uses": 5,
@@ -76,7 +76,7 @@
     "arrow":
     {
         "src_file": "img/arrow.png",
-        "speed": 15,
+        "speed": 10,
         "dmg": 50,
         "dir": 1,
         "scale": [0.07, 0.07],

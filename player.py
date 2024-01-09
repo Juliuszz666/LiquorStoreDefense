@@ -79,7 +79,7 @@ class Player(AliveBeing):
         elif not self.flag_boost and self.duration_boost == 0:
             self.speed = self.speed / 2
             self.flag_boost = True
-            
+
     def is_use(self):
         """
         Fuciton check if space is pressed

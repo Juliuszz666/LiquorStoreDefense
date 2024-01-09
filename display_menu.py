@@ -139,9 +139,13 @@ def main_menu():
                         active = False
                     elif event.key == pygame.K_BACKSPACE:
                         text = text[:-1]
+                        pygame.mixer.music.load("music/click.wav")
+                        pygame.mixer.music.play()
                     else:
                         if len(text) < MAX_LEN:
                             text += event.unicode
+                            pygame.mixer.music.load("music/click.wav")
+                            pygame.mixer.music.play()
 
         save_username(text)
         pygame.display.flip()

@@ -87,6 +87,7 @@ def main_menu():
             pygame.draw.rect(SCREEN, "black", text_input, 0, RADIUS['medium'])
         if active:
             pygame.draw.rect(SCREEN, D_GREY, text_input, 0, RADIUS['medium'])
+            pygame.draw.rect(SCREEN, RED, text_input, BORDER_VALUE, RADIUS['medium'])
 
         text_sur = username_font.render(text, True, "white")
         text_rect = text_sur.get_rect(center=text_input.center)

@@ -85,7 +85,7 @@ def display_health(player_hp):
                               EQ_ITEM_BASE + BORDER_VALUE)))
 
     hp_font = pygame.sysfont.SysFont("Times New Roman", FONT_SIZE['L'])
-    hp_counter = hp_font.render("HP: "+str(player_hp), (0, 0, 0), "white")
+    hp_counter = hp_font.render("HP: "+str(int(player_hp)), (0, 0, 0), "white")
     hp_prompt = hp_counter.get_rect()
     hp_prompt.center = (SCREEN.get_width() - EQ_ITEM_BASE -
                         (HP_BORDER_WIDTH / 2), SCREEN.get_height() / 20)

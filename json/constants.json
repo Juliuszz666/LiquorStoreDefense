@@ -2,7 +2,7 @@
 {
     "player_init": {
         "hp": 250,
-        "speed": 3,
+        "speed": 5,
         "height": 100,
         "width": 40,
         "src_file": "img/player_machete.png",
@@ -22,6 +22,7 @@
         "p_cooldown": 30,
         "s_cooldown": 450,
         "b_cooldown": 30,
+        "boost_duration": 150,
         "machete_dmg": 100,
         "medkit_uses": 5,
         "medkit_healing": 100,
@@ -58,7 +59,7 @@
     "b_pistol":
     {
         "src_file": "img/bullet_pistol.png",
-        "speed": 5,
+        "speed": 15,
         "dmg": 69,
         "dir": 1,
         "scale": [0.03, 0.03]
@@ -66,7 +67,7 @@
     "b_shotgun":
     {
         "src_file": "img/bullet_shotgun.png",
-        "speed": 20,
+        "speed": 30,
         "dmg": 150,
         "dir": 1,
         "scale": [0.02, 0.02],
@@ -75,7 +76,7 @@
     "arrow":
     {
         "src_file": "img/arrow.png",
-        "speed": 10,
+        "speed": 15,
         "dmg": 50,
         "dir": 1,
         "scale": [0.07, 0.07],
@@ -85,7 +86,7 @@
     "bottle":
     {
         "src_file": "img/bottle.png",
-        "speed": 12,
+        "speed": 13,
         "dmg": 50,
         "dir": -1,
         "angle": 30,

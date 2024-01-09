@@ -3,7 +3,7 @@ from alive_being import AliveBeing
 from settings import *
 from classes_bullets import *
 from sprites_groups import *
-from scoring import *
+import scoring
 
 
 class Player(AliveBeing):
@@ -27,8 +27,11 @@ class Player(AliveBeing):
         self.cooldown_shotgun = 0
         self.cooldown_bow = 0
         self.cooldown_medkit = 0
+        self.duration_boost = 0
         self.selected = 1
+        self.milestones = -1
         self.flag = True
+        self.flag_boost = True
         self.dead = False
 
     def cooldown_list(self):
@@ -65,6 +68,18 @@ class Player(AliveBeing):
         self.cooldown_pistol -= 1
         self.cooldown_shotgun -= 1
 
+    def boost(self):
+        if scoring.score // 100 > self.milestones and self.flag_boost:
+            self.milestones += 1
+            self.duration_boost = const['player_other']['boost_duration']
+            self.speed *= 2
+            self.flag_boost = False
+        elif self.duration_boost > 0:
+            self.duration_boost -= 1
+        elif not self.flag_boost and self.duration_boost == 0:
+            self.speed = self.speed / 2
+            self.flag_boost = True
+            
     def is_use(self):
         """
         Fuciton check if space is pressed
@@ -235,7 +250,7 @@ class Player(AliveBeing):
         if self.is_use() and self.cooldown_medkit <= 0:
             self.health_points += const['player_other']['medkit_healing']
             self.cooldown_medkit = const['player_other']['medkit_cooldown']
-            add_score(const['medkit_penalty'])
+            scoring.add_score(const['medkit_penalty'])
 
     def update(self):
         """
@@ -244,6 +259,7 @@ class Player(AliveBeing):
         """
         AliveBeing.update(self)
 
+        self.boost()
         self.cooldown_reduction()
         self.movement()
         self.handling_equipment()
@@ -256,7 +272,10 @@ class Player(AliveBeing):
             damage (int/float): damage amount
         """
         if self.health_points > 0:
-            self.health_points -= damage
+            if self.duration_boost:
+                self.health_points -= damage / 2
+            else:
+                self.health_points -= damage
         if self.health_points <= 0:
             self.dead = True
             self.kill()

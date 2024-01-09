@@ -66,7 +66,7 @@ SCORE_DELTA = 10
 
 SCREEN = pygame.display.set_mode(
     (settings['SCREEN_WIDTH'], settings['SCREEN_HEIGHT']))
-BG = pygame.image.load("img/background.png")
+BG = pygame.image.load("img/tlo-dla-pawelka.png")
 PLAYER_DETAILS = pygame.Surface((SCREEN.get_width(),
                                 SCREEN.get_height()/10), pygame.SRCALPHA)
 PLAYER_DETAILS.fill(GREEN_T)

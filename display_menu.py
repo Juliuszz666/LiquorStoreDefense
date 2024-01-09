@@ -60,7 +60,7 @@ def main_menu():
         title_font = pygame.sysfont.SysFont(
             "Times New Roman", FONT_SIZE['XXL'], False, True)
 
-        title = title_font.render("Liquor Store Defense", 1, "black")
+        title = title_font.render("Liquor Store Defense", 1, GREEN)
         title_rect = title.get_rect()
         title_rect.center = (SCREEN.get_width()/2, SCREEN.get_height()/4)
         SCREEN.blit(title, title_rect)

@@ -51,6 +51,8 @@ def display(hp, score):
     SCREEN.blit(PLAYER_DETAILS, (0, 0))
 
     # displaying player
+    if protagonist.is_boosted():
+        protagonist.graphics.fill(GOLD, special_flags=pygame.BLEND_RGB_MULT)
     SCREEN.blit(protagonist.graphics, protagonist.rect)
 
     display_health(hp)

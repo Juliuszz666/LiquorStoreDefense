@@ -85,6 +85,7 @@ def main_menu():
         text_input.top = USERNAME_HEIGHT_CO * SCREEN.get_height() + BORDER_VALUE
         if not active:
             pygame.draw.rect(SCREEN, "black", text_input, 0, RADIUS['medium'])
+            pygame.draw.rect(SCREEN, RED, text_input, BORDER_VALUE, RADIUS['medium'])
         if active:
             pygame.draw.rect(SCREEN, D_GREY, text_input, 0, RADIUS['medium'])
             pygame.draw.rect(SCREEN, RED, text_input, BORDER_VALUE, RADIUS['medium'])

@@ -58,6 +58,9 @@ class Player(AliveBeing):
         cooldown_lists.append(cooldowns_max)
         return cooldown_lists
 
+    def is_boosted(self):
+        return self.duration_boost > 0
+
     def cooldown_reduction(self):
         """
         Fuction responsible for reducing items' cooldowns over time

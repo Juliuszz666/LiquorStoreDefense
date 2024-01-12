@@ -29,7 +29,7 @@ class Player(AliveBeing):
         self.cooldown_medkit = 0
         self.duration_boost = 0
         self.selected = 1
-        self.milestones = -1
+        self.milestones = 0
         self.flag = True
         self.flag_boost = True
         self.dead = False
@@ -300,6 +300,7 @@ class Player(AliveBeing):
         self.health_points = const['player_init']['hp']
         self.rect.topleft = (self.position_x, self.position_y)
         self.dead = False
+        self.milestones = 0
         self.cooldown_melee = 0
         self.cooldown_pistol = 0
         self.cooldown_shotgun = 0

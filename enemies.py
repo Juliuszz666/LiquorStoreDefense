@@ -33,6 +33,7 @@ class Enemy(AliveBeing):
         """
         if self.health_points > 0:
             self.health_points -= damage
+            self.graphics.fill(RED, special_flags=pygame.BLEND_RGB_MULT)
         if self.health_points <= 0:
             add_score(10)
             self.kill()

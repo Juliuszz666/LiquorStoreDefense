@@ -35,7 +35,7 @@ RED = (255, 0, 0)
 D_RED = (139, 0, 0)
 D_GREY = (32, 32, 32)
 YELLOW_T = (255, 255, 0, 160)
-GOLD = (255,215,0)
+GOLD = (255, 215, 0)
 
 # display settings
 

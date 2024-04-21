@@ -12,6 +12,6 @@ Game is some kind of tower defense. Player needs to prevent junkies entering the
 
 5. Scoring System: The game includes a scoring system that determines the player's performance. The score is based on how long the player can successfully defend the liquor store. Players can compete with others or try to beat their own high scores.
 
-## Overall, the "LiquorStoreDefense" game offers an engaging tower defense experience with a variety of weapons, different types of enemies, increasing difficulty, and a scoring system to track the player's progress. The provided README.md file gives a brief overview of these features to help users understand what the game offers.
+#### Overall, the "LiquorStoreDefense" game offers an engaging tower defense experience with a variety of weapons, different types of enemies, increasing difficulty, and a scoring system to track the player's progress. The provided README.md file gives a brief overview of these features to help users understand what the game offers.
 
 ### Graphics were made by [Paweł Korabiewski](https://www.instagram.com/xmakaronito/)
